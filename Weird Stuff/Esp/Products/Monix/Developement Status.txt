@@ -1,0 +1,684 @@
+WEIRD STUFF
+MONIX
+
+DEVELOPMENT STATUS
+
+Version: 1.0
+Status: INTERNAL
+Owner: Weird Stuff
+Product: Monix
+Last Updated: September 7, 2026
+
+============================================================
+
+1. PURPOSE
+   ============================================================
+
+This document records the current development state of Monix.
+
+It is intended to provide a concise internal reference for the
+progress, maturity, stability, known limitations, and current
+development priorities of the product.
+
+This document does not replace the Product Overview or Product
+Specification.
+
+============================================================
+2. CURRENT STATUS
+=================
+
+Product:
+Monix
+
+Development Status:
+ACTIVE DEVELOPMENT
+
+Release Status:
+NOT FINAL
+
+Production Status:
+NOT ESTABLISHED
+
+Public Release Status:
+PENDING
+
+============================================================
+3. DEVELOPMENT PHASE
+====================
+
+Monix is currently considered an active development project.
+
+The product may progress through the following stages:
+
+1. Concept
+2. Architecture
+3. Core Development
+4. Internal Testing
+5. Feature Completion
+6. Stabilization
+7. Beta
+8. Release Candidate
+9. Stable Release
+10. Maintenance
+11. Retirement
+
+[MANDATORY]
+
+The actual public status of Monix must match its real development
+state.
+
+============================================================
+4. CURRENT DEVELOPMENT AREAS
+============================
+
+Current development areas include:
+
+* Core application architecture.
+* System monitoring.
+* Logging.
+* Task and process information.
+* Security-oriented analysis.
+* Configuration.
+* Snapshot and state handling.
+* Rendering.
+* Shader processing.
+* Shader caching.
+* Automatic updates.
+* Testing.
+* Error handling.
+* User interface.
+
+============================================================
+5. CORE SYSTEM STATUS
+=====================
+
+The following areas are considered active development areas.
+
+LOGGER
+Status:
+IN DEVELOPMENT
+
+TASK MONITORING
+Status:
+IN DEVELOPMENT
+
+SYSTEM USAGE
+Status:
+IN DEVELOPMENT
+
+SECURITY ANALYSIS
+Status:
+IN DEVELOPMENT
+
+CONFIGURATION
+Status:
+IN DEVELOPMENT
+
+SNAPSHOT SYSTEM
+Status:
+IN DEVELOPMENT
+
+RENDERER
+Status:
+IN DEVELOPMENT
+
+SHADER SYSTEM
+Status:
+IN DEVELOPMENT
+
+AUTOMATIC UPDATES
+Status:
+IN DEVELOPMENT
+
+AI FEATURES
+Status:
+PENDING / IN DEVELOPMENT
+
+============================================================
+6. RENDERING STATUS
+===================
+
+Monix uses a specialized rendering architecture designed around
+Vulkan and shader-based processing.
+
+Current architectural areas include:
+
+* Vulkan rendering.
+* Dynamic Rendering.
+* SPIR-V.
+* Slang shaders.
+* .slangp presets.
+* Multi-pass processing.
+* Runtime shader management.
+* Shader cache.
+* External texture handling.
+* Feedback and pass-resource management.
+
+[MANDATORY]
+
+Rendering changes must preserve application stability and must not
+knowingly compromise unrelated system functionality.
+
+============================================================
+7. SHADER STATUS
+================
+
+Shader processing is an active development area.
+
+Current shader-related functionality may include:
+
+* Slang compilation.
+* SPIR-V generation.
+* Shader presets.
+* Multi-pass pipelines.
+* Dependency handling.
+* Shader caching.
+* Runtime loading.
+* Validation.
+
+[MANDATORY]
+
+Shader resources must be validated before being treated as valid
+runtime resources.
+
+[MANDATORY]
+
+A shader failure must not be treated as a successful initialization.
+
+[RECOMMENDED]
+
+Shader changes should be tested independently before being
+included in a major product release.
+
+============================================================
+8. SHADER CACHE STATUS
+======================
+
+The shader cache is intended to minimize unnecessary recompilation.
+
+Relevant cache information may include:
+
+* Source content.
+* Shader stage.
+* Language.
+* Compiler version.
+* Dependency hashes.
+* Manifest information.
+* Integrity data.
+
+[MANDATORY]
+
+Cache entries must be invalidated when relevant source,
+dependency, compiler, or compatibility information changes.
+
+[MANDATORY]
+
+Invalid or corrupted cache data must not be blindly trusted.
+
+[RECOMMENDED]
+
+Cache size should be controlled through an eviction strategy.
+
+============================================================
+9. LOGGING STATUS
+=================
+
+The logging subsystem is intended to provide structured
+diagnostic information.
+
+Potential logging categories include:
+
+* Informational events.
+* Warnings.
+* Errors.
+* Critical failures.
+* Security events.
+* Monitoring events.
+* State changes.
+
+[MANDATORY]
+
+Logging must not intentionally expose passwords, private keys,
+tokens, or other secrets.
+
+============================================================
+10. MONITORING STATUS
+=====================
+
+Monix is intended to monitor available system information.
+
+Potential monitored values include:
+
+CPU
+RAM
+GPU
+TEMPERATURE
+DISK
+NETWORK
+PROCESSES
+
+[MANDATORY]
+
+A measurement must not be represented as valid when the required
+data could not actually be obtained.
+
+[RECOMMENDED]
+
+Unsupported measurements should be clearly indicated.
+
+============================================================
+11. SECURITY FEATURES STATUS
+============================
+
+Security-oriented functionality is under active development.
+
+Potential functionality includes:
+
+* Process analysis.
+* Reputation analysis.
+* Heuristic detection.
+* Security event logging.
+* Protective response.
+* SCRAM.
+
+[MANDATORY]
+
+Security detections must distinguish verified information from
+heuristic conclusions.
+
+[MANDATORY]
+
+High-impact security functionality must receive appropriate
+testing before stable release.
+
+============================================================
+12. SCRAM STATUS
+================
+
+SCRAM is an emergency-response subsystem.
+
+Current modes:
+
+TEST
+REAL
+
+TEST mode is intended for controlled testing.
+
+REAL mode is intended for actual response actions.
+
+[MANDATORY]
+
+TEST mode must not intentionally execute actions exclusive to
+REAL mode.
+
+[MANDATORY]
+
+The currently active SCRAM mode must be identifiable by the User.
+
+============================================================
+13. USER INTERFACE STATUS
+=========================
+
+The current interface structure includes:
+
+LOG
+TASKS
+USAGE
+AI
+SETTINGS
+
+The visual system may also include:
+
+* CRT-inspired presentation.
+* VHS-inspired effects.
+* Custom shader effects.
+* Event streams.
+* Monitoring panels.
+* Tables.
+* Status indicators.
+
+[MANDATORY]
+
+Visual effects must not make critical information unreadable.
+
+============================================================
+14. AI STATUS
+=============
+
+AI functionality is not considered fully defined.
+
+[PENDING]
+
+AI architecture:
+
+---
+
+[PENDING]
+
+AI provider:
+
+---
+
+[PENDING]
+
+Local or remote processing:
+
+---
+
+[PENDING]
+
+AI feature scope:
+
+---
+
+[MANDATORY]
+
+AI-generated information must not be automatically treated as
+verified system telemetry.
+
+============================================================
+15. TESTING STATUS
+==================
+
+Testing is a continuous part of Monix development.
+
+Testing areas may include:
+
+* Unit tests.
+* Integration tests.
+* End-to-end tests.
+* Rendering tests.
+* Shader tests.
+* Security tests.
+* Performance tests.
+* Regression tests.
+* Compatibility tests.
+
+[MANDATORY]
+
+Release-blocking defects must be evaluated before stable release.
+
+[RECOMMENDED]
+
+Important changes should receive regression testing.
+
+============================================================
+16. BUILD STATUS
+================
+
+[PENDING]
+
+Current build status:
+
+---
+
+[PENDING]
+
+Current compiler/toolchain:
+
+---
+
+[PENDING]
+
+Supported build configurations:
+
+---
+
+============================================================
+17. COMPATIBILITY STATUS
+========================
+
+[PENDING]
+
+Supported operating systems:
+
+---
+
+[PENDING]
+
+Minimum supported hardware:
+
+---
+
+[PENDING]
+
+Graphics requirements:
+
+---
+
+[PENDING]
+
+Unsupported configurations:
+
+---
+
+============================================================
+18. RELEASE STATUS
+==================
+
+Current release channel:
+
+PENDING
+
+Possible channels:
+
+* Development.
+* Experimental.
+* Alpha.
+* Beta.
+* Release Candidate.
+* Stable.
+
+[MANDATORY]
+
+A release must not be publicly represented as stable if it does
+not meet the requirements established for stable releases.
+
+============================================================
+19. AUTOMATIC UPDATE STATUS
+===========================
+
+Automatic update functionality may be used by Monix.
+
+Current implementation status:
+
+[PENDING]
+
+Update system:
+
+---
+
+[MANDATORY]
+
+Update packages must be authenticated and integrity-protected
+using an appropriate mechanism.
+
+============================================================
+20. DOCUMENTATION STATUS
+========================
+
+Monix documentation is under continuous development.
+
+Relevant documentation may include:
+
+* Product documentation.
+* Installation documentation.
+* Configuration documentation.
+* Technical architecture.
+* Troubleshooting.
+* Release notes.
+* Security documentation.
+
+[RECOMMENDED]
+
+Major architectural changes should be reflected in documentation.
+
+============================================================
+21. KNOWN LIMITATIONS
+=====================
+
+Known limitations are to be recorded here.
+
+[PENDING]
+
+Limitation:
+
+---
+
+Impact:
+
+---
+
+Workaround:
+
+---
+
+[PENDING]
+
+Limitation:
+
+---
+
+Impact:
+
+---
+
+Workaround:
+
+---
+
+============================================================
+22. CURRENT RISKS
+=================
+
+Potential development risks include:
+
+* Rendering instability.
+* Hardware compatibility.
+* Shader compatibility.
+* Driver-related issues.
+* Security false positives.
+* Resource usage.
+* Incomplete functionality.
+* Configuration errors.
+* Third-party dependency issues.
+
+[MANDATORY]
+
+Significant risks affecting security, stability, or release
+readiness must be communicated to the appropriate responsible
+person.
+
+============================================================
+23. DEVELOPMENT PRIORITIES
+==========================
+
+Current priorities:
+
+[PENDING]
+
+Priority 1:
+
+---
+
+Priority 2:
+
+---
+
+Priority 3:
+
+---
+
+Priority 4:
+
+---
+
+============================================================
+24. BLOCKERS
+============
+
+[PENDING]
+
+Current blockers:
+
+---
+
+---
+
+---
+
+============================================================
+25. COMPLETED WORK
+==================
+
+Completed development milestones should be recorded here.
+
+[PENDING]
+
+Milestone:
+
+---
+
+Date:
+
+---
+
+Description:
+
+---
+
+============================================================
+26. NEXT RELEASE
+================
+
+[PENDING]
+
+Target version:
+
+---
+
+Release type:
+
+---
+
+Expected changes:
+
+---
+
+Known release blockers:
+
+---
+
+============================================================
+27. VERSION HISTORY
+===================
+
+Version 1.0
+Date: September 7, 2026
+Status: Initial development-status record.
+
+============================================================
+28. DOCUMENT CONTROL
+====================
+
+Document:
+MONIX — DEVELOPMENT STATUS
+
+Version:
+1.0
+
+Status:
+INTERNAL
+
+Owner:
+Weird Stuff
+
+Product:
+Monix
+
+Last Updated:
+September 7, 2026
+
+============================================================
+END OF DOCUMENT
+===============
