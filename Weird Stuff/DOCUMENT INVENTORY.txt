@@ -1,0 +1,48 @@
+WEIRD STUFF DOCUMENT INVENTORY
+
+Total files: 44
+
+01 - CORPORATE/Document Control.txt
+01 - CORPORATE/Manual Corporativo.txt
+01 - CORPORATE/Organization.txt
+02 - LEGAL/Política de Aplicaciones Personalizadas.txt
+02 - LEGAL/Política de Cookies.txt
+02 - LEGAL/Política de Privacidad.txt
+02 - LEGAL/Política de Propiedad Intelectual.txt
+02 - LEGAL/Política de Seguridad.txt
+02 - LEGAL/Política de Uso Aceptable.txt
+02 - LEGAL/Términos y Condiciones.txt
+03 - PRODUCTS/CryptCast/Product Overview.txt
+03 - PRODUCTS/CryptCast/Product Specification.txt
+03 - PRODUCTS/Datalog/Product Overview.txt
+03 - PRODUCTS/Datalog/Product Specification.txt
+03 - PRODUCTS/DraftPad/Product Overview.txt
+03 - PRODUCTS/DraftPad/Product Specification.txt
+03 - PRODUCTS/Monix/Development Status.txt
+03 - PRODUCTS/Monix/Documentation/Architecture.txt
+03 - PRODUCTS/Monix/Documentation/Security.txt
+03 - PRODUCTS/Monix/Documentation/Shader System.txt
+03 - PRODUCTS/Monix/Documentation/Testing.txt
+03 - PRODUCTS/Monix/Product Overview.txt
+03 - PRODUCTS/Monix/Product Specification.txt
+03 - PRODUCTS/Monix/Release History.txt
+03 - PRODUCTS/Telenet/Product Overview.txt
+03 - PRODUCTS/Telenet/Product Specification.txt
+04 - OPERATIONS/Design/Design Standards.txt
+04 - OPERATIONS/Development/Development Standards.txt
+04 - OPERATIONS/Development/Release Procedure.txt
+04 - OPERATIONS/Infrastructure/Infrastructure Standards.txt
+04 - OPERATIONS/QA/Bug Management.txt
+04 - OPERATIONS/QA/QA Standards.txt
+04 - OPERATIONS/Security/Access Control.txt
+04 - OPERATIONS/Security/Incident Response.txt
+05 - BRAND/Brand Guidelines.txt
+05 - BRAND/Marketing/Marketing Standards.txt
+06 - PUBLIC/Announcements/README.txt
+06 - PUBLIC/Discord/Company Update.txt
+06 - PUBLIC/Website/Website Content Standards.txt
+07 - INTERNAL/Internal Communications/Communication Standards.txt
+07 - INTERNAL/Meetings/Meeting Standards.txt
+07 - INTERNAL/Team/Team Rules.txt
+08 - ARCHIVE/README.txt
+README.txt

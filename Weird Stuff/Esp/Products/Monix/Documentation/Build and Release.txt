@@ -1,0 +1,791 @@
+WEIRD STUFF
+MONIX
+
+BUILD AND RELEASE
+
+Version: 1.0
+Status: INTERNAL / DEVELOPMENT
+Owner: Weird Stuff
+Product: Monix
+Last Updated: September 7, 2026
+
+============================================================
+
+1. PURPOSE
+   ============================================================
+
+This document defines the build and release process for Monix.
+
+It covers source preparation, configuration, compilation, testing,
+artifact generation, validation, packaging, release approval,
+distribution, and rollback.
+
+The purpose is to ensure that released Monix builds are
+traceable, reproducible to a reasonable extent, and suitable for
+their intended release channel.
+
+============================================================
+2. BUILD PRINCIPLES
+===================
+
+[MANDATORY]
+
+A release build must be produced from an identifiable source
+revision or equivalent development state.
+
+[MANDATORY]
+
+Build failures must not be represented as successful builds.
+
+[MANDATORY]
+
+Required validation must be completed before a build is classified
+as a releasable artifact.
+
+[RECOMMENDED]
+
+Builds should be automated wherever practical.
+
+============================================================
+3. BUILD CONFIGURATIONS
+=======================
+
+Monix may use separate build configurations, including:
+
+* Debug.
+* Development.
+* Testing.
+* Release.
+
+Debug and development configurations may contain additional
+diagnostic functionality.
+
+[MANDATORY]
+
+Development-only functionality must not unintentionally remain
+enabled in a stable release when it creates a security, stability,
+or information-disclosure risk.
+
+============================================================
+4. SOURCE STATE
+===============
+
+Before building a release:
+
+[MANDATORY]
+
+The source revision used to produce the build must be identifiable.
+
+[MANDATORY]
+
+The build must use the intended source tree and dependency state.
+
+[RECOMMENDED]
+
+The exact source revision should be recorded with the release
+artifact.
+
+============================================================
+5. SOURCE CONTROL
+=================
+
+Monix source code is expected to be maintained under authorized
+version control.
+
+[MANDATORY]
+
+Important release changes must be committed to the authoritative
+repository before the release build.
+
+[MANDATORY]
+
+A release must not knowingly be built from an untracked or
+unidentified state when this would prevent release traceability.
+
+============================================================
+6. DEPENDENCIES
+===============
+
+A build may depend on:
+
+* Compilers.
+* SDKs.
+* Graphics libraries.
+* Runtime libraries.
+* Build tools.
+* Shader compilers.
+* Third-party packages.
+* Platform-specific components.
+
+[MANDATORY]
+
+Required dependencies must be identifiable.
+
+[MANDATORY]
+
+Dependency versions must be controlled sufficiently to avoid
+unintended build changes where practical.
+
+[MANDATORY]
+
+Dependencies must comply with their applicable licenses.
+
+============================================================
+7. TOOLCHAIN
+============
+
+The build toolchain may include:
+
+* C++ compiler.
+* CMake.
+* Linker.
+* Vulkan SDK.
+* Slang compiler.
+* Platform SDKs.
+* Packaging tools.
+
+[PENDING]
+
+Official compiler:
+
+---
+
+[PENDING]
+
+Official CMake version:
+
+---
+
+[PENDING]
+
+Official Vulkan SDK version:
+
+---
+
+[PENDING]
+
+Official Slang compiler version:
+
+---
+
+============================================================
+8. BUILD ENVIRONMENT
+====================
+
+[PENDING]
+
+Official build operating system:
+
+---
+
+[PENDING]
+
+Official build architecture:
+
+---
+
+[PENDING]
+
+Supported build targets:
+
+---
+
+[RECOMMENDED]
+
+The build environment should be documented sufficiently to
+reproduce important releases.
+
+============================================================
+9. CLEAN BUILD
+==============
+
+A clean build removes generated artifacts from previous builds
+before compiling the intended source state.
+
+[RECOMMENDED]
+
+Stable releases should be validated using a clean build.
+
+[MANDATORY]
+
+A release must not accidentally depend on stale generated files
+from an unrelated source state.
+
+============================================================
+10. COMPILATION
+===============
+
+A normal build flow may include:
+
+SOURCE
+->
+CONFIGURE
+->
+GENERATE
+->
+COMPILE
+->
+LINK
+->
+POST-BUILD VALIDATION
+
+[MANDATORY]
+
+Compilation errors must cause the corresponding build stage to
+fail.
+
+[MANDATORY]
+
+The final executable must correspond to the intended build
+configuration.
+
+============================================================
+11. LINKING
+===========
+
+The linker combines compiled objects and required libraries.
+
+[MANDATORY]
+
+Missing or incompatible dependencies must not be silently
+ignored.
+
+[MANDATORY]
+
+A partially generated or invalid executable must not be
+classified as a successful release artifact.
+
+============================================================
+12. SHADER BUILD
+================
+
+Where shader compilation is part of the Monix build or release:
+
+[MANDATORY]
+
+Required shaders must compile successfully before inclusion in
+a stable release.
+
+[MANDATORY]
+
+Required shader presets, includes, and dependencies must be
+available.
+
+[MANDATORY]
+
+Shader compilation errors must cause the applicable validation
+stage to fail.
+
+============================================================
+13. BUILD VALIDATION
+====================
+
+After compilation, the resulting build may be checked for:
+
+* Executable presence.
+* Expected version.
+* Required resources.
+* Required libraries.
+* Configuration.
+* Shader resources.
+* Package contents.
+* Architecture compatibility.
+
+[MANDATORY]
+
+A build must not be classified as valid solely because the
+compiler returned a successful exit code.
+
+============================================================
+14. TEST EXECUTION
+==================
+
+The release build must be passed through applicable tests.
+
+Potential test stages include:
+
+* Unit tests.
+* Integration tests.
+* End-to-end tests.
+* Shader tests.
+* Rendering tests.
+* Security tests.
+* Compatibility tests.
+* Regression tests.
+
+[MANDATORY]
+
+Mandatory release tests must be executed before a stable release.
+
+[MANDATORY]
+
+Skipped or unavailable tests must not be represented as passed.
+
+============================================================
+15. BUILD ARTIFACTS
+===================
+
+Build artifacts may include:
+
+* Executable files.
+* Dynamic libraries.
+* Static libraries.
+* Shader artifacts.
+* Resource files.
+* Installers.
+* Archives.
+* Debug symbols.
+* Checksums.
+* Signature files.
+
+[MANDATORY]
+
+Release artifacts must be identifiable by version and build state.
+
+============================================================
+16. VERSION INFORMATION
+=======================
+
+Release artifacts should expose sufficient version information to
+identify the product version.
+
+[MANDATORY]
+
+The version shown to the User must correspond to the intended
+release.
+
+[RECOMMENDED]
+
+The build identifier and source revision should also be available
+for diagnostics.
+
+============================================================
+17. PACKAGE CREATION
+====================
+
+A release package may contain:
+
+* Monix executable.
+* Required runtime libraries.
+* Shader resources.
+* Configuration resources.
+* Documentation.
+* License notices.
+* Release notes.
+
+[MANDATORY]
+
+Packages must not intentionally contain secrets or unrelated
+development artifacts.
+
+[MANDATORY]
+
+Required third-party license notices must be included.
+
+============================================================
+18. PACKAGE VALIDATION
+======================
+
+Before distribution:
+
+[MANDATORY]
+
+The package must be checked for:
+
+* Correct files.
+* Correct version.
+* Required dependencies.
+* Correct resource paths.
+* Expected executable behavior.
+* License requirements.
+* Security-sensitive content.
+
+============================================================
+19. INSTALLATION TESTING
+========================
+
+Where Monix is distributed through an installer or installation
+package:
+
+[MANDATORY]
+
+The installation process must be tested before a stable release.
+
+Testing may include:
+
+* Fresh installation.
+* Upgrade.
+* Reinstallation.
+* Uninstallation.
+* Configuration preservation.
+* Missing dependency handling.
+
+============================================================
+20. UPDATE TESTING
+==================
+
+Where automatic updates are supported:
+
+[MANDATORY]
+
+The update process must be tested for:
+
+* Valid update.
+* Invalid package.
+* Interrupted update.
+* Failed verification.
+* Version transition.
+* Rollback where supported.
+
+============================================================
+21. RELEASE CHANNELS
+====================
+
+Monix may use multiple release channels:
+
+* Development.
+* Experimental.
+* Alpha.
+* Beta.
+* Release Candidate.
+* Stable.
+
+[MANDATORY]
+
+The release channel must accurately describe the maturity of
+the distributed build.
+
+============================================================
+22. RELEASE APPROVAL
+====================
+
+A stable release should be approved after the applicable
+requirements have been satisfied.
+
+[PENDING]
+
+Release authority:
+
+---
+
+[PENDING]
+
+QA approval authority:
+
+---
+
+[PENDING]
+
+Security approval authority:
+
+---
+
+============================================================
+23. RELEASE GATE
+================
+
+A stable release should satisfy the following gate:
+
+[MANDATORY]
+
+SOURCE
+|
+v
+BUILD
+|
+v
+VALIDATION
+|
+v
+TESTING
+|
+v
+SECURITY REVIEW
+|
+v
+PACKAGE VALIDATION
+|
+v
+RELEASE APPROVAL
+|
+v
+DISTRIBUTION
+
+[MANDATORY]
+
+A mandatory gate must not be knowingly bypassed without an
+authorized exception.
+
+============================================================
+24. RELEASE ARTIFACT INTEGRITY
+==============================
+
+[MANDATORY]
+
+Released artifacts must remain identifiable after publication.
+
+[RECOMMENDED]
+
+Release artifacts should use cryptographic hashes.
+
+[RECOMMENDED]
+
+Important release artifacts should be digitally signed.
+
+============================================================
+25. DISTRIBUTION
+================
+
+[PENDING]
+
+Official distribution channel:
+
+---
+
+[PENDING]
+
+Official download location:
+
+---
+
+[PENDING]
+
+Update distribution service:
+
+---
+
+[MANDATORY]
+
+Stable releases must only be distributed through authorized
+mechanisms.
+
+============================================================
+26. RELEASE RECORD
+==================
+
+Each significant release should record:
+
+* Product version.
+* Build identifier.
+* Source revision.
+* Build configuration.
+* Release date.
+* Release channel.
+* Test result.
+* Security result.
+* Package identifier.
+
+[RECOMMENDED]
+
+The complete release record should be retained internally.
+
+============================================================
+27. FAILED RELEASE
+==================
+
+A release may fail because of:
+
+* Build failure.
+* Test failure.
+* Security problem.
+* Packaging problem.
+* Compatibility problem.
+* Resource issue.
+* Documentation issue.
+
+[MANDATORY]
+
+A failed release must not be represented as a successfully
+released stable version.
+
+============================================================
+28. RELEASE ROLLBACK
+====================
+
+If a release causes a serious problem:
+
+[MANDATORY]
+
+The affected version must be identified.
+
+[MANDATORY]
+
+Distribution may be suspended where necessary.
+
+[MANDATORY]
+
+A corrected release should be created where appropriate.
+
+[MANDATORY]
+
+The original release record must not be erased merely because
+the release was withdrawn.
+
+============================================================
+29. EMERGENCY RELEASES
+======================
+
+Emergency releases may be required for serious security or
+stability problems.
+
+[MANDATORY]
+
+Emergency handling must still preserve release identification
+and traceability.
+
+[MANDATORY]
+
+Security-critical fixes must receive appropriate validation even
+when the normal release process is accelerated.
+
+============================================================
+30. BUILD REPRODUCIBILITY
+=========================
+
+[RECOMMENDED]
+
+Important releases should preserve enough information to recreate
+the build environment.
+
+Relevant information may include:
+
+* Compiler version.
+* SDK version.
+* Dependency versions.
+* Source revision.
+* Build configuration.
+* Build scripts.
+* Shader compiler version.
+
+============================================================
+31. CI/CD
+=========
+
+Monix may use continuous integration or deployment systems.
+
+[PENDING]
+
+CI platform:
+
+---
+
+[PENDING]
+
+Automated build:
+
+---
+
+[PENDING]
+
+Automated test pipeline:
+
+---
+
+[RECOMMENDED]
+
+Automated validation should be used for frequently changed
+components.
+
+============================================================
+32. SECRETS DURING BUILD
+========================
+
+[MANDATORY]
+
+Build systems must not expose secrets unnecessarily.
+
+[MANDATORY]
+
+Credentials used by CI/CD systems must be protected.
+
+[MANDATORY]
+
+Build logs must not intentionally reveal secrets.
+
+============================================================
+33. RELEASE SECURITY
+====================
+
+[MANDATORY]
+
+The build system must protect release artifacts against
+unauthorized modification to the extent reasonably possible.
+
+[MANDATORY]
+
+Only authorized persons or systems may publish stable releases.
+
+============================================================
+34. RELEASE DOCUMENTATION
+=========================
+
+A significant release should have:
+
+* Release notes.
+* Version information.
+* Known issues.
+* Relevant security information.
+* Installation information where necessary.
+
+[RECOMMENDED]
+
+User-facing release information should focus on changes relevant
+to Users rather than internal implementation details.
+
+============================================================
+35. MAINTENANCE
+===============
+
+The build and release process must be reviewed when:
+
+* The compiler changes.
+* The graphics stack changes.
+* Major dependencies change.
+* The packaging method changes.
+* The distribution system changes.
+* Security requirements change.
+
+============================================================
+36. RELATED DOCUMENTATION
+=========================
+
+Related documents:
+
+* Monix Product Overview.
+* Monix Product Specification.
+* Monix Architecture.
+* Monix Testing Documentation.
+* Monix Development Status.
+* Monix Release History.
+* Monix Security Documentation.
+* Monix Shader System.
+* Monix Performance Documentation.
+* Monix Debugging Documentation.
+* Weird Stuff Security Policy.
+* Weird Stuff Intellectual Property Policy.
+
+============================================================
+37. DOCUMENT CONTROL
+====================
+
+Document:
+MONIX — BUILD AND RELEASE
+
+Version:
+1.0
+
+Status:
+INTERNAL / DEVELOPMENT
+
+Owner:
+Weird Stuff
+
+Product:
+Monix
+
+Last Updated:
+September 7, 2026
+
+============================================================
+END OF DOCUMENT
+===============

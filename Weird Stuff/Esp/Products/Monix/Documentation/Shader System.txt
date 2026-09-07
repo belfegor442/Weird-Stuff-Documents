@@ -1,0 +1,869 @@
+WEIRD STUFF
+MONIX
+
+SHADER SYSTEM
+
+Version: 1.0
+Status: INTERNAL / DEVELOPMENT
+Owner: Weird Stuff
+Product: Monix
+Last Updated: September 7, 2026
+
+============================================================
+
+1. PURPOSE
+   ============================================================
+
+This document defines the shader system used by Monix.
+
+It describes the shader formats, preset system, compilation flow,
+dependency resolution, validation, runtime pipeline creation,
+multi-pass rendering, feedback resources, caching, error handling,
+and related requirements.
+
+This document is technical documentation and does not replace
+the general Monix Product Specification or Architecture document.
+
+============================================================
+2. SHADER SYSTEM OVERVIEW
+=========================
+
+The Monix shader system is responsible for transforming shader
+resources into executable GPU rendering pipelines.
+
+General flow:
+
+SHADER SOURCE
+|
+v
+PRESET / CONFIGURATION
+|
+v
+DEPENDENCY RESOLUTION
+|
+v
+VALIDATION
+|
+v
+COMPILATION
+|
+v
+SPIR-V
+|
+v
+REFLECTION
+|
+v
+PIPELINE CREATION
+|
+v
+VULKAN
+|
+v
+GPU
+
+============================================================
+3. SUPPORTED SHADER FORMATS
+===========================
+
+Monix may process the following shader resources:
+
+.slang
+.slangp
+SPIR-V
+
+The exact supported features depend on the implementation and
+compiler version.
+
+[MANDATORY]
+
+A file must not be treated as a valid shader resource solely
+because it has a recognized file extension.
+
+============================================================
+4. SLANG SOURCE
+===============
+
+Slang source files contain shader program source code.
+
+They may define:
+
+* Vertex stages.
+* Fragment stages.
+* Compute stages where supported.
+* Resource declarations.
+* Uniforms.
+* Samplers.
+* Textures.
+* Helper functions.
+* Includes or dependencies.
+
+[MANDATORY]
+
+Shader source must be validated and compiled before being used as
+a runtime pipeline component.
+
+============================================================
+5. SLANG PRESETS
+================
+
+Slang preset files may describe:
+
+* Shader passes.
+* Shader paths.
+* Parameters.
+* Resources.
+* Output behavior.
+* Dependencies.
+* Feedback behavior.
+* Other rendering configuration.
+
+Preset processing may include:
+
+1. File loading.
+2. Parsing.
+3. Reference resolution.
+4. Path resolution.
+5. Parameter resolution.
+6. Pass construction.
+7. Validation.
+
+============================================================
+6. PRESET REFERENCES
+====================
+
+Presets may reference other preset or shader resources.
+
+[MANDATORY]
+
+Referenced resources must be resolved before the resulting
+pipeline is considered valid.
+
+[MANDATORY]
+
+Missing references must produce a clear failure state.
+
+[MANDATORY]
+
+Reference resolution must not silently substitute unrelated
+resources for missing dependencies.
+
+============================================================
+7. INCLUDE AND DEPENDENCY RESOLUTION
+====================================
+
+Shaders and presets may depend on additional files.
+
+Dependencies may include:
+
+* Include files.
+* Shared shader functions.
+* Configuration files.
+* Referenced presets.
+* Other shader resources.
+
+Conceptual flow:
+
+ROOT RESOURCE
+|
++--> DEPENDENCY A
+|
++--> DEPENDENCY B
+|
++--> DEPENDENCY C
+|
+v
+RESOLVED RESOURCE GRAPH
+
+[MANDATORY]
+
+The complete set of relevant dependencies must be resolved before
+compilation.
+
+[MANDATORY]
+
+A missing or invalid dependency must prevent the affected shader
+resource from being treated as fully valid.
+
+============================================================
+8. PATH RESOLUTION
+==================
+
+Shader paths may be relative or otherwise derived from preset
+configuration.
+
+[MANDATORY]
+
+Path resolution must produce the intended resource.
+
+[MANDATORY]
+
+Path traversal or unexpected path interpretation must not be
+allowed to bypass applicable security boundaries.
+
+[RECOMMENDED]
+
+Resolved paths should be normalized before use.
+
+============================================================
+9. SHADER VALIDATION
+====================
+
+Validation may occur at several stages:
+
+* Source validation.
+* Preset validation.
+* Dependency validation.
+* Compilation validation.
+* SPIR-V validation.
+* Reflection validation.
+* Runtime pipeline validation.
+
+[MANDATORY]
+
+Validation failure must produce a failure result.
+
+[MANDATORY]
+
+Invalid shader resources must not be silently accepted as valid.
+
+============================================================
+10. COMPILATION
+===============
+
+The shader compiler converts supported shader source into a runtime
+representation suitable for the Vulkan rendering pipeline.
+
+Typical flow:
+
+SOURCE
+->
+COMPILER
+->
+SPIR-V
+->
+VALIDATION
+->
+RUNTIME
+
+[MANDATORY]
+
+Compiler failures must be propagated accurately.
+
+[MANDATORY]
+
+A failed compilation must never be reported as successful
+compilation.
+
+[RECOMMENDED]
+
+Compiler diagnostics should be retained for troubleshooting.
+
+============================================================
+11. COMPILER VERSION
+====================
+
+Shader compilation may depend on the compiler implementation and
+version.
+
+[MANDATORY]
+
+The compiler version must be considered when determining whether
+previously compiled shader data remains valid.
+
+[MANDATORY]
+
+A cache entry generated under an incompatible compiler version
+must not be blindly reused.
+
+============================================================
+12. SPIR-V
+==========
+
+SPIR-V is the intermediate representation used for the Vulkan
+shader pipeline.
+
+[MANDATORY]
+
+SPIR-V generated or loaded by Monix must be validated to the
+extent required by the implementation before being used for
+runtime pipeline creation.
+
+[MANDATORY]
+
+Invalid SPIR-V must not be treated as a valid shader module.
+
+============================================================
+13. REFLECTION
+==============
+
+Shader reflection may identify resources such as:
+
+* Uniform buffers.
+* Storage buffers.
+* Textures.
+* Samplers.
+* Push constants.
+* Resource bindings.
+* Shader stage information.
+
+Reflection data may be used to construct compatible Vulkan
+pipeline layouts and resource bindings.
+
+[MANDATORY]
+
+Runtime resource binding must be compatible with the shader's
+actual declared resources.
+
+============================================================
+14. PIPELINE CREATION
+=====================
+
+The shader system may create Vulkan pipelines from validated
+shader modules.
+
+Conceptual flow:
+
+SPIR-V MODULES
+|
+v
+REFLECTION
+|
+v
+PIPELINE LAYOUT
+|
+v
+GRAPHICS PIPELINE
+|
+v
+RUNTIME
+
+[MANDATORY]
+
+Pipeline creation failure must be handled without treating the
+pipeline as usable.
+
+[MANDATORY]
+
+Resources must be destroyed correctly when a pipeline or module
+is no longer required.
+
+============================================================
+15. MULTI-PASS PIPELINES
+========================
+
+A preset may describe multiple rendering passes.
+
+A pass may define:
+
+* Shader.
+* Input textures.
+* Output targets.
+* Parameters.
+* Resource bindings.
+* Feedback resources.
+* Execution order.
+
+Example:
+
+PASS 1
+|
+v
+PASS 2
+|
+v
+PASS 3
+|
+v
+FINAL OUTPUT
+
+[MANDATORY]
+
+Pass dependencies must be resolved before execution.
+
+[MANDATORY]
+
+Pass resources must be synchronized according to their actual
+usage.
+
+============================================================
+16. RENDER TARGETS
+==================
+
+Passes may render into:
+
+* Intermediate textures.
+* Off-screen targets.
+* Swapchain-related outputs.
+* Other valid Vulkan resources.
+
+[MANDATORY]
+
+A pass must not write to an invalid or unavailable target.
+
+[MANDATORY]
+
+Resource format and usage must be compatible with the intended
+rendering operation.
+
+============================================================
+17. EXTERNAL TEXTURES
+=====================
+
+The shader system may support external textures supplied by the
+renderer or another subsystem.
+
+External textures may include:
+
+* Application images.
+* Previous pass results.
+* Input textures.
+* Runtime resources.
+
+[MANDATORY]
+
+An external texture must be validated before being bound to a
+shader.
+
+[MANDATORY]
+
+The shader system must not assume that an external resource is
+valid without appropriate validation.
+
+============================================================
+18. FEEDBACK RESOURCES
+======================
+
+Feedback resources allow a shader pass to access information
+generated during an earlier rendering operation or frame.
+
+Conceptual model:
+
+PREVIOUS FRAME
+|
+v
+FEEDBACK RESOURCE
+|
+v
+CURRENT SHADER
+|
+v
+NEW OUTPUT
+|
++------> NEXT FRAME
+
+[MANDATORY]
+
+Feedback resources must be synchronized according to Vulkan
+requirements.
+
+[MANDATORY]
+
+Uninitialized feedback data must not be treated as valid data.
+
+============================================================
+19. SHADER PARAMETERS
+=====================
+
+Shader parameters may be provided through:
+
+* Uniform data.
+* Push constants.
+* Descriptor resources.
+* Preset-defined values.
+* Runtime configuration.
+
+[MANDATORY]
+
+Parameter values must match the expected type and valid range
+where such validation is possible.
+
+[MANDATORY]
+
+Invalid parameters must not intentionally produce undefined
+application behavior.
+
+============================================================
+20. SHADER CACHE
+================
+
+The shader cache exists to reduce unnecessary shader compilation.
+
+A cache key may depend on:
+
+* Shader source.
+* Shader stage.
+* Shader language.
+* Compiler version.
+* Dependency content.
+* Relevant compilation configuration.
+
+Conceptual flow:
+
+RESOURCE
+|
+v
+KEY GENERATION
+|
+v
+CACHE LOOKUP
+|
++---- HIT ----> VALIDATE ----> LOAD
+|
++---- MISS ---> COMPILE -----> STORE
+
+[MANDATORY]
+
+Changes to relevant source or dependencies must invalidate the
+affected cache entry.
+
+[MANDATORY]
+
+Corrupted cache entries must not be used as trusted shader data.
+
+============================================================
+21. CACHE INTEGRITY
+===================
+
+The cache may use:
+
+* Manifest information.
+* Content hashes.
+* Metadata.
+* Atomic file replacement.
+* Integrity validation.
+
+[MANDATORY]
+
+A cache entry must not be accepted when its integrity cannot be
+verified to the required level.
+
+[RECOMMENDED]
+
+Atomic writes should be used to reduce the risk of incomplete
+cache files.
+
+============================================================
+22. CACHE EVICTION
+==================
+
+The shader cache may implement controlled eviction.
+
+Possible strategies include:
+
+* LRU.
+* Size-based limits.
+* Age-based expiration.
+
+[RECOMMENDED]
+
+Cache storage should have a defined maximum size appropriate to
+the target environment.
+
+============================================================
+23. RUNTIME RELOADING
+=====================
+
+Monix may support shader hot reload or runtime shader updates.
+
+Possible flow:
+
+FILE CHANGE
+|
+v
+DETECT
+|
+v
+RELOAD
+|
+v
+VALIDATE
+|
+v
+COMPILE
+|
+v
+CREATE PIPELINE
+|
+v
+ACTIVATE
+
+[MANDATORY]
+
+A failed reload must not replace a valid active shader pipeline
+with an invalid one.
+
+[RECOMMENDED]
+
+The currently active valid pipeline should remain available when
+a hot reload fails and the architecture permits it.
+
+============================================================
+24. TRANSACTIONAL SHADER STATE
+==============================
+
+Shader state changes should be treated as a transition between:
+
+CURRENT VALID STATE
+|
+v
+CANDIDATE STATE
+|
+v
+VALIDATION
+|
++---- FAIL ----> KEEP CURRENT STATE
+|
++---- PASS ----> COMMIT
+|
+v
+NEW STATE
+
+[MANDATORY]
+
+Invalid shader state must not replace a previously valid runtime
+state where safe rollback is possible.
+
+============================================================
+25. ERROR HANDLING
+==================
+
+Shader errors may originate from:
+
+* File access.
+* Parsing.
+* Dependency resolution.
+* Compilation.
+* SPIR-V validation.
+* Reflection.
+* Resource creation.
+* Pipeline creation.
+* Runtime execution.
+
+[MANDATORY]
+
+The source of a failure must not be intentionally misrepresented.
+
+[RECOMMENDED]
+
+Errors should identify the relevant shader, pass, stage, or
+dependency when possible.
+
+============================================================
+26. FAILURE ISOLATION
+=====================
+
+[MANDATORY]
+
+A failure in an optional shader or pass must not unnecessarily
+terminate unrelated Monix functionality.
+
+Possible fallback behavior may include:
+
+* Previous valid shader.
+* Default shader.
+* Disabled effect.
+* Reduced rendering path.
+
+The actual fallback strategy depends on implementation.
+
+============================================================
+27. SECURITY
+============
+
+Shader resources are executable GPU programs and must be treated
+as potentially unsafe inputs when their origin is untrusted.
+
+[MANDATORY]
+
+Monix must not intentionally bypass applicable operating-system,
+graphics-driver, or application security boundaries through shader
+processing.
+
+[MANDATORY]
+
+Shader resources must not be treated as trusted merely because
+they are located in a recognized shader directory.
+
+============================================================
+28. THIRD-PARTY SHADERS
+=======================
+
+Weird Stuff may use third-party shader code or presets.
+
+[MANDATORY]
+
+Third-party shader resources must comply with their applicable
+licenses.
+
+[MANDATORY]
+
+Required attribution and license information must be preserved.
+
+============================================================
+29. SUPPORTED SHADER INVENTORY
+==============================
+
+The Monix project may contain:
+
+* Shader source files.
+* Shader presets.
+* Include files.
+* Configuration resources.
+* Compiled shader artifacts.
+
+[PENDING]
+
+Final production shader inventory:
+
+---
+
+[PENDING]
+
+Final preset inventory:
+
+---
+
+============================================================
+30. TESTING REQUIREMENTS
+========================
+
+The shader system should be tested for:
+
+* Valid source.
+* Invalid source.
+* Missing dependencies.
+* Invalid presets.
+* Reference failures.
+* Compilation errors.
+* Reflection mismatches.
+* Pipeline failures.
+* Cache corruption.
+* Cache invalidation.
+* Hot reload failures.
+* Multi-pass failures.
+* Feedback resources.
+* Unsupported resources.
+
+[MANDATORY]
+
+Critical shader functionality must pass applicable tests before
+stable release.
+
+============================================================
+31. PERFORMANCE
+===============
+
+Shader performance may depend on:
+
+* Shader complexity.
+* Number of passes.
+* Resolution.
+* GPU capability.
+* Driver behavior.
+* Compilation cost.
+* Resource synchronization.
+
+[RECOMMENDED]
+
+Expensive shader operations should be profiled where appropriate.
+
+[MANDATORY]
+
+Performance optimizations must not knowingly compromise shader
+correctness or resource safety.
+
+============================================================
+32. COMPATIBILITY
+=================
+
+Shader behavior may differ between:
+
+* GPU vendors.
+* GPU architectures.
+* Driver versions.
+* Operating systems.
+* Vulkan implementations.
+
+[RECOMMENDED]
+
+Important shaders should be tested on representative supported
+hardware.
+
+============================================================
+33. DOCUMENTATION REQUIREMENTS
+==============================
+
+Important shader components should document:
+
+* Purpose.
+* Required inputs.
+* Outputs.
+* Dependencies.
+* Supported stages.
+* Relevant parameters.
+* Licensing.
+* Known limitations.
+
+============================================================
+34. SHADER SYSTEM OWNERSHIP
+===========================
+
+[PENDING]
+
+Shader System Lead:
+
+---
+
+[PENDING]
+
+Renderer Lead:
+
+---
+
+[PENDING]
+
+Testing Owner:
+
+---
+
+============================================================
+35. RELATED DOCUMENTATION
+=========================
+
+Related documents:
+
+* Monix Product Overview.
+* Monix Product Specification.
+* Monix Development Status.
+* Monix Release History.
+* Monix Architecture.
+* Monix Testing Documentation.
+* Weird Stuff Security Policy.
+* Weird Stuff Intellectual Property Policy.
+
+============================================================
+36. DOCUMENT CONTROL
+====================
+
+Document:
+MONIX — SHADER SYSTEM
+
+Version:
+1.0
+
+Status:
+INTERNAL / DEVELOPMENT
+
+Owner:
+Weird Stuff
+
+Product:
+Monix
+
+Last Updated:
+September 7, 2026
+
+============================================================
+END OF DOCUMENT
+===============

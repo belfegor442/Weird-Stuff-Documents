@@ -1,0 +1,843 @@
+WEIRD STUFF
+MONIX
+
+MONITORING DOCUMENTATION
+
+Version: 1.0
+Status: INTERNAL / DEVELOPMENT
+Owner: Weird Stuff
+Product: Monix
+Last Updated: September 7, 2026
+
+============================================================
+
+1. PURPOSE
+   ============================================================
+
+This document defines the monitoring subsystem of Monix.
+
+It describes the collection, validation, processing, presentation,
+and handling of system telemetry and monitoring information.
+
+The monitoring subsystem is responsible for providing Users with
+accurate and useful information about the current state of the
+system to the extent supported by the operating system and
+hardware.
+
+============================================================
+2. MONITORING OBJECTIVES
+========================
+
+The monitoring subsystem is intended to provide information about:
+
+* CPU activity.
+* Memory usage.
+* GPU activity.
+* Temperature.
+* Storage.
+* Network activity.
+* Running processes.
+* Other supported system metrics.
+
+[MANDATORY]
+
+Monitoring must prioritize accuracy, consistency, safe failure,
+and reasonable resource usage.
+
+============================================================
+3. DATA FLOW
+============
+
+The general monitoring flow is:
+
+SYSTEM
+|
+v
+DATA COLLECTION
+|
+v
+VALIDATION
+|
+v
+NORMALIZATION
+|
+v
+PROCESSING
+|
+v
+PRESENTATION
+
+[MANDATORY]
+
+Collected information must pass through appropriate validation
+before being represented as valid telemetry.
+
+============================================================
+4. CPU MONITORING
+=================
+
+Monix may collect information concerning CPU activity.
+
+Possible metrics include:
+
+* Overall utilization.
+* Per-core utilization.
+* Frequency.
+* Temperature where available.
+* Load information.
+* Other supported metrics.
+
+[MANDATORY]
+
+CPU values must use appropriate units.
+
+[MANDATORY]
+
+Unavailable CPU information must not be represented as a verified
+measurement.
+
+[RECOMMENDED]
+
+Per-core information should clearly identify the corresponding
+logical or physical processing unit where supported.
+
+============================================================
+5. MEMORY MONITORING
+====================
+
+Monix may monitor system memory.
+
+Possible values include:
+
+* Total memory.
+* Used memory.
+* Available memory.
+* Free memory where supported.
+* Memory utilization percentage.
+
+[MANDATORY]
+
+Memory values must be internally consistent.
+
+[MANDATORY]
+
+Monix must not intentionally report memory that is unavailable
+as available memory.
+
+[RECOMMENDED]
+
+The interface should clearly distinguish between physical memory
+and other memory categories when both are displayed.
+
+============================================================
+6. GPU MONITORING
+=================
+
+Monix may collect GPU information.
+
+Possible values include:
+
+* GPU utilization.
+* GPU memory usage.
+* GPU temperature.
+* GPU frequency.
+* GPU engine activity.
+* Other available metrics.
+
+[MANDATORY]
+
+GPU values must only be presented when they are supported by the
+active platform.
+
+[MANDATORY]
+
+Unsupported GPU metrics must not be fabricated.
+
+[RECOMMENDED]
+
+Where multiple GPUs exist, the monitored device should be clearly
+identified.
+
+============================================================
+7. TEMPERATURE MONITORING
+=========================
+
+Monix may display temperature information obtained through
+available hardware or operating-system interfaces.
+
+Potential sources include:
+
+* CPU sensors.
+* GPU sensors.
+* Motherboard sensors.
+* Platform thermal interfaces.
+
+[MANDATORY]
+
+The source and identity of a temperature value must be known where
+necessary to interpret it correctly.
+
+[MANDATORY]
+
+A missing sensor value must not be substituted with an unrelated
+measurement and presented as equivalent.
+
+[RECOMMENDED]
+
+The interface should identify the monitored component.
+
+============================================================
+8. STORAGE MONITORING
+=====================
+
+Monix may monitor storage devices.
+
+Possible metrics include:
+
+* Total capacity.
+* Used capacity.
+* Free capacity.
+* Read activity.
+* Write activity.
+* Transfer rates.
+* Device availability.
+
+[MANDATORY]
+
+Storage capacity values must correspond to the detected device
+and filesystem or platform information used to calculate them.
+
+[MANDATORY]
+
+Unavailable storage information must be handled safely.
+
+============================================================
+9. NETWORK MONITORING
+=====================
+
+Monix may monitor network interfaces.
+
+Potential information includes:
+
+* Interface status.
+* Received data.
+* Transmitted data.
+* Transfer rate.
+* Connection state.
+* Available interfaces.
+
+[MANDATORY]
+
+Network information must identify the relevant interface where
+multiple interfaces could make the displayed value ambiguous.
+
+[RECOMMENDED]
+
+The interface should distinguish total transfer counts from
+instantaneous transfer rates.
+
+============================================================
+10. PROCESS MONITORING
+======================
+
+Monix may enumerate running processes and display associated
+information.
+
+Possible information includes:
+
+* Process name.
+* Process identifier.
+* Executable path.
+* CPU usage.
+* Memory usage.
+* Process state.
+* Other available metadata.
+
+[MANDATORY]
+
+A process that cannot be fully inspected due to platform
+permissions must not automatically be considered safe or
+malicious.
+
+[MANDATORY]
+
+Permission failures must be represented accurately.
+
+============================================================
+11. PROCESS REFRESH
+===================
+
+Process information may change rapidly.
+
+[RECOMMENDED]
+
+Monix should use a controlled refresh interval rather than
+continuously performing unnecessary full enumerations.
+
+[MANDATORY]
+
+Refresh operations must not intentionally create excessive
+resource consumption.
+
+============================================================
+12. SAMPLING
+============
+
+Monitoring systems may collect data at intervals.
+
+Sampling frequency affects:
+
+* Accuracy.
+* Responsiveness.
+* CPU usage.
+* Memory usage.
+* Log volume.
+
+[PENDING]
+
+Default monitoring interval:
+
+---
+
+[PENDING]
+
+Minimum supported interval:
+
+---
+
+[PENDING]
+
+Maximum supported interval:
+
+---
+
+============================================================
+13. DATA NORMALIZATION
+======================
+
+Different platforms may expose system information using different
+units, scales, or interfaces.
+
+[MANDATORY]
+
+Monix must normalize measurements before comparing or presenting
+them when normalization is required.
+
+Examples include:
+
+* Bytes versus larger storage units.
+* Percentages.
+* Temperature units.
+* Transfer rates.
+* Frequency units.
+
+[MANDATORY]
+
+Unit conversions must preserve the meaning of the original data.
+
+============================================================
+14. TIMESTAMPS
+==============
+
+Monitoring values may be associated with timestamps.
+
+[MANDATORY]
+
+A timestamp must not be represented as precise measurement time
+when the underlying system cannot provide that precision.
+
+[RECOMMENDED]
+
+Monitoring samples should use a consistent time source within
+the application where practical.
+
+============================================================
+15. STALE DATA
+==============
+
+A monitoring value may become stale when the underlying source
+stops updating.
+
+[MANDATORY]
+
+Monix must not continue presenting stale information as current
+without an appropriate indication.
+
+Possible states include:
+
+* Current.
+* Delayed.
+* Stale.
+* Unavailable.
+* Error.
+
+============================================================
+16. MISSING DATA
+================
+
+Monitoring data may be unavailable because of:
+
+* Unsupported hardware.
+* Permission restrictions.
+* Driver limitations.
+* Operating-system limitations.
+* Sensor failure.
+* Temporary source failure.
+
+[MANDATORY]
+
+Missing data must not be replaced with fabricated values.
+
+[RECOMMENDED]
+
+The interface should indicate when information is unavailable.
+
+============================================================
+17. INVALID DATA
+================
+
+Invalid data may occur due to:
+
+* Platform errors.
+* Driver bugs.
+* Unexpected values.
+* Corrupted source information.
+* Conversion errors.
+
+[MANDATORY]
+
+Invalid measurements must not be silently displayed as valid
+telemetry.
+
+[MANDATORY]
+
+The affected value must be rejected, marked invalid, or safely
+handled.
+
+============================================================
+18. MONITORING STATES
+=====================
+
+A monitored metric may have the following states:
+
+VALID
+A valid measurement has been obtained.
+
+UNAVAILABLE
+The value cannot currently be obtained.
+
+STALE
+The value exists but is no longer sufficiently current.
+
+ERROR
+The measurement process encountered a problem.
+
+UNSUPPORTED
+The active platform does not provide the requested metric.
+
+[MANDATORY]
+
+The internal state must accurately represent the collection result.
+
+============================================================
+19. ALERTS
+==========
+
+Monix may generate alerts based on monitored values.
+
+Examples include:
+
+* High CPU usage.
+* High memory usage.
+* High temperature.
+* Storage exhaustion.
+* Unexpected process behavior.
+* Security-related conditions.
+
+[MANDATORY]
+
+Alerts must use clearly defined thresholds or detection logic.
+
+[MANDATORY]
+
+An alert must not be represented as proof of a security threat
+when it is only a threshold-based observation.
+
+[RECOMMENDED]
+
+Users should be able to determine which measurement caused an
+important alert.
+
+============================================================
+20. THRESHOLDS
+==============
+
+Monitoring thresholds may be configurable.
+
+[PENDING]
+
+CPU warning threshold:
+
+---
+
+[PENDING]
+
+Memory warning threshold:
+
+---
+
+[PENDING]
+
+Temperature warning threshold:
+
+---
+
+[PENDING]
+
+Storage warning threshold:
+
+---
+
+[MANDATORY]
+
+Thresholds must use valid values and appropriate units.
+
+============================================================
+21. RESOURCE OVERHEAD
+=====================
+
+Monitoring itself consumes system resources.
+
+[MANDATORY]
+
+Monitoring must not intentionally create uncontrolled CPU,
+memory, disk, or network usage.
+
+[RECOMMENDED]
+
+Expensive monitoring operations should be cached, sampled, or
+executed asynchronously where appropriate.
+
+============================================================
+22. LOG INTEGRATION
+===================
+
+Monitoring events may be sent to the logging subsystem.
+
+Potential events include:
+
+* Monitoring initialization.
+* Sensor failure.
+* Value becoming unavailable.
+* Threshold crossing.
+* Recovery.
+* Configuration changes.
+
+[MANDATORY]
+
+Monitoring logs must not intentionally expose sensitive
+information.
+
+============================================================
+23. USER INTERFACE
+==================
+
+Monitoring data may be displayed through:
+
+* Numeric values.
+* Tables.
+* Graphs.
+* Status indicators.
+* Event streams.
+* Dashboard components.
+
+[MANDATORY]
+
+Units must be visible or otherwise unambiguous where necessary.
+
+[MANDATORY]
+
+Critical monitoring information must remain readable.
+
+[RECOMMENDED]
+
+The interface should visually distinguish warning, error,
+unavailable, and normal states.
+
+============================================================
+24. HISTORICAL DATA
+===================
+
+Monix may retain monitoring history for graphs, diagnostics, or
+snapshots.
+
+[PENDING]
+
+Historical data retention:
+
+---
+
+[PENDING]
+
+Maximum history size:
+
+---
+
+[MANDATORY]
+
+Historical values must not be represented as current values.
+
+============================================================
+25. SNAPSHOT INTEGRATION
+========================
+
+Monitoring values may be included in system snapshots.
+
+[MANDATORY]
+
+A snapshot must identify the time at which its monitoring values
+were captured where such information is available.
+
+[MANDATORY]
+
+Snapshot telemetry must not be presented as live telemetry after
+the snapshot has been captured.
+
+============================================================
+26. SECURITY INTEGRATION
+========================
+
+Monitoring data may contribute to security analysis.
+
+Examples include:
+
+* Unexpected resource usage.
+* Suspicious process activity.
+* Abnormal behavior.
+* System state changes.
+
+[MANDATORY]
+
+Monitoring observations must remain distinguishable from
+security conclusions.
+
+A high CPU value alone, for example, must not automatically be
+represented as proof of malicious activity.
+
+============================================================
+27. PLATFORM DIFFERENCES
+========================
+
+Monitoring behavior may differ between operating systems,
+hardware vendors, and driver versions.
+
+[MANDATORY]
+
+Platform-specific limitations must be handled explicitly.
+
+[RECOMMENDED]
+
+Platform-specific collectors should be isolated behind common
+interfaces where practical.
+
+============================================================
+28. MULTIPLE HARDWARE DEVICES
+=============================
+
+Systems may contain:
+
+* Multiple GPUs.
+* Multiple storage devices.
+* Multiple network adapters.
+* Multiple temperature sensors.
+
+[MANDATORY]
+
+Metrics must be associated with the correct hardware source.
+
+============================================================
+29. FAILURE RECOVERY
+====================
+
+If a monitoring collector fails:
+
+Monix may:
+
+1. Retry.
+2. Mark the metric unavailable.
+3. Use another supported source.
+4. Disable the affected collector.
+5. Report the error.
+
+[MANDATORY]
+
+A failed collector must not cause fabricated telemetry.
+
+============================================================
+30. MONITORING CONFIGURATION
+============================
+
+Monitoring configuration may control:
+
+* Sampling intervals.
+* Enabled metrics.
+* Refresh frequency.
+* Alert thresholds.
+* Historical collection.
+* Process monitoring.
+
+[MANDATORY]
+
+Configuration must be validated before application.
+
+Detailed configuration rules are defined in:
+
+Monix — Configuration Documentation.
+
+============================================================
+31. TESTING
+===========
+
+Monitoring tests should cover:
+
+* Correct values.
+* Unit conversion.
+* Missing sensors.
+* Unsupported metrics.
+* Permission failures.
+* Stale data.
+* Invalid data.
+* Hardware changes.
+* Multiple devices.
+* Collector failures.
+* Threshold behavior.
+* Refresh behavior.
+
+[MANDATORY]
+
+A monitoring implementation must not be considered valid based
+only on successful initialization.
+
+============================================================
+32. PERFORMANCE TESTING
+=======================
+
+Monitoring performance may be evaluated using:
+
+* CPU overhead.
+* Memory overhead.
+* Sampling frequency.
+* Collector execution time.
+* Data processing rate.
+
+[RECOMMENDED]
+
+Performance measurements should be taken using representative
+monitoring configurations.
+
+============================================================
+33. PRIVACY CONSIDERATIONS
+==========================
+
+Some monitoring information may constitute personal data or
+sensitive information depending on context.
+
+[MANDATORY]
+
+Monix must only collect and process personal information required
+for its documented functionality.
+
+[MANDATORY]
+
+Monitoring information must not be transmitted externally
+without an appropriate purpose and authorization where required.
+
+============================================================
+34. TELEMETRY
+=============
+
+Monitoring telemetry and external telemetry are distinct concepts.
+
+Local monitoring may only exist on the User's device.
+
+External telemetry may involve sending information to Weird Stuff
+or another service.
+
+[PENDING]
+
+External telemetry implementation:
+
+---
+
+[MANDATORY]
+
+The privacy implications of external telemetry must be documented
+before activation.
+
+============================================================
+35. CURRENT STATUS
+==================
+
+Monitoring is an active Monix subsystem.
+
+Current implementation status:
+
+[PENDING]
+
+---
+
+============================================================
+36. KNOWN LIMITATIONS
+=====================
+
+[PENDING]
+
+Known monitoring limitations:
+
+---
+
+---
+
+---
+
+============================================================
+37. RELATED DOCUMENTATION
+=========================
+
+Related documents:
+
+* Monix Product Overview.
+* Monix Product Specification.
+* Monix Architecture.
+* Monix Configuration Documentation.
+* Monix Testing Documentation.
+* Monix Performance Documentation.
+* Monix Debugging Documentation.
+* Monix Security Documentation.
+* Monix Development Status.
+
+============================================================
+38. DOCUMENT CONTROL
+====================
+
+Document:
+MONIX — MONITORING DOCUMENTATION
+
+Version:
+1.0
+
+Status:
+INTERNAL / DEVELOPMENT
+
+Owner:
+Weird Stuff
+
+Product:
+Monix
+
+Last Updated:
+September 7, 2026
+
+============================================================
+END OF DOCUMENT
+===============
