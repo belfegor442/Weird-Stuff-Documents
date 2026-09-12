@@ -1,0 +1,60 @@
+WEIRD STUFF
+DEVELOPMENT STANDARDS
+
+Version: 1.0
+Status: IN FORCE
+Effective Date: September 12, 2026
+Owner: Weird Stuff
+Classification: INTERNAL
+
+1. SOURCE CONTROL
+
+[MANDATORY]
+Production source code must be stored in an authorized version-control repository.
+
+[MANDATORY]
+Changes must be traceable through commits, pull requests, or equivalent version-control history.
+
+[MANDATORY]
+Secrets must not intentionally be committed to repositories.
+
+2. DEVELOPMENT
+
+[MANDATORY]
+Changes must remain within the approved scope of the project.
+
+[MANDATORY]
+Security-sensitive changes must receive appropriate review before release when team capacity permits.
+
+[RECOMMENDED]
+Large changes should be divided into reviewable units.
+
+3. DEPENDENCIES
+
+[MANDATORY]
+Dependencies must be identified and used according to their licenses.
+
+[MANDATORY]
+Known dependencies with unacceptable security or licensing risk must not knowingly be introduced.
+
+4. BUILDS
+
+[MANDATORY]
+Development builds must be distinguishable from stable releases.
+
+[MANDATORY]
+Release artifacts must correspond to the source revision intended for release.
+
+[PENDING]
+Formal build environment matrix.
+[PENDING]
+Formal supported compiler matrix.
+[PENDING]
+Dependency lockfile policy.
+
+5. DOCUMENTATION
+
+[MANDATORY]
+Material architectural or operational changes must be reflected in the applicable documentation.
+
+END OF DOCUMENT
