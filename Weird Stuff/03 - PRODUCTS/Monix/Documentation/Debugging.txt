@@ -1,663 +1,279 @@
 WEIRD STUFF
-MONIX
+MONIX — DEBUGGING DOCUMENTATION
 
-DEBUGGING DOCUMENTATION
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL / DEVELOPMENT
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+PURPOSE
 
-1. PURPOSE
-   ============================================================
+This document defines the practical debugging process for Monix: identifying a problem, reproducing it, isolating the cause, making a fix, and proving that the fix actually works.
 
-This document defines the general debugging and diagnostic
-framework for Monix.
+A disappearing symptom is not enough to call a problem solved.
 
-Its purpose is to provide a consistent method for identifying,
-reproducing, analyzing, fixing, and verifying software defects.
-
-This document applies to development, testing, release
-preparation, and post-release investigation.
-
-============================================================
-2. DEBUGGING PRINCIPLES
-=======================
+DEBUGGING PRINCIPLES
 
 [MANDATORY]
-
-A reported problem must not be considered resolved solely because
-the visible symptom disappears.
+A reported problem must not be considered resolved only because the visible symptom disappeared.
 
 [MANDATORY]
-
-A fix must be evaluated for unintended side effects when the
-affected component is important to product functionality.
+Important fixes must be checked for side effects.
 
 [MANDATORY]
-
-Debugging must not intentionally introduce unprotected secrets,
-credentials, or sensitive information into logs or test artifacts.
+Debugging must not intentionally place passwords, credentials, tokens, private keys, or other sensitive information into logs or test artifacts.
 
 [RECOMMENDED]
+Problems should be reproduced before changing the affected code where practical.
 
-Problems should be reproduced before being modified whenever
-practical.
+STANDARD FLOW
 
-============================================================
-3. ISSUE IDENTIFICATION
-=======================
+REPORT
+-> REPRODUCE
+-> ISOLATE
+-> ANALYZE
+-> FIX
+-> TEST
+-> VERIFY
 
-A debugging issue should contain enough information to determine:
+[MANDATORY]
+A claimed fix must include an appropriate verification step.
+
+ISSUE INFORMATION
+
+A useful debugging report should identify:
 
 * What happened.
 * What was expected.
-* How the issue was triggered.
-* Which version was affected.
-* Relevant environment information.
-* Relevant logs or evidence.
-* Whether the issue is reproducible.
+* How it was triggered.
+* Affected version or build.
+* Relevant environment.
+* Logs or other evidence.
+* Whether the problem is reproducible.
 
 [MANDATORY]
+Critical issues must be escalated appropriately.
 
-Known critical issues must be escalated appropriately.
+ENVIRONMENT
 
-============================================================
-4. REPRODUCTION
-===============
-
-The preferred debugging process is:
-
-REPORT
-->
-REPRODUCE
-->
-ISOLATE
-->
-ANALYZE
-->
-FIX
-->
-TEST
-->
-VERIFY
-
-[MANDATORY]
-
-A claimed fix must not be considered verified without an
-appropriate verification step.
-
-============================================================
-5. ENVIRONMENT INFORMATION
-==========================
-
-Relevant debugging information may include:
-
-* Monix version.
-* Build identifier.
-* Operating system.
-* CPU.
-* GPU.
-* Graphics driver.
-* Memory configuration.
-* Display configuration.
-* Configuration state.
-* Shader version.
-* Relevant dependencies.
+Relevant diagnostic information may include Monix version, build identifier, operating system, CPU, GPU, graphics driver, memory, display configuration, active configuration, shader version, and relevant dependencies.
 
 [RECOMMENDED]
+Environment information should be collected automatically where practical.
 
-Environment information should be captured automatically where
-practical.
+DEBUG LOGGING
 
-============================================================
-6. LOGGING FOR DEBUGGING
-========================
-
-Logs are an important debugging source.
-
-Relevant information may include:
-
-* Initialization events.
-* Configuration loading.
-* Hardware detection.
-* Monitoring events.
-* Rendering events.
-* Shader events.
-* Cache events.
-* Security events.
-* Errors.
-* Warnings.
+Useful debugging events may come from initialization, configuration, hardware detection, monitoring, rendering, shaders, cache operations, security, errors, and warnings.
 
 [MANDATORY]
-
-Debug logs must not intentionally expose passwords, API keys,
-private keys, authentication tokens, or other secrets.
+Debug logs must not intentionally expose secrets.
 
 [RECOMMENDED]
+Logs should contain enough context to identify the affected subsystem without becoming unnecessarily noisy.
 
-Logs should contain enough contextual information to identify the
-affected subsystem.
+LOG SEVERITY
 
-============================================================
-7. LOG SEVERITY
-===============
+DEBUG — detailed diagnostic information.
 
-Debugging events may use the following severity levels:
+INFO — normal operational information.
 
-DEBUG
-Detailed diagnostic information.
+WARNING — an unexpected condition that does not necessarily stop operation.
 
-INFO
-Normal operational information.
+ERROR — an operation failed or produced an invalid result.
 
-WARNING
-Unexpected condition that does not necessarily prevent operation.
-
-ERROR
-Operation failed or produced an invalid result.
-
-CRITICAL
-Severe failure affecting essential functionality, security, or
-system stability.
+CRITICAL — a severe failure affecting essential functionality, security, or stability.
 
 [MANDATORY]
+Severity must accurately describe the event.
 
-Severity must accurately represent the event.
+DEBUG BUILDS
 
-============================================================
-8. ASSERTIONS
-=============
-
-Assertions may be used to identify invalid internal states during
-development.
+Monix may use Debug, Development, Testing, and Release configurations.
 
 [MANDATORY]
+Development-only functionality must not unintentionally remain enabled in a stable release when it creates a security, stability, or information-disclosure risk.
 
-Assertions must not be used as the sole protection against
-security-critical invalid states in production.
+RENDERING DEBUGGING
 
-[RECOMMENDED]
+Rendering problems may involve Vulkan initialization, device selection, swapchain handling, resources, synchronization, pipelines, shaders, render passes, Dynamic Rendering, or frame execution.
 
-Assertions should target assumptions that are expected to remain
-true during development.
-
-============================================================
-9. DEBUG BUILDS
-===============
-
-Monix may have separate development and release configurations.
-
-Possible configurations include:
-
-* Debug.
-* Development.
-* Testing.
-* Release.
-
-[MANDATORY]
-
-Development-only functionality must not unintentionally remain
-active in a production release when it creates a security,
-stability, or information-disclosure risk.
-
-============================================================
-10. DEBUGGING RENDERING
-=======================
-
-Rendering issues may involve:
-
-* Vulkan initialization.
-* Device selection.
-* Swapchain.
-* Resources.
-* Synchronization.
-* Pipelines.
-* Shaders.
-* Render passes.
-* Dynamic rendering.
-* Frame execution.
-
-A general rendering debugging flow is:
+A useful investigation follows:
 
 INITIALIZATION
-->
-RESOURCE CREATION
-->
-SHADER VALIDATION
-->
-PIPELINE CREATION
-->
-FRAME EXECUTION
-->
-OUTPUT
+-> RESOURCE CREATION
+-> SHADER VALIDATION
+-> PIPELINE CREATION
+-> FRAME EXECUTION
+-> OUTPUT
 
 [MANDATORY]
-
 The failing stage should be identified where reasonably possible.
 
-============================================================
-11. DEBUGGING SHADERS
-=====================
+SHADER DEBUGGING
 
-Shader failures may originate from:
-
-* Invalid source.
-* Missing include.
-* Missing reference.
-* Incorrect parameter.
-* Compilation failure.
-* SPIR-V failure.
-* Reflection mismatch.
-* Pipeline creation.
-* Runtime execution.
-* Resource synchronization.
+Shader failures may originate in source code, includes, dependencies, parameters, compilation, SPIR-V generation, reflection, pipeline creation, runtime execution, or resource synchronization.
 
 [MANDATORY]
-
-A shader failure must be reported with the relevant context when
-available.
+Shader failures must be reported with relevant context when available.
 
 [RECOMMENDED]
+Shader investigations should identify the shader or preset, pass, stage, relevant dependency, and failure stage where possible.
 
-Shader debugging should identify at least:
+MULTI-PASS AND CACHE DEBUGGING
 
-* Shader or preset.
-* Pass.
-* Stage.
-* Relevant dependency.
-* Failure stage.
-
-============================================================
-12. DEBUGGING MULTI-PASS PIPELINES
-==================================
-
-Multi-pass rendering problems may involve:
-
-* Incorrect pass order.
-* Invalid input resources.
-* Incorrect output resources.
-* Synchronization.
-* Feedback resources.
-* Resource lifetime.
-* Format mismatch.
+For multi-pass rendering, debugging must consider pass order, resource inputs and outputs, synchronization, feedback resources, resource lifetime, and format compatibility.
 
 [MANDATORY]
+Resource flow between passes must be checked when diagnosing a multi-pass failure.
 
-Debugging must verify the resource flow between passes.
-
-============================================================
-13. DEBUGGING SHADER CACHE
-==========================
-
-Cache-related issues may include:
-
-* Incorrect cache hit.
-* Incorrect cache miss.
-* Stale cache.
-* Corrupted cache.
-* Invalid manifest.
-* Dependency mismatch.
-* Compiler mismatch.
-* Failed cache write.
+For shader-cache problems, investigate cache keys, dependencies, compiler information, stale data, corruption, and failed cache writes.
 
 [MANDATORY]
+A cache entry must not be trusted merely because it exists.
 
-When investigating cache issues, the validity of the underlying
-shader source and dependency state must be considered.
+MONITORING DEBUGGING
+
+Monitoring problems may involve missing, stale, incorrect, or incorrectly scaled values, unsupported sensors, sampling errors, or driver limitations.
+
+[MANDATORY]
+An unavailable measurement must be distinguished from an incorrect measurement.
+
+PROCESS ANALYSIS
+
+Process problems may involve enumeration, permissions, executable metadata, paths, resource usage, reputation, or heuristic classification.
+
+[MANDATORY]
+Permission denial must not automatically be treated as malicious behavior.
+
+SECURITY DEBUGGING
+
+Security investigations may involve detections, reputation, heuristics, alerts, process actions, SCRAM, update verification, and access controls.
+
+[MANDATORY]
+High-impact security behavior must be tested in controlled conditions.
+
+SCRAM DEBUGGING
+
+SCRAM has two distinct operating contexts:
+
+TEST MODE
+Used to validate logic without intentionally executing actions reserved for real operation.
+
+REAL MODE
+Used only with appropriate authorization and controlled conditions.
+
+[MANDATORY]
+TEST and REAL behavior must remain clearly distinguishable.
+
+[MANDATORY]
+Debugging must not accidentally trigger a real high-impact action.
+
+CONFIGURATION DEBUGGING
+
+Investigations may involve missing values, invalid values, corrupted files, migrations, unexpected defaults, or conflicting settings.
+
+[MANDATORY]
+The effective configuration must be identifiable during diagnosis.
+
+MEMORY AND CONCURRENCY
+
+Memory investigations may cover leaks, use-after-free, double release, invalid ownership, unbounded allocation, and fragmentation.
+
+Concurrency investigations may cover data races, deadlocks, race conditions, synchronization errors, and resource-lifetime conflicts.
+
+[MANDATORY]
+Fixes for concurrency or memory problems must be tested under conditions capable of exercising the affected behavior where practical.
+
+CRASHES AND HANGS
+
+Crash investigations may require the crash location, call stack, exception type, thread state, logs, active configuration, recent changes, and reproduction conditions.
+
+When Monix hangs, investigate the main thread, worker threads, rendering synchronization, file and network operations, locks, GPU waits, and possible infinite loops.
 
 [RECOMMENDED]
+Thread dumps or equivalent diagnostic information should be captured when available.
 
-A cache entry should be reproducible from its associated
-identifying inputs where practical.
+PERFORMANCE DEBUGGING
 
-============================================================
-14. DEBUGGING MONITORING
-========================
-
-Monitoring problems may include:
-
-* Missing values.
-* Incorrect values.
-* Stale values.
-* Incorrect units.
-* Incorrect sampling.
-* Unsupported sensors.
-* Driver limitations.
+Performance investigations may cover CPU, memory, GPU, frame time, startup, shutdown, shader compilation, logging, and I/O.
 
 [MANDATORY]
+A suspected bottleneck should be measured rather than inferred from a secondary symptom alone.
 
-Debugging must distinguish an incorrect measurement from a
-measurement that is unavailable.
+EXTERNAL SERVICES
 
-============================================================
-15. DEBUGGING PROCESS ANALYSIS
-==============================
-
-Process-related problems may involve:
-
-* Enumeration.
-* Permission errors.
-* Process metadata.
-* Executable paths.
-* Resource usage.
-* Reputation.
-* Heuristic classification.
+External-service failures may involve network connectivity, authentication, API responses, timeouts, rate limits, or provider outages.
 
 [MANDATORY]
+An external failure must not automatically be classified as a local Monix failure without appropriate evidence.
 
-Permission denial must not automatically be interpreted as
-malicious behavior.
+REGRESSION VERIFICATION
 
-============================================================
-16. DEBUGGING SECURITY FEATURES
-===============================
-
-Security-related debugging may require analysis of:
-
-* Detection logic.
-* Reputation.
-* Heuristics.
-* Alerts.
-* Process actions.
-* SCRAM.
-* Update verification.
-* Access controls.
-
-[MANDATORY]
-
-Security testing and debugging must use controlled environments
-where high-impact actions could affect real systems.
-
-============================================================
-17. SCRAM DEBUGGING
-===================
-
-SCRAM requires special debugging controls.
-
-TEST MODE:
-
-Used to verify logic without intentionally executing actions
-reserved for real operation.
-
-REAL MODE:
-
-Used only under appropriate authorization and controlled
-conditions.
-
-[MANDATORY]
-
-TEST MODE and REAL MODE behavior must remain distinguishable.
-
-[MANDATORY]
-
-Debugging must not accidentally activate a real high-impact action.
-
-============================================================
-18. CONFIGURATION DEBUGGING
-===========================
-
-Configuration problems may involve:
-
-* Missing values.
-* Invalid values.
-* Corrupted files.
-* Version migrations.
-* Unexpected defaults.
-* Conflicting settings.
-
-[MANDATORY]
-
-The effective configuration must be identifiable during
-diagnosis.
-
-============================================================
-19. MEMORY DEBUGGING
-====================
-
-Potential memory problems include:
-
-* Leaks.
-* Use-after-free.
-* Double release.
-* Invalid ownership.
-* Unbounded allocation.
-* Fragmentation.
-
-[RECOMMENDED]
-
-Memory analysis tools should be used for suspected memory
-corruption or leak issues.
-
-============================================================
-20. CONCURRENCY DEBUGGING
-=========================
-
-Potential concurrency problems include:
-
-* Data races.
-* Deadlocks.
-* Race conditions.
-* Incorrect synchronization.
-* Resource lifetime conflicts.
-
-[MANDATORY]
-
-A concurrency fix must be tested under conditions capable of
-reproducing the relevant workload where practical.
-
-============================================================
-21. CRASH DEBUGGING
-===================
-
-For a crash, the investigation may include:
-
-* Crash location.
-* Call stack.
-* Exception type.
-* Thread state.
-* Relevant logs.
-* Active configuration.
-* Recent changes.
-* Reproduction conditions.
-
-[MANDATORY]
-
-Crash evidence must not be intentionally altered to misrepresent
-the cause.
-
-============================================================
-22. HANGS AND DEADLOCKS
-=======================
-
-When Monix becomes unresponsive, debugging should investigate:
-
-* Main thread state.
-* Worker threads.
-* Rendering synchronization.
-* File operations.
-* Network operations.
-* Locks.
-* GPU waits.
-* Infinite loops.
-
-[RECOMMENDED]
-
-Thread dumps or equivalent diagnostic information should be
-captured when available.
-
-============================================================
-23. PERFORMANCE DEBUGGING
-=========================
-
-Performance issues may include:
-
-* High CPU usage.
-* High memory usage.
-* GPU bottlenecks.
-* Frame-time spikes.
-* Slow startup.
-* Slow shutdown.
-* Shader compilation delays.
-* Excessive logging.
-* Excessive I/O.
-
-[MANDATORY]
-
-Performance debugging must distinguish actual bottlenecks from
-secondary symptoms.
-
-============================================================
-24. DEBUGGING EXTERNAL SERVICES
-===============================
-
-Where Monix depends on external services, failures may involve:
-
-* Network connectivity.
-* Authentication.
-* API responses.
-* Timeouts.
-* Rate limits.
-* Provider failures.
-
-[MANDATORY]
-
-External-service failures must not automatically be treated as
-local application failures without appropriate investigation.
-
-============================================================
-25. REGRESSION VERIFICATION
-===========================
-
-After fixing a significant issue:
-
-[MANDATORY]
-
-The original failure must be tested again.
-
-[RECOMMENDED]
-
-Related functionality should also be tested to identify
-regressions.
-
-A preferred sequence is:
+After a significant fix:
 
 ORIGINAL FAILURE
-->
-FIX
-->
-ORIGINAL TEST
-->
-RELATED TESTS
-->
-REGRESSION CHECK
+-> FIX
+-> ORIGINAL TEST
+-> RELATED TESTS
+-> REGRESSION CHECK
 
-============================================================
-26. ROOT CAUSE ANALYSIS
-=======================
-
-For significant issues, the investigation should attempt to
-identify the underlying cause rather than only the visible symptom.
-
-Possible root causes include:
-
-* Incorrect assumptions.
-* Invalid state transitions.
-* Resource lifetime errors.
-* Synchronization errors.
-* Invalid input handling.
-* Configuration problems.
-* Dependency behavior.
-* Platform differences.
+[MANDATORY]
+The original defect must be tested again.
 
 [RECOMMENDED]
+Related functionality should also be tested when the change could affect it.
 
-Critical incidents should receive a documented root-cause
-analysis.
+ROOT CAUSE
 
-============================================================
-27. DEBUGGING CHANGES
-=====================
+For important issues, the investigation should go beyond the visible symptom and identify the underlying cause where possible.
 
-[MANDATORY]
-
-Temporary debugging changes must be identifiable.
-
-[MANDATORY]
-
-Temporary test code, diagnostics, bypasses, or instrumentation
-must not accidentally be included in a stable release when they
-alter intended security or product behavior.
+Potential causes include incorrect assumptions, invalid state transitions, resource-lifetime errors, synchronization problems, invalid input handling, configuration problems, dependency behavior, and platform differences.
 
 [RECOMMENDED]
+Critical incidents should receive a documented root-cause analysis.
 
-Temporary changes should be removed immediately after their
-purpose is complete.
-
-============================================================
-28. DEBUGGING WITH PRODUCTION DATA
-==================================
+TEMPORARY DEBUGGING CHANGES
 
 [MANDATORY]
-
-Production personal data and sensitive information must not be
-used unnecessarily during debugging.
+Temporary debugging code, instrumentation, bypasses, and test switches must be identifiable.
 
 [MANDATORY]
-
-Sensitive data must be protected whenever it is legitimately
-required for diagnosis.
+They must not accidentally reach a stable release when they alter intended security or product behavior.
 
 [RECOMMENDED]
+Temporary changes should be removed when their purpose is complete.
 
-Anonymized or synthetic data should be preferred.
+PRODUCTION DATA
 
-============================================================
-29. BUG FIX VALIDATION
-======================
+[MANDATORY]
+Production personal data and sensitive information must not be used unnecessarily during debugging.
 
-A bug fix should verify:
+[RECOMMENDED]
+Synthetic or anonymized data should be preferred.
+
+BUG-FIX VALIDATION
+
+A fix should demonstrate that:
 
 * The original defect no longer occurs.
-* Expected behavior works.
+* Expected behavior still works.
 * Related functionality remains operational.
-* No new critical error was introduced.
+* No new critical failure was introduced.
 
 [MANDATORY]
-
-A fix must not be classified as verified when the relevant
-validation has not been performed.
-
-============================================================
-30. DEBUGGING OWNERSHIP
-=======================
+A fix must not be called verified when the relevant validation has not been performed.
 
 [PENDING]
-
-Primary debugging owner:
-
----
+Primary debugging owner.
 
 [PENDING]
-
-Development Lead:
-
----
+Development Lead.
 
 [PENDING]
+QA Lead.
 
-QA Lead:
-
----
-
-============================================================
-31. RELATED DOCUMENTATION
-=========================
-
-Related documents:
+RELATED DOCUMENTATION
 
 * Monix Product Overview.
 * Monix Product Specification.
@@ -670,15 +286,13 @@ Related documents:
 * Monix Release History.
 * Weird Stuff Security Policy.
 
-============================================================
-32. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — DEBUGGING DOCUMENTATION
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL / DEVELOPMENT
@@ -690,8 +304,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
