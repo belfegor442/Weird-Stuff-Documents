@@ -1,0 +1,26 @@
+WEIRD STUFF
+TEAM RULES
+
+Version: 1.0
+Status: IN FORCE
+Classification: INTERNAL
+
+[MANDATORY]
+Team members must operate within their assigned authority and responsibilities.
+
+[MANDATORY]
+Members must protect internal, restricted, and confidential information.
+
+[MANDATORY]
+Members must not intentionally interfere with another member's authorized work, accounts, repositories, or infrastructure.
+
+[MANDATORY]
+Security incidents and significant operational problems must be escalated through the appropriate channel.
+
+[MANDATORY]
+When a member leaves a role or Weird Stuff, applicable access must be revoked.
+
+[RECOMMENDED]
+Members should document important work so that responsibilities can be transferred when necessary.
+
+END OF DOCUMENT
