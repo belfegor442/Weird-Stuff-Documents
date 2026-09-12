@@ -1,6 +1,6 @@
 WEIRD STUFF DOCUMENT INVENTORY
 
-Total files: 44
+Total files: 53 (including root README.txt)
 
 01 - CORPORATE/Document Control.txt
 01 - CORPORATE/Manual Corporativo.txt
@@ -19,10 +19,19 @@ Total files: 44
 03 - PRODUCTS/DraftPad/Product Overview.txt
 03 - PRODUCTS/DraftPad/Product Specification.txt
 03 - PRODUCTS/Monix/Development Status.txt
+03 - PRODUCTS/Monix/Documentation/AI.txt
 03 - PRODUCTS/Monix/Documentation/Architecture.txt
+03 - PRODUCTS/Monix/Documentation/Build and Release.txt
+03 - PRODUCTS/Monix/Documentation/Configuracion.txt
+03 - PRODUCTS/Monix/Documentation/Debugging.txt
+03 - PRODUCTS/Monix/Documentation/Logging.txt
+03 - PRODUCTS/Monix/Documentation/Monitoring.txt
+03 - PRODUCTS/Monix/Documentation/Performance.txt
 03 - PRODUCTS/Monix/Documentation/Security.txt
 03 - PRODUCTS/Monix/Documentation/Shader System.txt
+03 - PRODUCTS/Monix/Documentation/State and Snapshot.txt
 03 - PRODUCTS/Monix/Documentation/Testing.txt
+03 - PRODUCTS/Monix/Documentation/User Interface.txt
 03 - PRODUCTS/Monix/Product Overview.txt
 03 - PRODUCTS/Monix/Product Specification.txt
 03 - PRODUCTS/Monix/Release History.txt
