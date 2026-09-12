@@ -1,26 +1,28 @@
 WEIRD STUFF
 DRAFTPAD — PRODUCT OVERVIEW
 
-Version: 1.0
+Version: 1.1
 Status: RETIRED / HISTORICAL RECORD
 Owner: Weird Stuff
 Classification: INTERNAL
 
-1. STATUS
+STATUS
 
-DraftPad is retained in the documentation repository as a historical product record.
+DraftPad is no longer treated as an active product. Its documentation stays here because the project existed and its history may still matter.
 
 [MANDATORY]
-DraftPad must not be represented as an active or supported product unless its lifecycle status is formally changed.
+DraftPad must not be described as an active or supported product unless Weird Stuff formally changes its lifecycle status.
 
-2. PUBLIC COMMUNICATION
+PUBLIC COMMUNICATION
 
-Any retirement or withdrawal communication must accurately describe the product's current availability and support status.
+If DraftPad is mentioned publicly, the wording should make its current availability and support status clear. Do not imply that the product is still being maintained if it is not.
 
 [PENDING]
 Final retirement date.
+
 [PENDING]
 Archived release identifier.
+
 [PENDING]
 Final public retirement notice.
 
