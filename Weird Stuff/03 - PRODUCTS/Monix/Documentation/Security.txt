@@ -1,38 +1,21 @@
 WEIRD STUFF
-MONIX
+MONIX — SECURITY DOCUMENTATION
 
-SECURITY DOCUMENTATION
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL / DEVELOPMENT
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+PURPOSE
 
-1. PURPOSE
-   ============================================================
+This document defines the security model and product-specific security requirements for Monix. It complements the Weird Stuff Security Policy and focuses on how those principles apply inside the application.
 
-This document defines the security characteristics, security
-boundaries, security-sensitive functionality, threat areas, and
-security requirements of Monix.
+SECURITY OBJECTIVE
 
-It complements the Weird Stuff Security Policy and provides
-product-specific security guidance.
+Monix should provide monitoring, diagnostic, and security-oriented features without unnecessarily increasing the security risk of the system on which it runs.
 
-This document is intended for internal use.
-
-============================================================
-2. SECURITY OBJECTIVE
-=====================
-
-The security objective of Monix is to provide monitoring,
-diagnostic, and security-oriented functionality without
-unnecessarily increasing the security risk of the system on which
-the application operates.
-
-Monix must prioritize:
+Security priorities are:
 
 * Integrity.
 * Controlled access.
@@ -42,710 +25,306 @@ Monix must prioritize:
 * Safe failure.
 * Traceability.
 
-============================================================
-3. SECURITY SCOPE
-=================
+SCOPE
 
-Security considerations apply to:
+Security applies to binaries, source code, configuration, logs, monitoring data, process information, detections, SCRAM, shaders, updates, external services, credentials, local storage, and network communication.
 
-* Application binaries.
-* Source code.
-* Configuration.
-* Logs.
-* Monitoring data.
-* Process information.
-* Security detections.
-* SCRAM.
-* Shader processing.
-* Update mechanisms.
-* External services.
-* Credentials and secrets.
-* Local storage.
-* Network communication.
+TRUST MODEL
 
-============================================================
-4. TRUST MODEL
-==============
-
-Monix may interact with resources with different trust levels.
-
-Conceptual trust hierarchy:
-
-TRUSTED APPLICATION COMPONENTS
-|
-v
-VALIDATED INPUTS
-|
-v
-SYSTEM INFORMATION
-|
-v
-EXTERNAL RESOURCES
-|
-v
-UNTRUSTED INPUT
+Monix interacts with resources with different levels of trust.
 
 [MANDATORY]
+Information crossing from outside a trusted boundary must not automatically be treated as trustworthy.
 
-Information originating from outside a trusted security boundary
-must not automatically be considered trustworthy.
+SECURITY BOUNDARIES
 
-============================================================
-5. SECURITY BOUNDARIES
-======================
+Important boundaries include:
 
-Important boundaries may exist between:
-
-* User interface and application logic.
-* Application logic and privileged operations.
-* Monix and operating-system APIs.
-* Monix and external services.
-* Shader resources and the renderer.
-* Update packages and the installed application.
-* User-provided input and internal processing.
+* User interface -> application logic.
+* Application logic -> privileged operations.
+* Monix -> operating-system APIs.
+* Monix -> external services.
+* Shader resources -> renderer.
+* Update packages -> installed application.
+* User input -> internal processing.
 
 [MANDATORY]
+Crossing a security boundary requires the validation, authorization, or integrity verification appropriate to the operation.
 
-Crossing a security boundary must require appropriate validation,
-authorization, or integrity verification.
-
-============================================================
-6. PRINCIPLE OF LEAST PRIVILEGE
-===============================
+LEAST PRIVILEGE
 
 [MANDATORY]
-
-Monix must request and use only the privileges reasonably
-necessary for its functionality.
+Monix must request and use only the privileges reasonably necessary for its functionality.
 
 [MANDATORY]
-
-A feature must not require elevated privileges merely because
-they are convenient when the same function can reasonably be
-performed without them.
+Elevated privileges must not be used merely for convenience when the same operation can reasonably be performed without them.
 
 [RECOMMENDED]
+Privileged functionality should remain isolated from ordinary application functionality.
 
-Privileged functionality should be isolated from ordinary
-application functionality.
+PROCESS INFORMATION AND ACTIONS
 
-============================================================
-7. PROCESS INFORMATION
-======================
-
-Monix may inspect information about running processes.
-
-Potential information includes:
-
-* Process identifiers.
-* Executable paths.
-* Process names.
-* Resource consumption.
-* Runtime state.
-* Security indicators.
+Monix may inspect process identifiers, names, executable paths, resource usage, state, and security indicators.
 
 [MANDATORY]
-
 Process inspection must respect operating-system access controls.
 
 [MANDATORY]
+Access denial must not automatically be interpreted as evidence that a process is safe or malicious.
 
-Access-denied conditions must be handled safely rather than
-treated as proof that a process is safe or malicious.
-
-============================================================
-8. PROCESS ACTIONS
-==================
-
-Monix may support actions affecting processes depending on the
-implemented feature set.
-
-Potential actions may include:
-
-* Termination.
-* Restriction.
-* Isolation.
-* Other protective actions.
+Where process actions exist, such as termination or isolation:
 
 [MANDATORY]
-
-A process action must only be executed where the required
-authorization is available.
+The action must have the required authorization.
 
 [MANDATORY]
-
-A failed process action must not be represented as successful.
+A failed action must never be reported as successful.
 
 [RECOMMENDED]
+High-impact actions should use explicit confirmation or additional safeguards where appropriate.
 
-High-impact actions should provide explicit confirmation or
-additional safeguards where appropriate.
+DETECTION MODEL
 
-============================================================
-9. DETECTION SYSTEM
-===================
+Monix may combine process characteristics, executable information, reputation, behavior, resource usage, and other indicators.
 
-Monix may identify potentially suspicious activity through
-multiple signals.
-
-Possible inputs include:
-
-* Process characteristics.
-* Executable information.
-* Reputation.
-* Behavioral indicators.
-* Resource behavior.
-* Known indicators.
-
-[MANDATORY]
-
-Detection results must clearly distinguish:
+Detection results should distinguish:
 
 VERIFIED
-Information supported by reliable evidence.
+Supported by reliable evidence.
 
 HEURISTIC
-A probability-based or rule-based assessment.
+A probability- or rule-based assessment.
 
 UNKNOWN
-Insufficient information for a reliable determination.
-
-============================================================
-10. FALSE POSITIVES
-===================
-
-Security detections may incorrectly classify legitimate software
-or activity.
+There is not enough information for a reliable conclusion.
 
 [MANDATORY]
-
-Monix must not represent a heuristic detection as conclusive
-proof of malicious behavior unless independently verified.
-
-[RECOMMENDED]
-
-Detection results should provide useful evidence or reasoning for
-important classifications.
-
-============================================================
-11. FALSE NEGATIVES
-===================
-
-No detection system can guarantee detection of every malicious
-activity.
+A heuristic result must not be presented as conclusive proof of malicious behavior unless independently verified.
 
 [MANDATORY]
+Monix must not claim complete or guaranteed malware detection without evidence supporting such a claim.
 
-Monix must not claim complete or guaranteed malware detection
-unless the implementation and evidence support such a claim.
+SCRAM
 
-[RECOMMENDED]
-
-Known detection limitations should be documented internally.
-
-============================================================
-12. SCRAM SECURITY MODEL
-========================
-
-SCRAM is considered a high-impact security subsystem.
-
-Security flow:
+SCRAM is a high-impact security subsystem.
 
 TRIGGER
-|
-v
-VALIDATION
-|
-v
-MODE CHECK
-|
-v
-AUTHORIZATION
-|
-v
-ACTION
-|
-v
-RESULT
-|
-v
-LOG
+-> VALIDATION
+-> MODE CHECK
+-> AUTHORIZATION
+-> ACTION
+-> RESULT
+-> LOG
 
 [MANDATORY]
-
-Every condition required for a high-impact SCRAM action must be
-validated before execution.
+All conditions required for a high-impact SCRAM action must be validated before execution.
 
 [MANDATORY]
-
-TEST mode must not intentionally execute REAL mode actions.
-
-[MANDATORY]
-
-REAL mode must only execute actions that are authorized for the
-current environment.
-
-============================================================
-13. SCRAM FAIL-SAFE BEHAVIOR
-============================
+TEST mode must not intentionally execute actions reserved for REAL mode.
 
 [MANDATORY]
+REAL mode must only execute actions authorized for the current environment.
 
-If SCRAM cannot reliably determine whether the conditions required
-for a high-impact action are satisfied, it must fail safely rather
-than assume authorization.
+[MANDATORY]
+If SCRAM cannot reliably establish that an action is authorized and safe, it must fail safely rather than assume permission.
+
+SHADER SECURITY
+
+Shaders are executable GPU programs and may come from internal or external sources.
+
+[MANDATORY]
+Shader source and presets must be handled according to their trust level.
+
+[MANDATORY]
+Malformed or invalid shader resources must be rejected or safely handled.
+
+[MANDATORY]
+Shader processing must not intentionally bypass application, operating-system, or graphics-driver security boundaries.
 
 [RECOMMENDED]
+Third-party shader resources should be reviewed before inclusion in a trusted release.
 
-SCRAM should maintain a clearly observable operational state.
+UPDATE SECURITY
 
-============================================================
-14. SHADER SECURITY
-===================
-
-Shaders are executable GPU programs and may originate from
-internal or external sources.
+Updates are security-sensitive operations.
 
 [MANDATORY]
-
-Shader source and preset files must be treated according to their
-trust level.
+Update packages must come from authorized mechanisms.
 
 [MANDATORY]
-
-Invalid or malformed shader resources must be rejected or safely
-handled.
+Integrity and authenticity must be verified to the level required for safe installation.
 
 [MANDATORY]
-
-Shader processing must not intentionally bypass application,
-operating-system, or graphics-driver security boundaries.
+Failed verification must prevent installation when verification is required.
 
 [RECOMMENDED]
+Released update artifacts should be digitally signed.
 
-Third-party shader resources should be reviewed before being
-included in a trusted release.
+LOCAL STORAGE
 
-============================================================
-15. UPDATE SECURITY
-===================
-
-Software updates are a security-sensitive operation.
+Monix may store configuration, logs, caches, snapshots, and other application state.
 
 [MANDATORY]
-
-Monix must obtain update packages through authorized mechanisms.
-
-[MANDATORY]
-
-Update integrity and authenticity must be verified to an
-appropriate level before installation.
-
-[MANDATORY]
-
-Failure to verify an update must prevent installation where
-verification is required for safe operation.
-
-[RECOMMENDED]
-
-Cryptographic signing should be used for released update
-artifacts.
-
-============================================================
-16. LOCAL STORAGE
-=================
-
-Monix may store:
-
-* Configuration.
-* Logs.
-* Cache data.
-* Snapshots.
-* Other application state.
-
-[MANDATORY]
-
 Sensitive information must not be stored unnecessarily.
 
 [MANDATORY]
-
-Sensitive local information must be protected appropriately
-for its risk.
+Sensitive local information must receive protection appropriate to its risk.
 
 [RECOMMENDED]
+Sensitive data should be encrypted at rest when justified by the threat model and implementation.
 
-Sensitive data should be encrypted at rest where justified by
-the threat model and implementation requirements.
-
-============================================================
-17. LOG SECURITY
-================
-
-Logs are considered a potential source of sensitive information.
+LOG SECURITY
 
 [MANDATORY]
-
-Monix must not intentionally log:
-
-* Passwords.
-* Private keys.
-* Authentication tokens.
-* API secrets.
-* Other confidential credentials.
+Monix must not intentionally log passwords, private keys, authentication tokens, API secrets, or other confidential credentials.
 
 [MANDATORY]
+Security-sensitive logs must be protected against unauthorized access.
 
-Security-sensitive logs must be protected against unauthorized
-access.
-
-[RECOMMENDED]
-
-Logging should use structured fields that make security events
-easier to analyze.
-
-============================================================
-18. CONFIGURATION SECURITY
-==========================
-
-Configuration may affect security-sensitive behavior.
+CONFIGURATION SECURITY
 
 [MANDATORY]
-
 Security-critical configuration values must be validated.
 
 [MANDATORY]
-
-Configuration files must not be treated as trusted solely
-because they exist on the local system.
+Configuration files must not be trusted merely because they exist in an expected directory.
 
 [RECOMMENDED]
+Configuration integrity should be protected when tampering could have significant security consequences.
 
-Configuration integrity should be protected where tampering could
-cause significant security consequences.
+INPUT VALIDATION
 
-============================================================
-19. INPUT VALIDATION
-====================
-
-Monix may receive inputs from:
-
-* Users.
-* Configuration files.
-* Shader files.
-* Presets.
-* External services.
-* Operating-system APIs.
-* Filesystem resources.
+Monix may receive input from Users, configuration files, shaders, presets, external services, operating-system APIs, and filesystem resources.
 
 [MANDATORY]
+Inputs crossing a security boundary must be validated before being used in security-sensitive operations.
 
-Inputs crossing a security boundary must be validated before
-they are used in security-sensitive operations.
-
-============================================================
-20. PATH SECURITY
-=================
-
-Monix may load resources from filesystem paths.
+PATH SECURITY
 
 [MANDATORY]
-
-Resource loading must not unintentionally allow unauthorized
-access to protected filesystem locations.
+Resource loading must not unintentionally grant access to protected filesystem locations.
 
 [MANDATORY]
-
-Path traversal must be prevented where user-controlled or
-untrusted paths are processed.
+Path traversal must be prevented when untrusted paths are processed.
 
 [RECOMMENDED]
-
 Paths should be normalized and validated before use.
 
-============================================================
-21. EXTERNAL COMMUNICATION
-==========================
-
-Monix may communicate with external services depending on its
-implemented features.
+EXTERNAL COMMUNICATION
 
 [PENDING]
-
-External network services:
-
----
+Final list of external services.
 
 [MANDATORY]
-
-External communication must only occur for an intended product
-function.
+Network communication must only occur for intended product functions.
 
 [MANDATORY]
-
 Sensitive information must not be transmitted unnecessarily.
 
-============================================================
-22. TELEMETRY SECURITY
-======================
+TELEMETRY
 
 [PENDING]
-
-Telemetry:
-
----
-
-If telemetry is implemented:
+Final telemetry behavior.
 
 [MANDATORY]
-
-Telemetry must be limited to the documented purpose.
+Telemetry must be limited to its documented purpose.
 
 [MANDATORY]
-
 Sensitive data must not be collected unnecessarily.
 
 [MANDATORY]
+Telemetry involving sensitive information must receive appropriate transport protection.
 
-Telemetry transport must receive appropriate protection where
-sensitive information is involved.
-
-============================================================
-23. AI SECURITY
-===============
-
-Monix may include AI-supported features.
+AI SECURITY
 
 [PENDING]
-
-AI architecture:
-
----
-
-[PENDING]
-
-AI provider:
-
----
+Final AI architecture and provider.
 
 [MANDATORY]
-
-Sensitive system information must not be transmitted to an
-external AI service unless the transmission is authorized and
-consistent with applicable privacy requirements.
+Sensitive system information must not be sent to an external AI service without appropriate authorization and compliance with applicable privacy requirements.
 
 [MANDATORY]
+AI-generated output must not automatically become a trusted security decision.
 
-AI-generated output must not automatically be treated as a
-trusted security decision.
-
-============================================================
-24. DEPENDENCY SECURITY
-=======================
+DEPENDENCY SECURITY
 
 [MANDATORY]
-
-Third-party dependencies must be reviewed according to their
-security relevance.
+Third-party dependencies must be evaluated according to their security relevance.
 
 [MANDATORY]
-
-Known severe dependency vulnerabilities must be assessed.
+Known severe vulnerabilities must be assessed and addressed appropriately.
 
 [RECOMMENDED]
+Dependency vulnerability monitoring should be automated where practical.
 
-Dependency vulnerability monitoring should be automated where
-practical.
-
-============================================================
-25. BUILD SECURITY
-==================
-
-The Monix build process may produce:
-
-* Executables.
-* Libraries.
-* Shader artifacts.
-* Installers.
-* Update packages.
+BUILD AND RELEASE SECURITY
 
 [MANDATORY]
-
-Build artifacts must correspond to the intended source and
-configuration.
+Build artifacts must correspond to the intended source and configuration.
 
 [MANDATORY]
-
-Release artifacts must not knowingly contain debugging,
-credentials, test payloads, or other unintended sensitive
-material.
-
-============================================================
-26. RELEASE SECURITY
-====================
-
-Before a stable release:
+Stable release artifacts must not contain unintended credentials, debugging payloads, or other sensitive development material.
 
 [MANDATORY]
+Stable releases must be distributed through authorized mechanisms.
 
-Security-relevant functionality must be evaluated.
+SECURITY INCIDENTS
 
-[MANDATORY]
-
-Known critical security defects must be addressed, mitigated,
-or explicitly accepted by the appropriate authority before
-release.
+Potential incidents include credential compromise, unauthorized access, malicious modification, vulnerable dependencies, compromised releases, data exposure, update compromise, shader-related security issues, and unauthorized privileged operations.
 
 [MANDATORY]
-
-Release packages must be distributed through authorized
-mechanisms.
-
-============================================================
-27. SECURITY INCIDENT RESPONSE
-==============================
-
-Potential Monix security incidents include:
-
-* Credential compromise.
-* Unauthorized access.
-* Malicious modification.
-* Vulnerable dependency.
-* Malicious release artifact.
-* Data exposure.
-* Update compromise.
-* Shader-related security issue.
-* Unauthorized privileged operation.
-
-[MANDATORY]
-
-Security incidents must be escalated according to the Weird Stuff
-Security Policy.
+Monix security incidents must follow the Weird Stuff Security Policy.
 
 General response:
 
 DETECT
-->
-ASSESS
-->
-CONTAIN
-->
-REMOVE
-->
-RECOVER
-->
-VERIFY
-->
-DOCUMENT
+-> ASSESS
+-> CONTAIN
+-> REMOVE
+-> RECOVER
+-> VERIFY
+-> DOCUMENT
 
-============================================================
-28. COMPROMISED RELEASE
-=======================
+COMPROMISED RELEASE
 
 If a released Monix artifact is suspected of compromise:
 
 [MANDATORY]
-
-The affected artifact must be identified.
-
-[MANDATORY]
-
-Distribution must be restricted or suspended where reasonably
-necessary.
+Identify the affected artifact.
 
 [MANDATORY]
-
-The incident must be investigated.
+Restrict or suspend distribution where reasonably necessary.
 
 [MANDATORY]
+Investigate the incident.
 
-A corrected release should be produced where necessary.
+[MANDATORY]
+Produce a corrected release where necessary.
 
 [RECOMMENDED]
+Notify affected Users when the incident materially affects their security.
 
-Affected Users should be notified when the incident materially
-affects their security.
+SECURITY TESTING
 
-============================================================
-29. SECURITY TESTING
-====================
-
-Security testing may include:
-
-* Authentication.
-* Authorization.
-* Input validation.
-* Privilege boundaries.
-* Shader validation.
-* Update verification.
-* Process operations.
-* Configuration.
-* Dependency security.
-* Storage.
-* Network communication.
+Security testing may cover authentication, authorization, input validation, privilege boundaries, shader validation, update verification, process actions, configuration, dependencies, storage, and network communication.
 
 [MANDATORY]
+High-impact security functionality must be tested before stable release.
 
-High-impact security features must be tested before stable
-release.
+SECURITY DOCUMENTATION
 
-============================================================
-30. SECURITY DOCUMENTATION
-==========================
-
-Security-sensitive features should document:
-
-* Threat.
-* Intended behavior.
-* Trust boundary.
-* Required privileges.
-* Failure behavior.
-* Logging.
-* Testing requirements.
-* Known limitations.
-
-[RECOMMENDED]
-
-Major security decisions should be documented before implementation
-when practical.
-
-============================================================
-31. SECURITY LIMITATIONS
-========================
+Security-sensitive features should document their threat, intended behavior, trust boundary, required privileges, failure behavior, logging, tests, and known limitations.
 
 [PENDING]
-
-Known security limitations:
-
----
-
----
-
----
-
-============================================================
-32. SECURITY CONTACT
-====================
+Known security limitations.
 
 [PENDING]
-
-Internal security contact:
-
----
+Internal security contact.
 
 [PENDING]
+Public security reporting contact.
 
-Public security reporting contact:
-
----
-
-============================================================
-33. RELATIONSHIP WITH OTHER DOCUMENTATION
-=========================================
-
-This document is subordinate to applicable law and the Weird Stuff
-Security Policy.
-
-It also relates to:
+RELATED DOCUMENTATION
 
 * Monix Product Overview.
 * Monix Product Specification.
@@ -753,19 +332,19 @@ It also relates to:
 * Monix Testing Documentation.
 * Monix Shader System.
 * Monix Development Status.
-* Monix Release History.
+* Monix Configuration Documentation.
+* Monix Logging Documentation.
+* Weird Stuff Security Policy.
 * Weird Stuff Privacy Policy.
 * Weird Stuff Intellectual Property Policy.
 
-============================================================
-34. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — SECURITY DOCUMENTATION
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL / DEVELOPMENT
@@ -777,8 +356,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
