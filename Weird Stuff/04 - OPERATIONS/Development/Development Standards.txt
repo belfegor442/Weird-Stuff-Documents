@@ -1,60 +1,72 @@
 WEIRD STUFF
 DEVELOPMENT STANDARDS
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Effective Date: September 12, 2026
 Owner: Weird Stuff
 Classification: INTERNAL
 
+PURPOSE
+
+These standards describe the basic expectations for developing and changing Weird Stuff software. They are intentionally practical: the point is to keep changes traceable, reviewable, and safe without turning every small change into paperwork.
+
 1. SOURCE CONTROL
 
 [MANDATORY]
-Production source code must be stored in an authorized version-control repository.
+Production source code must live in an authorized version-control repository.
 
 [MANDATORY]
-Changes must be traceable through commits, pull requests, or equivalent version-control history.
+Changes must be traceable through commits, pull requests, or equivalent history. Someone reviewing a project later should be able to understand what changed and why.
 
 [MANDATORY]
-Secrets must not intentionally be committed to repositories.
+Secrets, credentials, private keys, or other sensitive values must not be committed to a repository.
 
-2. DEVELOPMENT
-
-[MANDATORY]
-Changes must remain within the approved scope of the project.
+2. MAKING CHANGES
 
 [MANDATORY]
-Security-sensitive changes must receive appropriate review before release when team capacity permits.
+Changes should stay within the agreed scope of the task or project. If the scope needs to change, that change should be made explicit rather than quietly expanding the work.
+
+[MANDATORY]
+Security-sensitive changes must receive appropriate review before release when the team has enough capacity to provide it.
 
 [RECOMMENDED]
-Large changes should be divided into reviewable units.
+Large changes should be split into pieces that can be understood and reviewed without having to reconstruct the entire project at once.
 
 3. DEPENDENCIES
 
 [MANDATORY]
-Dependencies must be identified and used according to their licenses.
+Dependencies must be identified and used in accordance with their licenses.
 
 [MANDATORY]
-Known dependencies with unacceptable security or licensing risk must not knowingly be introduced.
+A dependency with a known and unacceptable security or licensing risk must not knowingly be introduced.
 
-4. BUILDS
+[RECOMMENDED]
+When practical, keep dependency versions reproducible so that a build can be recreated later.
+
+4. BUILDS AND RELEASES
 
 [MANDATORY]
-Development builds must be distinguishable from stable releases.
+Development builds must be clearly distinguishable from stable releases.
 
 [MANDATORY]
-Release artifacts must correspond to the source revision intended for release.
+A release artifact must correspond to the source revision that was actually intended for release.
 
 [PENDING]
 Formal build environment matrix.
+
 [PENDING]
 Formal supported compiler matrix.
+
 [PENDING]
 Dependency lockfile policy.
 
 5. DOCUMENTATION
 
 [MANDATORY]
-Material architectural or operational changes must be reflected in the applicable documentation.
+Important architectural or operational changes must be reflected in the relevant documentation.
+
+[RECOMMENDED]
+Documentation should explain decisions in plain language where possible. It should help the next person working on the project, not simply record that a rule exists.
 
 END OF DOCUMENT
