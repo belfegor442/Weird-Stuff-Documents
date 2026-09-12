@@ -1,75 +1,70 @@
 WEIRD STUFF
 DOCUMENTATION ROOT
 
-Version: 1.2
+Version: 1.3
 Status: IN FORCE
 Updated: September 12, 2026
 
-PURPOSE
+ABOUT THIS REPOSITORY
 
-This directory is the master working documentation repository for Weird Stuff.
+This is the working documentation for Weird Stuff. It is where we keep the rules, decisions, product records, and public material that the team actually needs to refer back to.
 
-DOCUMENTATION MODEL
+The goal is simple: if something matters to the company, there should be a clear place for it here. Documents should be understandable on their own, easy to find, and honest about what is decided and what is still being worked out.
 
-The controlled documentation is organized into eight functional areas:
+HOW THE REPOSITORY IS ORGANIZED
 
 01 - CORPORATE
-Company organization, governance, and document control.
+How Weird Stuff is organized, who is responsible for what, and how controlled documents are managed.
 
 02 - LEGAL
 Terms, privacy, cookies, acceptable use, security, intellectual property, and custom application policies.
 
 03 - PRODUCTS
-Product-specific documentation, specifications, development records, and release history.
+Product records, specifications, development notes, technical documentation, and release history.
 
 04 - OPERATIONS
-Development, QA, design, infrastructure, and operational security procedures.
+Development, QA, design, infrastructure, and security procedures used to run projects.
 
 05 - BRAND
-Brand identity and marketing standards.
+Brand identity, design rules, and marketing guidance.
 
 06 - PUBLIC
-Approved public-facing communications and publication standards.
+Material intended to be published or shared outside the team.
 
 07 - INTERNAL
-Internal team, meetings, and communication standards.
+Team communication, meetings, and other internal working rules.
 
 08 - ARCHIVE
-Superseded, retired, and historical documentation.
+Older material that is no longer current but is kept for historical or operational reasons.
 
-PHYSICAL REPOSITORY
+DOCUMENT STATUS
 
-The canonical physical repository now uses the numbered 01–08 structure above. The previous Esp directory has been removed after migration.
-
-Directory and file names have been normalized where the previous structure contained spelling inconsistencies. Existing document contents were preserved during the structural migration.
-
-DOCUMENT CONTROL
-
-DOCUMENT INVENTORY.txt is the controlled inventory of expected documentation.
-
-[MANDATORY]
-A document must not be treated as current solely because a file exists in the repository. Its document status determines whether it is authoritative.
+A file existing in this repository does not automatically make it an active policy. The status written in the document matters.
 
 [MANDATORY]
 Superseded documents must not be presented as current policy.
 
 [MANDATORY]
-Public legal documents must not be published as effective legal terms until the required legal identity, jurisdiction, contacts, effective date, and other applicable information have been completed and reviewed.
+Public legal documents must not be presented as effective legal terms until the required identity, jurisdiction, contacts, effective date, and other applicable details have been completed and reviewed.
 
 [MANDATORY]
-Restricted, confidential, and reserved information must not be published.
+Restricted or confidential information must not be published.
 
 [MANDATORY]
-When a document is moved or renamed, its content and document status must be preserved unless the change is explicitly documented as a content revision.
+When a document is moved or renamed, its content and status must stay intact unless the change is deliberately recorded as a revision.
 
-LEGAL NOTICE
+LEGAL NOTE
 
-Some legal identity and infrastructure details are intentionally not included because they are restricted or have not yet been formally defined.
+Some legal identity and infrastructure details are intentionally absent because they are private or have not been formally decided yet.
 
-This repository does not itself make a legal document binding against third parties. Public legal documents must be reviewed against the actual legal structure and applicable law before publication.
+This repository is a documentation system; it does not, by itself, make a document legally binding on third parties. Public legal material must be checked against the actual legal structure and applicable law before publication.
 
-ARCHIVE RULE
+ARCHIVING
 
-Do not delete superseded documentation when historical retention is required. Archived material must remain clearly distinguishable from current documentation.
+Old documents are not deleted just because they are old. When historical retention is useful or required, the document belongs in 08 - ARCHIVE and should be clearly marked as no longer current.
+
+DOCUMENT INVENTORY
+
+DOCUMENT INVENTORY.txt lists the controlled documentation expected in the repository. Keep it aligned with the actual structure.
 
 END OF DOCUMENT
