@@ -1,0 +1,30 @@
+WEIRD STUFF
+CRYPTCAST — PRODUCT SPECIFICATION
+
+Version: 1.0
+Status: PENDING PRODUCT DEFINITION
+Classification: INTERNAL
+
+[PENDING]
+Product purpose and functional scope.
+[PENDING]
+Supported platforms and versions.
+[PENDING]
+System requirements.
+[PENDING]
+Security requirements.
+[PENDING]
+Data model and storage behavior.
+[PENDING]
+Network behavior.
+[PENDING]
+Update mechanism.
+[PENDING]
+Testing requirements.
+[PENDING]
+Release criteria.
+
+[MANDATORY]
+No public technical claim may contradict the approved specification.
+
+END OF DOCUMENT
