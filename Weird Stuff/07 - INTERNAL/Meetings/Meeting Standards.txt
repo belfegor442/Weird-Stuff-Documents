@@ -1,21 +1,21 @@
 WEIRD STUFF
 MEETING STANDARDS
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Classification: INTERNAL
 
-1. PURPOSE
+PURPOSE
 
-Meetings should exist to make decisions, coordinate work, resolve issues, or transfer relevant information.
+Meetings should have a clear reason to exist. They are useful for making decisions, coordinating work, resolving issues, or transferring information that is easier to discuss than to communicate asynchronously.
 
-2. REQUIREMENTS
-
-[RECOMMENDED]
-Meetings should have a defined purpose and relevant participants.
+1. REQUIREMENTS
 
 [RECOMMENDED]
-Important decisions should be recorded with the decision, responsible person, and relevant follow-up.
+Meetings should have a defined purpose and include the people whose participation is actually relevant.
+
+[RECOMMENDED]
+Important decisions should be recorded together with the decision itself, the responsible person, and any relevant follow-up.
 
 [MANDATORY]
 Restricted information must only be discussed with authorized participants.
