@@ -1,33 +1,33 @@
 WEIRD STUFF
 BUG MANAGEMENT
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Effective Date: September 12, 2026
 Owner: Weird Stuff
 Classification: INTERNAL
 
-1. PURPOSE
+PURPOSE
 
-This document defines the baseline lifecycle for defects and operational issues.
+This document defines the basic lifecycle for software defects and operational issues. The goal is to make problems traceable from the first report through verification and closure.
 
-2. LIFECYCLE
+1. LIFECYCLE
 
 REPORTED -> TRIAGED -> ASSIGNED -> INVESTIGATING -> FIXED -> VERIFIED -> CLOSED
 
-An issue may instead be rejected, duplicated, deferred, or reopened when appropriate.
+An issue may instead be rejected, marked as a duplicate, deferred, or reopened when the situation requires it. The history of the issue should remain understandable when its state changes.
 
-3. REPORTING
+2. REPORTING
 
 [MANDATORY]
 Important defects must be recorded in an authorized tracking system.
 
 [MANDATORY]
-Reports must contain enough information to assess impact and reproduce the issue where possible.
+A report must contain enough information to assess its impact and reproduce the issue where possible.
 
-4. TRIAGE
+3. TRIAGE
 
-Issues should be evaluated according to:
+Issues should be evaluated using the factors that matter to the actual situation, including:
 
 * Security impact.
 * Data integrity impact.
@@ -36,7 +36,7 @@ Issues should be evaluated according to:
 * Reproducibility.
 * Scope.
 
-5. SEVERITY
+4. SEVERITY
 
 CRITICAL
 Immediate or potentially severe impact to security, data integrity, or essential operation.
@@ -45,20 +45,20 @@ HIGH
 Major functional, security, or reliability impact.
 
 MEDIUM
-Meaningful defect with limited scope or workaround.
+Meaningful defect with limited scope or an available workaround.
 
 LOW
 Minor defect with limited operational impact.
 
 INFORMATIONAL
-Observation or improvement without material defect impact.
+Observation, suggestion, or improvement that does not represent a material defect.
 
-6. CLOSURE
-
-[MANDATORY]
-A defect marked fixed must be verified before closure when verification is technically possible.
+5. CLOSURE
 
 [MANDATORY]
-Reopened issues must retain their prior history.
+A defect marked as fixed must be verified before closure when verification is technically possible.
+
+[MANDATORY]
+Reopened issues must retain their previous history rather than being treated as new issues without context.
 
 END OF DOCUMENT
