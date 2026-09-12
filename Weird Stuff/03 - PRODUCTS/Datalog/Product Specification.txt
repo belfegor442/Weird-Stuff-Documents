@@ -1,28 +1,51 @@
 WEIRD STUFF
 DATALOG — PRODUCT SPECIFICATION
 
-Version: 1.0
+Version: 1.1
 Status: PENDING PRODUCT DEFINITION
 Classification: INTERNAL
+Last Updated: September 12, 2026
+Owner: Weird Stuff
+
+PURPOSE
+
+This document is the controlled technical specification for Datalog. The product is not fully defined yet, so undecided requirements are kept explicit instead of being replaced with assumptions.
+
+CURRENT SPECIFICATION
 
 [PENDING]
 Functional specification.
+
 [PENDING]
 Architecture.
+
 [PENDING]
 Interfaces.
+
 [PENDING]
 Data and storage requirements.
+
 [PENDING]
 Security requirements.
+
 [PENDING]
 Performance requirements.
+
 [PENDING]
 Testing requirements.
+
 [PENDING]
 Release criteria.
 
+DOCUMENTATION RULES
+
 [MANDATORY]
-Future implementation decisions must be reflected here when they materially affect the product contract.
+Future implementation decisions that materially affect the product contract must be reflected in this document once they are approved.
+
+[MANDATORY]
+Planned functionality must not be presented as implemented functionality.
+
+[MANDATORY]
+Undecided technical requirements must remain marked as pending until they are formally defined.
 
 END OF DOCUMENT
