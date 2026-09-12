@@ -1,62 +1,66 @@
 WEIRD STUFF
 RELEASE PROCEDURE
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Effective Date: September 12, 2026
 Owner: Weird Stuff
 Classification: INTERNAL
 
+PURPOSE
+
+This procedure sets out the normal path for taking a Weird Stuff product from development to a stable release. It is meant to keep releases predictable and traceable without adding unnecessary process to routine work.
+
 1. RELEASE STATES
 
 DEVELOPMENT -> TESTING -> RELEASE CANDIDATE -> STABLE RELEASE
 
-A product may omit a state only when the responsible team has documented the reason and risk.
+A product may skip a state when there is a documented reason and the associated risk is understood and accepted.
 
 2. PRE-RELEASE
 
 [MANDATORY]
-The intended release version must be identifiable.
+The release version must be clearly identified before the release is prepared.
 
 [MANDATORY]
-Known critical defects affecting security, data integrity, or essential operation must be evaluated before release.
+Known critical defects affecting security, data integrity, or essential operation must be reviewed before release. A release must not proceed as though these defects do not exist.
 
 [MANDATORY]
-Release artifacts must be generated from the intended source revision.
+Release artifacts must be built from the source revision intended for that release.
 
 [RECOMMENDED]
-Release notes should identify material changes, fixes, known issues, and compatibility information.
+Release notes should cover the changes users are likely to care about, including important fixes, known issues, and compatibility information.
 
 3. VALIDATION
 
 [MANDATORY]
-Required tests for the product must pass or have an explicitly accepted exception.
+The tests required for the product must pass, or an explicit exception must be recorded and accepted by the responsible person.
 
 [MANDATORY]
-Security-sensitive releases must receive appropriate security review.
+Releases containing security-sensitive changes must receive an appropriate security review.
 
 4. PUBLICATION
 
 [MANDATORY]
-The published version must match the version recorded by the project.
+The version published to users must match the version recorded by the project.
 
 [MANDATORY]
-Stable and development artifacts must remain distinguishable.
+Stable releases and development builds must remain clearly distinguishable.
 
 [RECOMMENDED]
-Important artifacts should be signed or integrity-verified where technically practical.
+Important release artifacts should be signed or otherwise integrity-verified when the product and distribution method support it.
 
 5. ROLLBACK
 
 [MANDATORY]
-Critical releases should have a recovery or rollback mechanism whenever technically practical.
+Critical releases must have a recovery or rollback path when the product architecture and distribution method make one reasonably possible.
 
 6. POST-RELEASE
 
 [RECOMMENDED]
-Release health should be monitored after publication.
+Release health should be checked after publication, particularly for changes that affect stability, compatibility, security, or data handling.
 
 [MANDATORY]
-Material release incidents must be documented and escalated according to the incident-response procedure.
+Material incidents caused by a release must be documented and handled according to the incident-response procedure.
 
 END OF DOCUMENT
