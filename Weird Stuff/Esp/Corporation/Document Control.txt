@@ -1,0 +1,98 @@
+WEIRD STUFF
+DOCUMENT CONTROL
+
+Version: 1.0
+Status: IN FORCE
+Effective Date: September 12, 2026
+Owner: Weird Stuff
+Classification: INTERNAL
+
+============================================================
+1. PURPOSE
+============================================================
+
+This document defines the mandatory control framework for Weird Stuff documentation.
+
+[MANDATORY]
+Controlled documents must have an identifiable title, version, status, owner, classification, and effective date when applicable.
+
+[MANDATORY]
+A superseded document must not be treated as the current authoritative version.
+
+============================================================
+2. DOCUMENT STATUS
+============================================================
+
+IN FORCE
+Currently authoritative and applicable.
+
+DRAFT FOR REVIEW
+Prepared for review and not yet authoritative.
+
+PENDING
+Structure exists but required information or approval remains incomplete.
+
+RETIRED
+No longer applicable and retained for historical reference.
+
+ARCHIVED
+Superseded or historical material retained under archive controls.
+
+============================================================
+3. VERSIONING
+============================================================
+
+[MANDATORY]
+Material changes require a new document version.
+
+[MANDATORY]
+The effective date must be updated when a new version enters into force.
+
+[MANDATORY]
+Changes to legal documents must not be represented as legally effective until the applicable review and publication requirements have been completed.
+
+============================================================
+4. CLASSIFICATION
+============================================================
+
+PUBLIC
+Approved for public distribution.
+
+INTERNAL
+For Weird Stuff personnel and authorized collaborators.
+
+RESTRICTED
+For specifically authorized recipients.
+
+CONFIDENTIAL
+Information whose unauthorized disclosure could materially harm Weird Stuff, its users, members, or projects.
+
+RESERVED
+Information intentionally withheld from publication.
+
+============================================================
+5. CHANGE CONTROL
+============================================================
+
+[MANDATORY]
+Important changes must be traceable through version control.
+
+[MANDATORY]
+Documents must not be silently replaced while retaining an obsolete version identifier.
+
+[RECOMMENDED]
+Material documents should include a revision history.
+
+============================================================
+6. ARCHIVE
+============================================================
+
+[MANDATORY]
+Superseded documents must be retained when historical traceability is required.
+
+[MANDATORY]
+Archived documents must not be presented as current policy.
+
+============================================================
+END OF DOCUMENT
+============================================================
