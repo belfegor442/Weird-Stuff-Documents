@@ -1,31 +1,33 @@
 WEIRD STUFF
 WEBSITE CONTENT STANDARDS
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Classification: PUBLIC
 
-1. PURPOSE
+PURPOSE
 
-These standards govern official Weird Stuff website content.
+These standards govern official Weird Stuff website content. The website should give visitors an accurate picture of the company, its products, and their current status.
+
+1. CONTENT
 
 [MANDATORY]
 Published information must accurately represent Weird Stuff, its products, and their status.
 
 [MANDATORY]
-Public legal documents must not contain unresolved placeholders when presented as effective legal documents.
+Public legal documents must not contain unresolved placeholders when they are presented as effective legal documents.
 
 [MANDATORY]
 Internal, restricted, confidential, and reserved information must not be published.
 
 2. PRODUCT STATUS
 
-Product pages must distinguish active, development, beta, experimental, suspended, and retired products when applicable.
+Product pages must distinguish active, development, beta, experimental, suspended, and retired products whenever those distinctions are relevant.
 
 3. LEGAL CONTENT
 
 [MANDATORY]
-Terms, privacy, cookie, acceptable-use, intellectual-property, security, and custom-application documents must be consistent with their approved versions.
+Terms, privacy, cookie, acceptable-use, intellectual-property, security, and custom-application documents must remain consistent with their approved versions.
 
 4. ACCESSIBILITY AND QUALITY
 
