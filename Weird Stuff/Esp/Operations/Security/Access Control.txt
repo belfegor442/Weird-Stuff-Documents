@@ -1,0 +1,55 @@
+WEIRD STUFF
+ACCESS CONTROL
+
+Version: 1.0
+Status: IN FORCE
+Effective Date: September 12, 2026
+Owner: Weird Stuff
+Classification: RESTRICTED
+
+1. PRINCIPLES
+
+[MANDATORY]
+Access must be based on operational need.
+
+[MANDATORY]
+Permissions must be limited to what is reasonably necessary.
+
+[MANDATORY]
+Credentials must not be shared.
+
+[MANDATORY]
+Access must be revoked when the operational need ends.
+
+2. ROLE-BASED ACCESS
+
+Access should correspond to the person's actual role and assigned responsibilities.
+
+[MANDATORY]
+A role change requires an access review.
+
+[MANDATORY]
+Termination or removal requires prompt revocation of applicable access.
+
+3. ADMINISTRATIVE ACCESS
+
+[MANDATORY]
+Administrative access must receive stronger protection than ordinary access.
+
+[RECOMMENDED]
+Multi-factor authentication should be enabled on critical accounts where available.
+
+[RECOMMENDED]
+Critical permissions should be reviewed periodically.
+
+4. CREDENTIAL INCIDENTS
+
+[MANDATORY]
+Suspected credential compromise must be reported and the affected credential revoked, rotated, or otherwise secured as soon as reasonably possible.
+
+[PENDING]
+Formal access register.
+[PENDING]
+Formal approval workflow.
+
+END OF DOCUMENT
