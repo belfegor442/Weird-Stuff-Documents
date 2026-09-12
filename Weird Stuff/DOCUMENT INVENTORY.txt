@@ -1,10 +1,12 @@
 WEIRD STUFF DOCUMENT INVENTORY
 
-Total files: 53 (including root README.txt)
+Total files: 61 (including root README.txt)
 
+01 - CORPORATE/README.txt
 01 - CORPORATE/Document Control.txt
 01 - CORPORATE/Manual Corporativo.txt
 01 - CORPORATE/Organization.txt
+02 - LEGAL/README.txt
 02 - LEGAL/Política de Aplicaciones Personalizadas.txt
 02 - LEGAL/Política de Cookies.txt
 02 - LEGAL/Política de Privacidad.txt
@@ -12,6 +14,7 @@ Total files: 53 (including root README.txt)
 02 - LEGAL/Política de Seguridad.txt
 02 - LEGAL/Política de Uso Aceptable.txt
 02 - LEGAL/Términos y Condiciones.txt
+03 - PRODUCTS/README.txt
 03 - PRODUCTS/CryptCast/Product Overview.txt
 03 - PRODUCTS/CryptCast/Product Specification.txt
 03 - PRODUCTS/Datalog/Product Overview.txt
@@ -19,6 +22,7 @@ Total files: 53 (including root README.txt)
 03 - PRODUCTS/DraftPad/Product Overview.txt
 03 - PRODUCTS/DraftPad/Product Specification.txt
 03 - PRODUCTS/Monix/Development Status.txt
+03 - PRODUCTS/Monix/Documentation/README.txt
 03 - PRODUCTS/Monix/Documentation/AI.txt
 03 - PRODUCTS/Monix/Documentation/Architecture.txt
 03 - PRODUCTS/Monix/Documentation/Build and Release.txt
@@ -37,6 +41,7 @@ Total files: 53 (including root README.txt)
 03 - PRODUCTS/Monix/Release History.txt
 03 - PRODUCTS/Telenet/Product Overview.txt
 03 - PRODUCTS/Telenet/Product Specification.txt
+04 - OPERATIONS/README.txt
 04 - OPERATIONS/Design/Design Standards.txt
 04 - OPERATIONS/Development/Development Standards.txt
 04 - OPERATIONS/Development/Release Procedure.txt
@@ -45,11 +50,14 @@ Total files: 53 (including root README.txt)
 04 - OPERATIONS/QA/QA Standards.txt
 04 - OPERATIONS/Security/Access Control.txt
 04 - OPERATIONS/Security/Incident Response.txt
+05 - BRAND/README.txt
 05 - BRAND/Brand Guidelines.txt
 05 - BRAND/Marketing/Marketing Standards.txt
+06 - PUBLIC/README.txt
 06 - PUBLIC/Announcements/README.txt
 06 - PUBLIC/Discord/Company Update.txt
 06 - PUBLIC/Website/Website Content Standards.txt
+07 - INTERNAL/README.txt
 07 - INTERNAL/Internal Communications/Communication Standards.txt
 07 - INTERNAL/Meetings/Meeting Standards.txt
 07 - INTERNAL/Team/Team Rules.txt
