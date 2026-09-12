@@ -1,25 +1,51 @@
 WEIRD STUFF
 TELENET — PRODUCT SPECIFICATION
 
-Version: 1.0
+Version: 1.1
 Status: PENDING PRODUCT DEFINITION
 Classification: INTERNAL
+Owner: Weird Stuff
+Last Updated: September 12, 2026
+
+PURPOSE
+
+This document is the controlled place for the technical definition of Telenet. The product has not been formally defined yet, so undecided requirements are kept visible instead of being filled with assumptions.
+
+CURRENT SPECIFICATION
 
 [PENDING]
 Functional scope.
+
 [PENDING]
 Architecture.
+
 [PENDING]
 Interfaces.
+
 [PENDING]
 Security requirements.
+
 [PENDING]
 Network requirements.
+
 [PENDING]
 Data requirements.
+
 [PENDING]
 Testing requirements.
+
 [PENDING]
 Release criteria.
+
+DOCUMENTATION RULES
+
+[MANDATORY]
+A material technical decision must be reflected in this specification once it has been approved.
+
+[MANDATORY]
+Planned functionality must not be presented as implemented functionality.
+
+[MANDATORY]
+Unknown requirements must remain marked as pending until they are actually defined.
 
 END OF DOCUMENT
