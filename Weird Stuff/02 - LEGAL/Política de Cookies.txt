@@ -1,73 +1,64 @@
 WEIRD STUFF
 COOKIE POLICY
 
-Version: 1.0
+Version: 1.1
 Status: DRAFT FOR LEGAL REVIEW
 Publication Status: PENDING
 Effective Date: PENDING
-Last Updated: PENDING
+Last Updated: September 12, 2026
 Owner: Weird Stuff
 
 ============================================================
-
 1. PURPOSE
-   ============================================================
+============================================================
 
-This Cookie Policy explains how Weird Stuff ("Weird Stuff",
-"we", "us", or "our") may use cookies and similar technologies
-when Users access applicable websites, applications, or online
-services.
+This Cookie Policy explains how Weird Stuff may use cookies and
+similar technologies when Users access websites, applications, or
+online services covered by this Policy.
 
-This Policy explains the purposes of these technologies, the
-categories they may belong to, and how Users may manage them.
+It explains what these technologies are used for, how they may be
+classified, and what choices Users may have when consent is
+required.
 
 This Policy should be read together with the Weird Stuff Privacy
 Policy and Terms and Conditions.
 
 ============================================================
 2. WHAT ARE COOKIES
-===================
+============================================================
 
-Cookies are small files or similar technologies that may be
-stored on a User's device when visiting a website or using a
-service.
+Cookies are small files, identifiers, or similar technologies that
+may be stored on a User's device when a website or service is used.
 
-Cookies and similar technologies may be used to:
+They may be used to:
 
-* Keep a service functioning.
-* Remember preferences.
+* Keep a service working.
 * Maintain sessions.
+* Remember preferences.
+* Support security features.
 * Measure usage.
+* Understand technical problems.
 * Improve services.
-* Provide security features.
-* Perform analytics.
-* Provide other functionality.
+* Provide other necessary functionality.
 
-Not every Weird Stuff service necessarily uses cookies.
+Not every Weird Stuff service uses cookies or similar technologies.
 
 ============================================================
 3. SCOPE
-========
+============================================================
 
-This Policy applies only to websites, applications, and services
-that use cookies or similar technologies and explicitly refer to
-this Policy.
+This Policy applies only to Weird Stuff websites, applications, and
+services that use cookies or similar technologies and refer to this
+Policy.
 
-[PENDING]
-
-List of websites and services covered by this Policy:
-
----
-
----
-
----
+The list of covered services remains pending until the relevant
+services are confirmed.
 
 ============================================================
 4. TYPES OF TECHNOLOGIES
-========================
+============================================================
 
-Weird Stuff may use:
+Depending on the service, Weird Stuff may use:
 
 * HTTP cookies.
 * Local storage.
@@ -75,209 +66,163 @@ Weird Stuff may use:
 * Similar browser storage mechanisms.
 * Other technologies with comparable functionality.
 
-[PENDING]
-
 The actual technologies used by each service must be identified
-before publication.
+before this Policy is published as final.
 
 ============================================================
 5. COOKIE CATEGORIES
-====================
+============================================================
 
-Cookies may be classified according to their purpose.
-
-The following categories may apply.
+Cookies and similar technologies may be grouped according to their
+purpose.
 
 5.1 STRICTLY NECESSARY
 
-These technologies are required for essential functions of the
-service.
-
-Examples may include:
+These technologies support functions that are essential for the
+service, such as:
 
 * Authentication.
 * Session management.
 * Security.
 * Load balancing.
 * Basic technical functionality.
-* Remembering essential choices required for the service.
+* Essential service preferences.
 
 [MANDATORY]
+Technologies classified as strictly necessary must only be used for
+purposes compatible with their essential function.
 
-Technologies classified as strictly necessary must only be used
-for purposes compatible with their essential function.
-
-[PENDING]
-
-Actual necessary cookies used by Weird Stuff:
-
----
+The actual necessary technologies used by Weird Stuff remain to be
+identified for each service.
 
 5.2 PREFERENCES
 
-Preference technologies may remember choices made by the User,
-such as language, interface settings, or other configuration
-preferences.
+Preference technologies may remember choices such as language,
+interface settings, or other configuration preferences.
 
-[PENDING]
-
-Actual preference technologies used by Weird Stuff:
-
----
+The actual preference technologies used by Weird Stuff remain to be
+identified for each service.
 
 5.3 ANALYTICS
 
-Analytics technologies may be used to understand how a service
-is used and to identify technical or usability issues.
+Analytics technologies may help Weird Stuff understand how a service
+is used and identify technical or usability problems.
 
-Examples may include:
+They may measure things such as:
 
 * Page or feature usage.
-* Performance measurements.
-* Error information.
-* General traffic measurements.
+* Performance.
+* Errors.
+* General traffic patterns.
 
-[PENDING]
-
-Analytics providers:
-
----
-
-Analytics technologies:
-
----
+The providers and technologies actually used by Weird Stuff remain
+to be identified before publication.
 
 5.4 ADVERTISING OR MARKETING
 
-[PENDING]
-
-Weird Stuff must determine whether any advertising, marketing,
-profiling, or cross-service tracking technologies are used.
-
-If such technologies are used, they must be separately documented,
-including their purpose, provider, legal basis, and applicable
+If Weird Stuff uses advertising, marketing, profiling, or
+cross-service tracking technologies, they must be documented
+separately with their purpose, provider, legal basis, and applicable
 consent requirements.
 
 ============================================================
 6. NECESSARY TECHNOLOGIES AND CONSENT
-=====================================
+============================================================
 
-Depending on applicable law, certain technologies may be used
-without consent where they are strictly necessary for the service.
+Depending on applicable law, some technologies may be used without
+consent when they are genuinely necessary for the service.
 
 [MANDATORY]
-
-Weird Stuff must not classify a technology as strictly necessary
+Weird Stuff must not describe a technology as strictly necessary
 merely to avoid obtaining consent when consent is legally required.
 
-[PENDING]
-
-The exact classification of each technology must be verified
-before publication.
+The classification of each technology must be verified before final
+publication.
 
 ============================================================
 7. CONSENT FOR NON-NECESSARY TECHNOLOGIES
-=========================================
+============================================================
 
 Where consent is legally required:
 
 [MANDATORY]
-
-Non-essential cookies or similar technologies must not be
-activated before valid consent has been obtained.
-
-[MANDATORY]
-
-Users must be given appropriate information before or when
-consent is requested.
+Non-essential cookies and similar technologies must not be activated
+before valid consent has been obtained.
 
 [MANDATORY]
+Users must receive appropriate information before or when consent is
+requested.
 
+[MANDATORY]
 Users must be able to withdraw consent through an appropriate
-mechanism where legally required.
+mechanism where the law requires this.
 
 [MANDATORY]
-
-Withdrawal of consent must be possible without unreasonable
-difficulty.
+Withdrawing consent must not be made unreasonably difficult.
 
 ============================================================
 8. COOKIE CONSENT INTERFACE
-===========================
+============================================================
 
-Where a consent mechanism is required, the interface should
-provide clear and understandable information.
+Where a consent mechanism is required, the interface should explain
+the available choices clearly.
 
-[PENDING]
-
-Weird Stuff must define:
+Before publication, Weird Stuff must determine the applicable:
 
 * Consent banner.
 * Preference center.
-* Available categories.
+* Cookie categories.
 * Accept mechanism.
 * Reject mechanism.
 * Settings mechanism.
 * Withdrawal mechanism.
-* Consent record mechanism.
+* Consent-record mechanism.
 
 [RECOMMENDED]
-
-The user interface should make acceptance and rejection choices
-clear and should avoid designs intended to manipulate the User's
-decision.
+The interface should make acceptance and rejection choices clear and
+should not use manipulative design intended to influence the User's
+decision unfairly.
 
 ============================================================
 9. CONSENT RECORDS
-==================
+============================================================
 
 Where consent is required:
 
 [MANDATORY]
+Weird Stuff must keep appropriate evidence of consent in accordance
+with applicable legal requirements.
 
-Weird Stuff must maintain appropriate evidence of consent in
-accordance with applicable legal requirements.
-
-[PENDING]
-
-The following must be identified:
+The final implementation must identify:
 
 * What consent information is stored.
 * Where it is stored.
 * How long it is retained.
-* How consent changes are recorded.
+* How changes to consent are recorded.
 * How withdrawal is recorded.
 
 ============================================================
 10. THIRD-PARTY COOKIES
-=======================
+============================================================
 
-Some websites or services may use technologies provided by
-third parties.
-
-Examples may include:
+Some services may use technologies provided by third parties, such
+as:
 
 * Analytics providers.
-* Embedded content providers.
+* Embedded-content providers.
 * Security providers.
 * Authentication providers.
 * Advertising providers.
 
-[PENDING]
-
-The actual third parties used by each applicable service must be
-identified.
+The actual third parties used by each service must be identified.
 
 [MANDATORY]
-
-Weird Stuff must not claim that a technology is first-party when
-it is operated by a third party.
+Weird Stuff must not describe a third-party technology as first-party
+when it is operated by another party.
 
 ============================================================
 11. INTERNATIONAL PROCESSING
-============================
-
-[PENDING]
+============================================================
 
 Weird Stuff must determine whether any cookie provider or related
 service transfers or processes personal data outside the relevant
@@ -288,56 +233,45 @@ processing and safeguards.
 
 ============================================================
 12. COOKIE INVENTORY
-====================
+============================================================
 
-Every published cookie inventory must reflect the technologies
-actually deployed.
+Any published cookie inventory must describe the technologies that
+are actually deployed.
 
-[PENDING]
-
-The inventory should include, where applicable:
+Where applicable, the inventory should include:
 
 Cookie / Technology Name:
-
 ---
 
 Provider:
-
 ---
 
 Type:
-
 ---
 
 Purpose:
-
 ---
 
 Duration:
-
 ---
 
 First-party / Third-party:
-
 ---
 
 Consent Required:
-
 ---
 
 Data Involved:
-
 ---
 
 Related Service:
-
 ---
 
 ============================================================
 13. RETENTION AND DURATION
-==========================
+============================================================
 
-Cookie duration may differ depending on the technology.
+Cookie duration depends on the technology and its purpose.
 
 Possible categories include:
 
@@ -346,135 +280,101 @@ Possible categories include:
 * Long-term.
 * Persistent.
 
-[PENDING]
-
-The actual duration of each technology must be documented.
+The actual duration of each technology must be documented before
+final publication.
 
 ============================================================
 14. PERSONAL DATA
-=================
+============================================================
 
-Cookies or similar technologies may involve personal data or
+Cookies and similar technologies may involve personal data or
 information that can be linked to an identifiable individual.
 
 [MANDATORY]
-
-Where cookie-related processing involves personal data, it must
-also comply with the applicable Privacy Policy and data
-protection requirements.
+When cookie-related processing involves personal data, it must also
+comply with the Privacy Policy and applicable data-protection
+requirements.
 
 [MANDATORY]
-
-Weird Stuff must not state that a technology is anonymous if the
-information can actually be linked to an identifiable individual
-without appropriate qualification.
+Weird Stuff must not describe information as anonymous when it can
+actually be linked to an identifiable individual, unless the claim is
+appropriately qualified.
 
 ============================================================
 15. BROWSER CONTROLS
-====================
+============================================================
 
-Users may also have browser-level controls for managing cookies.
-
-Available controls depend on the User's browser and device.
+Users may have browser-level controls for managing cookies. The
+available controls depend on the browser and device being used.
 
 [RECOMMENDED]
-
-Weird Stuff may provide general information explaining how
-Users can manage cookies through common browsers.
-
-[PENDING]
-
-Browser-specific guidance may be added to the final published
-version if useful.
+Weird Stuff may provide general guidance explaining how Users can
+manage cookies in common browsers.
 
 ============================================================
 16. CHANGING COOKIE PREFERENCES
-===============================
+============================================================
 
-Where a consent management mechanism is provided:
+Where Weird Stuff provides a consent-management mechanism:
 
 [MANDATORY]
+Users must be able to access the relevant preference controls again
+where required by applicable law.
 
-Users must be able to access the relevant preference controls
-again where required by applicable law.
-
-[PENDING]
-
-Location of preference controls:
-
----
-
-Preference management link:
-
----
+The final publication must identify where those controls can be
+found and how they can be accessed.
 
 ============================================================
 17. COOKIE POLICY UPDATES
-=========================
+============================================================
 
-Weird Stuff may update this Cookie Policy when its technologies,
-services, legal obligations, or processing practices change.
-
-[MANDATORY]
-
-The version and effective date must be identifiable.
+Weird Stuff may update this Policy when its technologies, services,
+legal obligations, or processing practices change.
 
 [MANDATORY]
+The current version and effective date must be identifiable.
 
-Where changes materially affect User rights or consent, the
-appropriate notice or consent mechanism must be used where
+[MANDATORY]
+Where a material change affects User rights or consent, Weird Stuff
+must provide the appropriate notice or consent mechanism where
 required by law.
-
-[PENDING]
-
-Final publication and notification mechanism:
-
----
 
 ============================================================
 18. RELATIONSHIP WITH PRIVACY POLICY
-====================================
+============================================================
 
-This Cookie Policy explains the use of cookies and similar
-technologies.
+This Policy focuses on cookies and similar technologies.
 
-The Privacy Policy provides the broader information concerning
-the processing of personal data.
+The Privacy Policy provides the broader information about the
+processing of personal data.
 
 [MANDATORY]
-
-Where a cookie or similar technology processes personal data,
-the relevant information must be consistent across both
-documents.
+When a cookie or similar technology processes personal data, the
+relevant information must remain consistent across both documents.
 
 ============================================================
 19. SECURITY
-============
+============================================================
 
 [MANDATORY]
-
 Weird Stuff must take reasonable measures to prevent unauthorized
 access to information associated with its cookie and tracking
 systems.
 
 [MANDATORY]
-
-Cookie technologies must not intentionally be configured in a
-manner that unnecessarily exposes sensitive information.
+Cookie technologies must not intentionally be configured in a way
+that unnecessarily exposes sensitive information.
 
 [RECOMMENDED]
-
 Security-sensitive cookies should use appropriate security
 attributes and configuration supported by the relevant platform.
 
 ============================================================
 20. TRACKING TECHNOLOGIES
-=========================
+============================================================
 
-This Policy also applies, where relevant, to technologies that
-perform functions similar to cookies.
-
-These may include:
+This Policy also applies, where relevant, to technologies that serve
+functions similar to cookies, including:
 
 * Tracking pixels.
 * Web beacons.
@@ -482,84 +382,75 @@ These may include:
 * Similar identifiers.
 * Embedded tracking technologies.
 
-[PENDING]
-
-Weird Stuff must verify whether any such technologies are
-currently used.
+Weird Stuff must verify whether any such technologies are currently
+used before final publication.
 
 ============================================================
 21. COOKIE AUDIT
-================
+============================================================
 
 [RECOMMENDED]
-
 Weird Stuff should periodically review applicable websites and
-services to determine whether the published Cookie Policy still
-matches the technologies actually deployed.
+services to confirm that this Policy still matches the technologies
+actually deployed.
 
 [MANDATORY]
-
-If a material change is discovered, the Cookie Policy must be
+When a material difference is discovered, this Policy must be
 reviewed and updated where necessary.
 
 ============================================================
 22. CONTACT
-===========
+============================================================
 
-Cookie-related questions may be directed to Weird Stuff through
-the designated contact channel.
-
-[PENDING]
+Cookie-related questions may be directed to Weird Stuff through the
+designated official contact channel.
 
 Official contact email:
-
 ---
 
 Website:
-
 ---
 
 Privacy contact:
-
 ---
 
 ============================================================
 23. FINAL PUBLICATION REQUIREMENTS
-==================================
+============================================================
 
-Before publication, Weird Stuff must verify:
+Before this Policy is published as final, Weird Stuff must verify:
 
-* All websites covered by this Policy.
+* All covered websites and services.
 * All cookies actually deployed.
 * All similar technologies.
-* Cookie names.
+* Cookie and technology names.
 * Providers.
 * Purposes.
 * Durations.
 * First-party / third-party status.
 * Whether each technology is necessary.
 * Consent requirements.
-* Analytics.
+* Analytics technologies.
 * Marketing technologies.
 * Tracking technologies.
 * Personal data involved.
 * International processing.
-* Consent storage mechanism.
-* Preference management mechanism.
+* Consent storage.
+* Preference management.
 * Withdrawal mechanism.
-* Privacy Policy consistency.
+* Consistency with the Privacy Policy.
 * Final contact information.
 * Effective date.
 
 ============================================================
 24. DOCUMENT CONTROL
-====================
+============================================================
 
 Document:
 WEIRD STUFF — COOKIE POLICY
 
 Version:
-1.0
+1.1
 
 Status:
 DRAFT FOR LEGAL REVIEW
@@ -571,11 +462,11 @@ Effective Date:
 PENDING
 
 Last Updated:
-PENDING
+September 12, 2026
 
 Owner:
 Weird Stuff
 
 ============================================================
 END OF DOCUMENT
-===============
+============================================================
