@@ -1,0 +1,31 @@
+WEIRD STUFF
+MEETING STANDARDS
+
+Version: 1.0
+Status: IN FORCE
+Classification: INTERNAL
+
+1. PURPOSE
+
+Meetings should exist to make decisions, coordinate work, resolve issues, or transfer relevant information.
+
+2. REQUIREMENTS
+
+[RECOMMENDED]
+Meetings should have a defined purpose and relevant participants.
+
+[RECOMMENDED]
+Important decisions should be recorded with the decision, responsible person, and relevant follow-up.
+
+[MANDATORY]
+Restricted information must only be discussed with authorized participants.
+
+[MANDATORY]
+Meeting records must be stored according to their information classification.
+
+[PENDING]
+Formal meeting-record template.
+[PENDING]
+Formal retention period.
+
+END OF DOCUMENT
