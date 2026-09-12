@@ -1,7 +1,7 @@
 WEIRD STUFF
 DOCUMENTATION ROOT
 
-Version: 1.1
+Version: 1.2
 Status: IN FORCE
 Updated: September 12, 2026
 
@@ -14,32 +14,34 @@ DOCUMENTATION MODEL
 The controlled documentation is organized into eight functional areas:
 
 01 - CORPORATE
-Company organization, governance, document control.
+Company organization, governance, and document control.
 
 02 - LEGAL
 Terms, privacy, cookies, acceptable use, security, intellectual property, and custom application policies.
 
 03 - PRODUCTS
-Product-specific documentation.
+Product-specific documentation, specifications, development records, and release history.
 
 04 - OPERATIONS
-Development, QA, design, infrastructure, and security procedures.
+Development, QA, design, infrastructure, and operational security procedures.
 
 05 - BRAND
 Brand identity and marketing standards.
 
 06 - PUBLIC
-Approved public-facing communications.
+Approved public-facing communications and publication standards.
 
 07 - INTERNAL
-Internal team and communication standards.
+Internal team, meetings, and communication standards.
 
 08 - ARCHIVE
 Superseded, retired, and historical documentation.
 
 PHYSICAL REPOSITORY
 
-The current working files remain under the Esp directory while the documentation structure is being normalized. The functional classification above is authoritative for document organization and inventory.
+The canonical physical repository now uses the numbered 01–08 structure above. The previous Esp directory has been removed after migration.
+
+Directory and file names have been normalized where the previous structure contained spelling inconsistencies. Existing document contents were preserved during the structural migration.
 
 DOCUMENT CONTROL
 
@@ -56,6 +58,9 @@ Public legal documents must not be published as effective legal terms until the 
 
 [MANDATORY]
 Restricted, confidential, and reserved information must not be published.
+
+[MANDATORY]
+When a document is moved or renamed, its content and document status must be preserved unless the change is explicitly documented as a content revision.
 
 LEGAL NOTICE
 
