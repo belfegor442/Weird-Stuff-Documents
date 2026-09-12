@@ -1,30 +1,57 @@
 WEIRD STUFF
 CRYPTCAST — PRODUCT SPECIFICATION
 
-Version: 1.0
+Version: 1.1
 Status: PENDING PRODUCT DEFINITION
 Classification: INTERNAL
+Last Updated: September 12, 2026
+Owner: Weird Stuff
+
+PURPOSE
+
+This document is the controlled place for the technical definition of CryptCast. The product is not fully defined yet, so this specification deliberately records what is still unknown instead of presenting assumptions as finished requirements.
+
+CURRENT DEFINITION
 
 [PENDING]
 Product purpose and functional scope.
+
 [PENDING]
 Supported platforms and versions.
+
 [PENDING]
 System requirements.
+
 [PENDING]
 Security requirements.
+
 [PENDING]
 Data model and storage behavior.
+
 [PENDING]
 Network behavior.
+
 [PENDING]
 Update mechanism.
+
 [PENDING]
 Testing requirements.
+
 [PENDING]
 Release criteria.
 
+DOCUMENTATION RULES
+
 [MANDATORY]
-No public technical claim may contradict the approved specification.
+No public technical claim about CryptCast may contradict an approved version of this specification.
+
+[MANDATORY]
+A decision that materially changes the product must be reflected here once it has been approved.
+
+[MANDATORY]
+Unknown or undecided requirements must remain clearly marked as pending until they are actually defined.
+
+[MANDATORY]
+This document must not be used to imply that CryptCast supports a platform, feature, security property, or release state that has not been approved.
 
 END OF DOCUMENT
