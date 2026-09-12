@@ -1,25 +1,38 @@
 WEIRD STUFF
 DATALOG — PRODUCT OVERVIEW
 
-Version: 1.0
+Version: 1.1
 Status: PENDING PRODUCT DEFINITION
 Owner: Weird Stuff
 Classification: INTERNAL
 
-This document is the controlled overview record for Datalog.
+ABOUT DATALOG
+
+Datalog is currently documented as a product placeholder. The repository should not pretend that a product definition exists when the project has not been formally defined yet.
+
+WHAT IS STILL TO BE DECIDED
 
 [PENDING]
 Approved product purpose.
+
 [PENDING]
-Lifecycle state.
+Current lifecycle state.
+
 [PENDING]
 Supported platforms.
+
 [PENDING]
 Responsible team.
+
 [PENDING]
-Public description.
+Approved public description.
+
+PRODUCT STATUS
 
 [MANDATORY]
-Product status must be represented accurately in internal and public documentation.
+The status of Datalog must be represented accurately in both internal and public material.
+
+[MANDATORY]
+Do not describe planned functionality as if it were already available.
 
 END OF DOCUMENT
