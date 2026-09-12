@@ -1,9 +1,13 @@
 WEIRD STUFF
 INTERNAL COMMUNICATION STANDARDS
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Classification: INTERNAL
+
+PURPOSE
+
+Internal communication should make it possible for the team to share information, make decisions, and coordinate work without exposing information to people who are not supposed to receive it.
 
 [MANDATORY]
 Internal communication must remain within authorized channels for the information's classification.
@@ -12,10 +16,10 @@ Internal communication must remain within authorized channels for the informatio
 Restricted and confidential information must only be shared with authorized recipients.
 
 [MANDATORY]
-Operational decisions affecting products, security, access, or releases must be communicated to the responsible people.
+Operational decisions affecting products, security, access, or releases must be communicated to the people responsible for acting on them.
 
 [RECOMMENDED]
-Important decisions should be recorded so they remain traceable.
+Important decisions should be recorded so that their reasoning and outcome remain traceable later.
 
 [MANDATORY]
 Internal communication must not be used to impersonate another member or authority.
