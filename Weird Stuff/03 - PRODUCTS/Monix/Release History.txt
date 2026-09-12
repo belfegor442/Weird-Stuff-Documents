@@ -1,60 +1,38 @@
 WEIRD STUFF
-MONIX
+MONIX — RELEASE HISTORY
 
-RELEASE HISTORY
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+PURPOSE
 
-1. PURPOSE
-   ============================================================
+This document keeps the chronological record of Monix releases and significant release states. It exists so that a released version remains traceable even after it has been replaced, recalled, deprecated, or retired.
 
-This document records the release history of Monix.
+It is a release record, not a complete technical changelog.
 
-It provides an internal chronological record of published,
-candidate, experimental, and significant development releases.
+RELEASE IDENTIFICATION
 
-This document is intended to maintain release traceability and
-must not be interpreted as a complete technical change log unless
-all relevant changes are recorded here.
+Every release must have an identifiable version.
 
-============================================================
-2. RELEASE IDENTIFICATION
-=========================
+Possible classifications include:
 
-Every release should have a unique and identifiable version.
-
-Possible release classifications include:
-
-* Development
-* Experimental
-* Alpha
-* Beta
-* Release Candidate
-* Stable
-* Maintenance
-* Deprecated
-* Retired
+* Development.
+* Experimental.
+* Alpha.
+* Beta.
+* Release Candidate.
+* Stable.
+* Maintenance.
+* Deprecated.
+* Retired.
 
 [MANDATORY]
+A release must never be intentionally represented as a different version.
 
-A version number must identify the release being referenced.
-
-[MANDATORY]
-
-A released version must not be intentionally represented as a
-different version.
-
-============================================================
-3. RELEASE STATUS
-=================
-
-Each entry should have one of the following statuses:
+RELEASE STATUS
 
 PLANNED
 The release is being considered but has not been published.
@@ -66,7 +44,7 @@ RELEASED
 The release has been published.
 
 RECALLED
-The release has been withdrawn due to a significant problem.
+The release was withdrawn because of a significant problem.
 
 DEPRECATED
 The release remains identifiable but is no longer recommended.
@@ -74,9 +52,10 @@ The release remains identifiable but is no longer recommended.
 RETIRED
 The release is no longer supported or distributed.
 
-============================================================
-4. VERSION 0.0.0
-================
+HISTORICAL BASELINE
+
+Version:
+0.0.0
 
 Status:
 [PENDING]
@@ -99,398 +78,179 @@ Known Issues:
 Release Artifacts:
 [PENDING]
 
-============================================================
-5. VERSION HISTORY TEMPLATE
-===========================
+FUTURE RELEASE RECORD
 
-The following template must be used for future releases where
-appropriate.
+Each significant release should record:
 
----
+VERSION
+The exact version being released.
 
-## VERSION:
+RELEASE DATE
+When it was published.
 
-Version:
+RELEASE TYPE
+Development, Experimental, Alpha, Beta, Release Candidate, Stable, or another approved classification.
 
----
+RELEASE STATUS
+Current state of the release.
 
-Release Date:
+BUILD IDENTIFIER
+Identifier of the build artifact where applicable.
 
----
+SOURCE REVISION
+The source revision used to create the release.
 
-Release Type:
+SUMMARY
+Short explanation of the release.
 
----
+FEATURES
+Important functionality added.
 
-Release Status:
+CHANGES
+Important behavior or implementation changes.
 
----
+FIXES
+Important defects corrected.
 
-Build Identifier:
+SECURITY
+Security-related changes and affected versions where relevant.
 
----
+COMPATIBILITY
+Supported platforms and significant compatibility changes.
 
-Commit / Revision:
+KNOWN ISSUES
+Important known limitations or defects.
 
----
+TESTING
+Tests performed, relevant results, and known failures.
 
----
+RELEASE DECISION
+Approval state, authority, and date.
 
-## SUMMARY
-
-Release Summary:
-
----
-
----
-
----
-
-## FEATURES
-
-Added:
-
-* ---
-* ---
-* ---
-
----
-
-## CHANGES
-
-Changed:
-
-* ---
-* ---
-* ---
-
----
-
-## FIXES
-
-Fixed:
-
-* ---
-* ---
-* ---
-
----
-
-## SECURITY
-
-Security-related changes:
-
-* ---
-* ---
-
-Security advisories:
-
----
-
----
-
-## COMPATIBILITY
-
-Supported platforms:
-
----
-
-Important compatibility changes:
-
----
-
----
-
-## KNOWN ISSUES
-
-* ---
-* ---
-* ---
-
----
-
-## TESTING
-
-Testing status:
-
----
-
-Tests performed:
-
----
-
-Known failures:
-
----
-
----
-
-## RELEASE DECISION
-
-Decision:
-
-[PENDING]
-
-Approved by:
-
----
-
-Approval Date:
-
----
-
----
-
-## DISTRIBUTION
-
-Release Channel:
-
----
-
-Distribution Location:
-
----
-
-Package Identifier:
-
----
-
-============================================================
-6. RELEASE REQUIREMENTS
-=======================
+DISTRIBUTION
+Release channel, distribution location, and package identifier.
 
 [MANDATORY]
+The record must describe the version that was actually distributed.
 
-A release entry must accurately represent the release that was
-actually distributed.
-
-[MANDATORY]
-
-A stable release must not knowingly be published without
-satisfying the applicable release requirements.
+RELEASE REQUIREMENTS
 
 [MANDATORY]
-
-Security-critical release issues must be evaluated before
-publication.
+A stable release must satisfy the applicable build, testing, security, licensing, and release requirements.
 
 [MANDATORY]
+Security-critical issues must be evaluated before publication.
 
-Required third-party license notices must be included with a
-release where applicable.
+[MANDATORY]
+Required third-party license notices must accompany a release where applicable.
 
 [RECOMMENDED]
+Release notes should focus on changes relevant to Users.
 
-Release notes should summarize important user-visible changes.
+RELEASE ARTIFACTS
 
-============================================================
-7. RELEASE ARTIFACTS
-====================
-
-Relevant artifacts may include:
-
-* Installer.
-* Executable.
-* Portable package.
-* Archive.
-* Debug symbols.
-* Source package.
-* Checksums.
-* Signature files.
-* Release notes.
+Artifacts may include installers, executables, portable packages, archives, debug symbols, source packages, checksums, signatures, and release notes.
 
 [MANDATORY]
-
 Released artifacts must remain identifiable by version.
 
 [RECOMMENDED]
+Important artifacts should have integrity information such as checksums or digital signatures.
 
-Important release artifacts should have integrity information
-such as checksums or digital signatures.
+RELEASE CORRECTIONS
 
-============================================================
-8. RELEASE CORRECTIONS
-======================
-
-If a released version contains a significant problem:
+If a release contains a significant problem:
 
 [MANDATORY]
-
-The affected version must be identified.
+The affected version must remain identifiable.
 
 [MANDATORY]
-
 The problem must be evaluated.
 
 [MANDATORY]
-
-A corrected version should be assigned a new identifiable
-version where appropriate.
+A corrected release should receive a new identifiable version where appropriate.
 
 [RECOMMENDED]
+Users should be informed when a significant defect materially affects security or normal operation.
 
-Users should be informed when a significant released defect
-materially affects security or normal operation.
+SECURITY RELEASES
 
-============================================================
-9. SECURITY RELEASES
-====================
-
-Security-related releases may require accelerated publication.
+Security fixes may require an accelerated release process.
 
 [MANDATORY]
-
-A security fix must not be intentionally delayed solely to avoid
-creating an inaccurate appearance of product stability.
+Accelerating a security release must not remove the controls necessary to establish that the fix is valid.
 
 [RECOMMENDED]
+Security release notes should identify affected versions and versions containing the fix without unnecessarily exposing sensitive implementation details.
 
-Security fixes should include sufficient information to determine
-which versions are affected and which versions contain the fix.
+ROLLBACK
 
-============================================================
-10. ROLLBACK
-============
-
-Where technically possible, a problematic release may be
-withdrawn or replaced.
+A problematic release may be withdrawn or replaced where technically possible.
 
 [MANDATORY]
+Rollback must not erase the fact that the affected version existed.
 
-A rollback must not cause the release history to lose the
-information that the affected version existed.
+The original version remains part of the historical record even when it is no longer distributed.
 
-The original version must remain identifiable even if it is no
-longer distributed.
+RETIREMENT
 
-============================================================
-11. RELEASE RETIREMENT
-======================
-
-When a version becomes obsolete:
-
-[MANDATORY]
-
-Its status must be updated appropriately.
+When a release becomes obsolete, its status should be updated appropriately.
 
 [RECOMMENDED]
+The reason for retirement should be recorded when known.
 
-The retirement reason should be recorded.
+Possible reasons include replacement, security concerns, compatibility problems, end of support, or product retirement.
 
-Possible reasons include:
-
-* Replacement by a newer version.
-* Security concerns.
-* Compatibility issues.
-* End of support.
-* Product retirement.
-
-============================================================
-12. RELEASE OWNERSHIP
-=====================
+RELEASE OWNERSHIP
 
 [PENDING]
-
-Release Manager:
-
----
+Release Manager.
 
 [PENDING]
-
-Development Lead:
-
----
+Development Lead.
 
 [PENDING]
-
-QA Approval:
-
----
+QA Approval.
 
 [PENDING]
+Security Approval.
 
-Security Approval:
+RELEASE CHANNELS
 
----
-
-============================================================
-13. RELEASE CHANNELS
-====================
-
-Monix may use separate release channels.
-
-Possible channels include:
-
-* Development
-* Experimental
-* Alpha
-* Beta
-* Stable
+Monix may use separate Development, Experimental, Alpha, Beta, Release Candidate, and Stable channels.
 
 [PENDING]
+Current release-channel configuration.
 
-Current release channel configuration:
-
----
-
-============================================================
-14. CHANGE TRACEABILITY
-=======================
+CHANGE TRACEABILITY
 
 [MANDATORY]
-
-Important release changes should be traceable to an identifiable
-development revision, change, issue, or equivalent record where
-technically possible.
+Important release changes should be traceable to an identifiable source revision, change, issue, or equivalent record where technically possible.
 
 [RECOMMENDED]
+Major releases should retain their source revision, build identifier, release artifact, test evidence, and release notes.
 
-Major releases should maintain a corresponding set of:
+PUBLIC RELEASE RECORDS
 
-* Source revision.
-* Build identifier.
-* Release artifact.
-* Test evidence.
-* Release notes.
-
-============================================================
-15. PUBLIC RELEASE RECORDS
-==========================
-
-Public release information should only contain information
-intended for public disclosure.
+Public release information must contain only information intended for public disclosure.
 
 [MANDATORY]
+Release notes must not expose credentials, private infrastructure information, confidential development information, or unnecessary security-sensitive implementation details.
 
-Internal credentials, private infrastructure information,
-security-sensitive implementation details, or confidential
-development information must not be included in public release
-notes.
+CURRENT RELEASE RECORD
 
-============================================================
-16. RELEASE HISTORY RECORD
-==========================
-
-Current release records:
-
----
-
-## NO CONFIRMED PUBLIC RELEASES RECORDED
+NO CONFIRMED PUBLIC RELEASES RECORDED
 
 [PENDING]
+Historical Monix releases must be added after verification against the actual project and repository history.
 
-The historical Monix releases must be entered once verified from
-the actual project and repository history.
-
-============================================================
-17. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — RELEASE HISTORY
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL
@@ -502,8 +262,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
