@@ -1,0 +1,34 @@
+WEIRD STUFF
+CRYPTCAST — PRODUCT OVERVIEW
+
+Version: 1.0
+Status: PENDING PRODUCT DEFINITION
+Owner: Weird Stuff
+Classification: INTERNAL
+
+1. PURPOSE
+
+This document reserves the controlled product record for CryptCast.
+
+2. STATUS
+
+[PENDING]
+Current product lifecycle state.
+[PENDING]
+Public product description.
+[PENDING]
+Supported platforms.
+[PENDING]
+Responsible team.
+[PENDING]
+Release status.
+
+3. GOVERNANCE
+
+[MANDATORY]
+Any public description must match the approved product specification.
+
+[MANDATORY]
+Material product changes must be reflected in controlled documentation.
+
+END OF DOCUMENT
