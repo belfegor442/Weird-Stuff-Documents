@@ -1,105 +1,63 @@
 WEIRD STUFF
-MONIX
+MONIX — LOGGING DOCUMENTATION
 
-LOGGING DOCUMENTATION
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL / DEVELOPMENT
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+PURPOSE
 
-1. PURPOSE
-   ============================================================
+The Monix logging system exists to make the application understandable when something happens, especially when something goes wrong. It provides operational visibility, diagnostics, security-event visibility, monitoring context, debugging information, and evidence for investigating failures.
 
-This document defines the logging subsystem of Monix.
-
-It establishes the purpose, structure, severity levels, sources,
-storage behavior, security requirements, runtime behavior,
-diagnostic requirements, and testing expectations of the logging
-system.
-
-============================================================
-2. LOGGING OBJECTIVES
-=====================
-
-The Monix logging system is intended to provide:
-
-* Operational visibility.
-* Error reporting.
-* Diagnostic information.
-* Security event visibility.
-* Monitoring information.
-* Debugging support.
-* Release investigation.
-* Failure analysis.
+LOGGING PRINCIPLES
 
 [MANDATORY]
-
-Logs must provide truthful information about the events they
-represent.
-
-============================================================
-3. LOGGING PRINCIPLES
-=====================
+Logs must truthfully describe the events they represent.
 
 [MANDATORY]
+Severity must reflect the real importance of an event.
 
-The logging system must:
+[MANDATORY]
+Required diagnostic context must not be intentionally discarded.
 
-* Preserve the meaning of recorded events.
-* Represent severity accurately.
-* Avoid intentional information loss where the information is
-  required for diagnostics.
-* Protect sensitive information.
-* Handle logging failures safely.
-* Avoid uncontrolled resource consumption.
+[MANDATORY]
+Secrets and protected information must be handled safely.
+
+[MANDATORY]
+Logging must not create uncontrolled resource consumption.
 
 [RECOMMENDED]
+Events should use a consistent structure across Monix subsystems.
 
-Logs should be structured consistently across Monix subsystems.
+SEVERITY
 
-============================================================
-4. LOG SEVERITY
-===============
-
-Monix may use the following severity levels:
-
-DEBUG
-Detailed information intended primarily for development and
-diagnostics.
+Monix uses the following principal severities:
 
 INFO
-Normal operational events.
-
-NOTICE
-Relevant events that do not indicate a failure.
+Normal operational information.
 
 WARNING
-Unexpected or potentially problematic conditions.
+An unexpected or potentially problematic condition that does not necessarily stop operation.
 
 ERROR
 An operation failed or produced an invalid result.
 
 CRITICAL
-A severe event affecting essential functionality, security,
-data integrity, or system stability.
+A severe failure affecting essential functionality, security, data integrity, or system stability.
+
+KERNEL
+A high-priority system-level event that requires the strongest diagnostic visibility within Monix's internal logging model.
 
 [MANDATORY]
+Severity must not be inflated or reduced simply to make an event look more or less important.
 
-The selected severity must reasonably reflect the actual
-importance of the event.
-
-============================================================
-5. LOG SOURCES
-==============
+EVENT SOURCES
 
 Events may originate from:
 
-* Application startup.
-* Application shutdown.
+* Application startup and shutdown.
 * Configuration.
 * Monitoring.
 * Process analysis.
@@ -114,613 +72,221 @@ Events may originate from:
 * Internal failures.
 
 [MANDATORY]
+The source or subsystem responsible for an important event should be identifiable where technically possible.
 
-The source of an important event must be identifiable where
-technically possible.
+LOG STRUCTURE
 
-============================================================
-6. LOG EVENT STRUCTURE
-======================
-
-A structured log event may contain:
+A log entry may contain:
 
 * Timestamp.
 * Severity.
-* Source.
-* Event identifier.
-* Message.
-* Context.
-* Process or subsystem information.
-* Error information.
-* Relevant metadata.
+* Category or source.
+* Human-readable message.
+* Relevant context.
+* Error information where applicable.
+* Affected resource or subsystem.
 
-[PENDING]
+Monix does not require artificial event identifiers merely to make logs look structured. Context and meaningful messages are more important than arbitrary IDs.
 
-Final internal log schema:
-
----
-
-============================================================
-7. TIMESTAMPS
-=============
+TIMESTAMPS
 
 [MANDATORY]
-
-Log timestamps must represent the event time as accurately as
-the underlying implementation permits.
+Timestamps must represent the event time as accurately as the implementation allows.
 
 [MANDATORY]
-
-The logging system must not intentionally assign a false timestamp
-to an event.
+The logger must not intentionally assign a false timestamp to an event.
 
 [RECOMMENDED]
-
 A consistent time source should be used throughout the application.
 
-============================================================
-8. EVENT IDENTIFIERS
-====================
+CATEGORIES AND CONTEXT
 
-Important events may use unique event identifiers.
-
-Example:
-
-MONIX-LOGGER-0001
-MONIX-RENDER-0001
-MONIX-SHADER-0001
-MONIX-SECURITY-0001
-
-[RECOMMENDED]
-
-Event identifiers should remain stable when they are used by
-diagnostic or automated systems.
-
-============================================================
-9. CONTEXT
-==========
-
-Logs may include contextual information such as:
-
-* Product version.
-* Build identifier.
-* Subsystem.
-* File or resource.
-* Shader.
-* Pass.
-* Process identifier.
-* Configuration state.
-* Error code.
+Useful context may include the product version, build, subsystem, file or resource, shader, pass, process, configuration state, or error information.
 
 [MANDATORY]
-
 Context must not intentionally expose protected information.
 
-============================================================
-10. SENSITIVE INFORMATION
-=========================
+SENSITIVE INFORMATION
 
-Sensitive information may include:
-
-* Passwords.
-* API keys.
-* Authentication tokens.
-* Private keys.
-* Session credentials.
-* Personal data.
-* Other confidential information.
+Sensitive information may include passwords, API keys, authentication tokens, private keys, session credentials, personal data, and other confidential information.
 
 [MANDATORY]
-
-Secrets must never be intentionally written to ordinary logs.
+Secrets must not be intentionally written to ordinary logs.
 
 [MANDATORY]
-
-Sensitive information must only appear in diagnostic output when
-there is a legitimate and controlled reason and applicable
-protections are in place.
+Personal data must only be logged when there is a legitimate purpose and lawful basis where required.
 
 [RECOMMENDED]
+Sensitive values should be redacted or masked when diagnostic context genuinely requires them.
 
-Sensitive values should be redacted or masked in diagnostic
-output.
+RUNTIME BUFFER
 
-============================================================
-11. PERSONAL DATA
-=================
-
-Logs may contain information that constitutes personal data
-depending on the event and context.
+Monix may keep recent events in memory through a bounded runtime buffer.
 
 [MANDATORY]
-
-Personal data must only be logged where there is a legitimate
-purpose and lawful basis where required.
-
-[MANDATORY]
-
-Logging must not be used as a justification to collect personal
-data unnecessarily.
-
-The applicable privacy requirements are defined in the Weird
-Stuff Privacy Policy and relevant product-specific documentation.
-
-============================================================
-12. CIRCULAR BUFFER
-===================
-
-Monix may use a circular logging buffer for runtime events.
-
-A circular buffer allows new events to replace older events once
-the configured capacity has been reached.
-
-Conceptual behavior:
-
-EVENTS
-->
-BUFFER
-->
-FULL
-->
-OLDEST EVENT REPLACED
-->
-NEW EVENT STORED
-
-[MANDATORY]
-
 The buffer must have a controlled capacity.
 
 [MANDATORY]
-
-The logging system must not allow normal operation to create
-unbounded memory growth.
-
-[RECOMMENDED]
-
-The buffer capacity should be configurable where appropriate.
-
-============================================================
-13. PERSISTENT LOGGING
-======================
-
-Monix may persist logs to files or another supported storage
-mechanism.
+Normal operation must not cause unbounded memory growth because of logging.
 
 [PENDING]
+Final buffer capacity and retention behavior.
 
-Persistent log location:
+PERSISTENT LOGGING
 
----
-
-[PENDING]
-
-Maximum log size:
-
----
+Monix may persist logs to files or another supported storage mechanism.
 
 [PENDING]
-
-Log retention:
-
----
-
-[MANDATORY]
-
-Persistent logs must not grow without an appropriate limit or
-retention strategy.
-
-============================================================
-14. LOG ROTATION
-================
-
-Where persistent logging is enabled, Monix may rotate log files.
-
-Possible rotation conditions include:
-
-* Maximum size.
-* Maximum age.
-* Application restart.
-* Manual request.
+Persistent log location.
 
 [PENDING]
-
-Log rotation strategy:
-
----
-
-[RECOMMENDED]
-
-Old logs should be removed or archived according to a defined
-retention policy.
-
-============================================================
-15. RUNTIME LOGGING LEVEL
-=========================
-
-The logging verbosity may be configurable.
-
-Possible levels:
-
-* Minimal.
-* Normal.
-* Verbose.
-* Debug.
-
-[MANDATORY]
-
-Increasing logging verbosity must not disable required security
-or critical error reporting.
-
-[RECOMMENDED]
-
-Debug-level logging should normally be disabled in stable
-production builds unless required for diagnostics.
-
-============================================================
-16. DEBUG LOGGING
-=================
-
-Debug logs may contain significantly more information than normal
-logs.
-
-[MANDATORY]
-
-Debug logging must continue to respect the same security and
-privacy requirements as ordinary logging.
-
-[MANDATORY]
-
-Debug functionality must not intentionally expose credentials or
-protected information.
-
-============================================================
-17. ERROR LOGGING
-=================
-
-Errors may contain:
-
-* Error code.
-* Operation.
-* Component.
-* Resource.
-* Cause.
-* Recovery action.
-
-[MANDATORY]
-
-An error must not be logged as resolved when the operation
-actually failed.
-
-[RECOMMENDED]
-
-Error messages should contain enough context to support diagnosis.
-
-============================================================
-18. STACK TRACES
-================
-
-Stack traces may be recorded for appropriate failures.
-
-[RECOMMENDED]
-
-Stack traces should be available in development or diagnostic
-builds where useful.
-
-[MANDATORY]
-
-Stack traces must not intentionally expose secrets or unrelated
-protected information.
-
-============================================================
-19. SECURITY LOGGING
-====================
-
-Security-related events may include:
-
-* Authentication failures.
-* Unauthorized access attempts.
-* Security detections.
-* SCRAM events.
-* Update verification failures.
-* Integrity failures.
-* Privileged operation failures.
-
-[MANDATORY]
-
-Security events must be logged accurately.
-
-[MANDATORY]
-
-Security logs must be protected from unauthorized modification
-or disclosure where appropriate.
-
-============================================================
-20. SCRAM LOGGING
-=================
-
-SCRAM may produce events such as:
-
-* Activation request.
-* Mode detection.
-* Validation result.
-* Authorization result.
-* Action execution.
-* Action failure.
-* Completion.
-
-[MANDATORY]
-
-The log must accurately identify whether SCRAM operated in TEST
-or REAL mode.
-
-[MANDATORY]
-
-A failed action must not be logged as successful.
-
-============================================================
-21. MONITORING LOGGING
-======================
-
-Monitoring may generate events when:
-
-* A collector starts.
-* A collector fails.
-* A sensor becomes unavailable.
-* A threshold is exceeded.
-* A monitored resource recovers.
-
-[MANDATORY]
-
-Monitoring failures must be distinguishable from security
-detections and ordinary informational events.
-
-============================================================
-22. RENDERING LOGGING
-=====================
-
-The renderer may log:
-
-* Initialization.
-* Device selection.
-* Resource creation.
-* Pipeline creation.
-* Shader loading.
-* Rendering errors.
-* Swapchain events.
-* Recovery events.
-
-[MANDATORY]
-
-Rendering errors must identify the failing subsystem or stage
-where practical.
-
-============================================================
-23. SHADER LOGGING
-==================
-
-Shader operations may log:
-
-* Source loading.
-* Preset loading.
-* Dependency resolution.
-* Compilation.
-* Validation.
-* Reflection.
-* Pipeline creation.
-* Cache hit.
-* Cache miss.
-* Cache invalidation.
-* Hot reload.
-
-[MANDATORY]
-
-Shader compilation errors must contain enough information to
-identify the affected shader or operation where possible.
-
-============================================================
-24. LOG OUTPUT DESTINATIONS
-===========================
-
-Monix may support:
-
-* In-memory logs.
-* Console output.
-* Log files.
-* Diagnostic exports.
-* Internal event streams.
+Maximum log size.
 
 [PENDING]
-
-Supported output destinations:
-
----
+Retention period.
 
 [MANDATORY]
+Persistent logs must have an appropriate size or retention limit.
 
-Output destinations must respect the security classification of
-the logged information.
+LOG ROTATION
 
-============================================================
-25. LOG EXPORT
-==============
+Where persistent logging is enabled, logs may be rotated according to size, age, restart, or manual action.
 
-Monix may provide a mechanism for exporting logs for support or
-diagnostics.
+[PENDING]
+Final rotation strategy.
 
-[MANDATORY]
+LOGGING LEVELS
 
-Exported logs must not intentionally include secrets.
+Runtime verbosity may eventually be configurable, but increased verbosity must not disable required security or critical-error reporting.
 
 [RECOMMENDED]
+Highly verbose diagnostic logging should normally be limited in stable production builds unless it is explicitly needed for diagnosis.
 
-Export should allow appropriate filtering or redaction.
+SECURITY LOGGING
 
-============================================================
-26. LOG FILTERING
-=================
-
-Logs may be filtered by:
-
-* Severity.
-* Source.
-* Event type.
-* Time range.
-* Subsystem.
-* Search terms.
+Security events may include authentication failures, unauthorized-access attempts, detections, SCRAM activity, update-verification failures, integrity failures, and privileged-operation failures.
 
 [MANDATORY]
+Security events must be recorded accurately and protected from unauthorized modification or disclosure where appropriate.
 
-Filtering must not alter the underlying event meaning.
+SCRAM LOGGING
 
-============================================================
-27. LOG DISPLAY
-===============
-
-The LOG interface may display events using:
-
-* Tables.
-* Event streams.
-* Severity indicators.
-* Timestamps.
-* Categories.
-* Search and filters.
+SCRAM may record activation requests, mode checks, validation, authorization, actions, failures, and completion.
 
 [MANDATORY]
+Logs must clearly distinguish TEST mode from REAL mode.
 
+[MANDATORY]
+A failed SCRAM action must never be logged as successful.
+
+MONITORING LOGGING
+
+Monitoring may log collector startup and failure, unavailable sensors, threshold events, recovery, and other relevant state changes.
+
+[MANDATORY]
+A missing measurement must remain distinguishable from a valid measurement and from a security detection.
+
+RENDERING AND SHADER LOGGING
+
+Rendering logs may cover initialization, device selection, resources, pipelines, shaders, swapchain events, and recovery.
+
+Shader logs may cover source loading, presets, dependencies, compilation, validation, cache operations, and runtime failures.
+
+[MANDATORY]
+A rendering or shader failure must identify the relevant subsystem or stage where practical.
+
+LOG OUTPUT
+
+Monix may support in-memory events, console output, persistent files, diagnostic exports, and internal event streams.
+
+[PENDING]
+Final supported output destinations.
+
+[MANDATORY]
+The destination must respect the classification of the information being logged.
+
+LOG EXPORT AND FILTERING
+
+Monix may allow logs to be filtered by severity, source, category, time range, subsystem, or search terms, and may provide diagnostic exports.
+
+[MANDATORY]
+Filtering must not alter the meaning of the underlying event.
+
+[MANDATORY]
+Exported logs must not intentionally contain secrets.
+
+[RECOMMENDED]
+Exports should support appropriate filtering and redaction.
+
+LOG DISPLAY
+
+The LOG interface may use event streams, tables, timestamps, categories, severity indicators, search, and filters.
+
+[MANDATORY]
 Critical information must remain readable.
 
 [MANDATORY]
+Visual effects must not hide critical errors or warnings.
 
-Visual effects must not conceal critical errors or warnings.
+PERFORMANCE
 
-============================================================
-28. LOGGING PERFORMANCE
-=======================
-
-Logging may affect:
-
-* CPU usage.
-* Memory usage.
-* Disk usage.
-* Application responsiveness.
+Logging consumes CPU, memory, storage, and potentially I/O bandwidth.
 
 [MANDATORY]
-
-The logging subsystem must not create uncontrolled resource
-consumption during normal operation.
+The logger must not create uncontrolled resource consumption during normal operation.
 
 [RECOMMENDED]
+High-frequency events should use buffering, batching, or rate limiting where appropriate.
 
-High-frequency events should use batching, buffering, or
-rate-limiting where appropriate.
+LOGGING FAILURE
 
-============================================================
-29. FAILURE OF LOGGING
-======================
-
-The logging system itself may fail because of:
-
-* Full storage.
-* Permission denial.
-* Corrupt files.
-* Resource exhaustion.
-* Unexpected application state.
+Logging can fail because of full storage, permission errors, corrupted files, resource exhaustion, or unexpected application state.
 
 [MANDATORY]
-
-A logging failure must not falsely report that an event was
-persisted when it was not.
+A logging failure must not falsely report that an event was persisted when it was not.
 
 [RECOMMENDED]
+Monix should use an alternative diagnostic path where practical if the primary logging destination fails.
 
-Monix should fall back to another available logging mechanism
-where practical.
-
-============================================================
-30. LOG INTEGRITY
-=================
+LOG INTEGRITY AND ACCESS
 
 [MANDATORY]
+Important log events must not be modified in a way that changes their meaning.
 
-Important log events must not intentionally be modified in a way
-that changes their meaning.
-
-[RECOMMENDED]
-
-Security-sensitive logs may use integrity protections where
-appropriate.
-
-============================================================
-31. LOG RETENTION
-=================
+[MANDATORY]
+Restricted or sensitive logs must only be accessible to authorized persons.
 
 [PENDING]
+Security-log integrity mechanism and retention requirements.
 
-Runtime log retention:
-
----
-
-[PENDING]
-
-Persistent log retention:
-
----
-
-[PENDING]
-
-Security log retention:
-
----
-
-[MANDATORY]
-
-Logs must not be retained longer than necessary where personal
-data or other protected information is involved and applicable
-requirements impose limits.
-
-============================================================
-32. LOG ACCESS
-==============
-
-[MANDATORY]
-
-Access to restricted or sensitive logs must be limited to
-authorized persons.
-
-[MANDATORY]
-
-Users without authorization must not be given access to
-protected internal logs.
-
-============================================================
-33. DIAGNOSTIC MODE
-===================
+DIAGNOSTIC MODE
 
 Monix may provide a diagnostic or verbose mode.
 
+[MANDATORY]
+Diagnostic mode must not disable mandatory security controls.
+
 [PENDING]
+Diagnostic-mode activation and scope.
 
-Diagnostic mode activation:
+CONCURRENCY
 
----
+Multiple subsystems may write events at the same time.
 
 [MANDATORY]
+Concurrent logging must not corrupt events or introduce unsafe shared-state behavior.
 
-Diagnostic mode must not intentionally disable mandatory security
-controls.
+TESTING
 
-============================================================
-34. LOG TESTING
-===============
+Logging tests should cover:
 
-The logging subsystem should be tested for:
-
-* Correct severity.
-* Correct timestamps.
-* Event formatting.
+* Severity selection.
+* Timestamps.
+* Formatting.
+* Context.
 * Buffer limits.
-* File persistence.
-* Log rotation.
+* Persistent storage.
+* Rotation.
 * Failure handling.
 * Filtering.
 * Export.
@@ -728,120 +294,39 @@ The logging subsystem should be tested for:
 * Concurrent logging.
 
 [MANDATORY]
+Tests must verify that known secrets are not unintentionally written to logs.
 
-Tests must verify that known secrets are not unintentionally
-written to logs.
-
-============================================================
-35. CONCURRENCY
-===============
-
-Multiple Monix subsystems may write events concurrently.
-
-[MANDATORY]
-
-Concurrent logging must not produce data corruption or unsafe
-shared-state behavior.
-
-[RECOMMENDED]
-
-The logging implementation should use an appropriate thread-safe
-design.
-
-============================================================
-36. TRACEABILITY
-================
-
-Important events may need to be correlated across subsystems.
-
-[RECOMMENDED]
-
-Related events should use identifiers that allow diagnostic
-correlation where practical.
-
-Possible identifiers include:
-
-* Session ID.
-* Operation ID.
-* Event ID.
-* Request ID.
-* Build ID.
-
-============================================================
-37. RELEASE REQUIREMENTS
-========================
-
-Before a stable release:
-
-[MANDATORY]
-
-The logging subsystem must:
-
-* Handle normal operation.
-* Handle expected logging failures.
-* Protect secrets.
-* Respect configured limits.
-* Avoid uncontrolled memory growth.
-* Report critical errors correctly.
-
-============================================================
-38. KNOWN LIMITATIONS
-=====================
+CURRENT STATUS
 
 [PENDING]
-
-Known logging limitations:
-
----
-
----
-
----
-
-============================================================
-39. LOGGING OWNERSHIP
-=====================
+Final internal log schema.
 
 [PENDING]
-
-Logging subsystem owner:
-
----
+Persistent logging implementation.
 
 [PENDING]
+Retention policy.
 
-Diagnostic owner:
-
----
-
-============================================================
-40. RELATED DOCUMENTATION
-=========================
-
-Related documents:
+RELATED DOCUMENTATION
 
 * Monix Product Overview.
 * Monix Product Specification.
 * Monix Architecture.
+* Monix Debugging Documentation.
 * Monix Monitoring Documentation.
 * Monix Security Documentation.
-* Monix Testing Documentation.
-* Monix Debugging Documentation.
-* Monix Performance Documentation.
 * Monix Configuration Documentation.
-* Monix Build and Release.
-* Weird Stuff Security Policy.
+* Monix Development Status.
 * Weird Stuff Privacy Policy.
+* Weird Stuff Security Policy.
 
-============================================================
-41. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — LOGGING DOCUMENTATION
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL / DEVELOPMENT
@@ -853,8 +338,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
