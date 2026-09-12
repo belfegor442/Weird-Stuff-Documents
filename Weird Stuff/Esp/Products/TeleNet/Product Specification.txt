@@ -1,0 +1,25 @@
+WEIRD STUFF
+TELENET — PRODUCT SPECIFICATION
+
+Version: 1.0
+Status: PENDING PRODUCT DEFINITION
+Classification: INTERNAL
+
+[PENDING]
+Functional scope.
+[PENDING]
+Architecture.
+[PENDING]
+Interfaces.
+[PENDING]
+Security requirements.
+[PENDING]
+Network requirements.
+[PENDING]
+Data requirements.
+[PENDING]
+Testing requirements.
+[PENDING]
+Release criteria.
+
+END OF DOCUMENT
