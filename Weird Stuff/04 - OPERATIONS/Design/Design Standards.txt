@@ -1,7 +1,7 @@
 WEIRD STUFF
 DESIGN STANDARDS
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Effective Date: September 12, 2026
 Owner: Weird Stuff
@@ -9,40 +9,40 @@ Classification: INTERNAL
 
 1. PURPOSE
 
-These standards define the baseline requirements for product and communication design.
+These standards set the baseline for how Weird Stuff designs products, interfaces, and communication materials. The goal is not to make everything look identical, but to make sure design decisions are deliberate, usable, honest, and consistent with the company’s identity.
 
 2. DESIGN PRINCIPLES
 
 [MANDATORY]
-Design must serve a defined product, communication, or usability objective.
+Every design must have a clear purpose. It must support a product, communication, usability, or other defined objective.
 
 [MANDATORY]
-Design assets must not intentionally misrepresent product capabilities or status.
+Design must not deliberately suggest capabilities, features, compatibility, performance, or status that a product does not actually have.
 
 [MANDATORY]
-Brand assets must follow the approved Weird Stuff brand guidelines.
+Official brand assets must follow the approved Weird Stuff Brand Guidelines.
 
 [RECOMMENDED]
-Interfaces should prioritize readability, consistency, accessibility, and predictable interaction.
+Interfaces should favor readability, consistency, accessibility, and predictable interaction over decoration that does not serve a purpose.
 
 3. PRODUCT UI
 
 [MANDATORY]
-Critical actions must have distinguishable states and appropriate feedback.
+Important actions must have clearly distinguishable states and provide appropriate feedback when the user interacts with them.
 
 [MANDATORY]
-Error states must communicate enough information for the user to understand the problem without exposing secrets.
+Error states must explain the problem clearly enough for the user to understand what happened and, where appropriate, what can be done next. Error messages must not expose passwords, keys, tokens, internal credentials, or other sensitive information.
 
 [RECOMMENDED]
-Repeated interface patterns should behave consistently across a product.
+Repeated interface patterns should behave consistently throughout the same product. If a pattern needs to work differently, the difference should have a clear reason.
 
 4. ASSETS
 
 [MANDATORY]
-Third-party assets must be used according to their applicable licenses.
+Third-party assets may only be used in accordance with their applicable licenses and usage conditions.
 
 [MANDATORY]
-Final assets must be stored in an authorized repository or asset system.
+Final design assets must be stored in an authorized repository or asset-management system so the team can identify and maintain the current version.
 
 [PENDING]
 Formal asset naming convention.
