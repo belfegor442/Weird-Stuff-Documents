@@ -1,49 +1,23 @@
 WEIRD STUFF
-MONIX
+MONIX — PRODUCT SPECIFICATION
 
-PRODUCT SPECIFICATION
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL / DEVELOPMENT
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+DOCUMENT PURPOSE
 
-1. DOCUMENT PURPOSE
-   ============================================================
+This is the controlled functional and technical specification for Monix. It describes what the product is intended to do and the requirements its major systems must satisfy.
 
-This document defines the functional and technical specification
-of Monix.
+PRODUCT DEFINITION
 
-It describes the intended architecture, principal systems,
-functional areas, interfaces, rendering environment, monitoring,
-logging, security mechanisms, configuration, testing requirements,
-and other major technical characteristics of the product.
+Monix is a Weird Stuff desktop software product for system monitoring, diagnostics, event logging, security-oriented analysis, configuration, state handling, and visual system information.
 
-This document is intended for internal development and
-documentation purposes.
+Monix is a specialized desktop application, not an operating-system replacement.
 
-============================================================
-2. PRODUCT DEFINITION
-=====================
-
-Monix is a desktop software product developed by Weird Stuff.
-
-Its purpose is to provide a unified environment for system
-monitoring, diagnostics, event logging, security-oriented
-analysis, configuration, and visual system information.
-
-Monix is designed as a specialized technical application rather
-than a generic operating-system replacement.
-
-============================================================
-3. CORE FUNCTIONAL AREAS
-========================
-
-Monix is organized around the following principal interface
-areas:
+CORE INTERFACE
 
 LOG
 TASKS
@@ -53,635 +27,278 @@ SETTINGS
 
 Additional internal systems may support these areas.
 
-============================================================
-4. LOG SYSTEM
-=============
+LOG SYSTEM
 
-The LOG system is responsible for collecting, processing, storing,
-and displaying application and system events available to Monix.
+The logging system collects, processes, and displays application and system events available to Monix.
 
-Potential event types include:
-
-* Information.
-* Debug information.
-* Warning.
-* Error.
-* Critical event.
-* Security event.
-* Monitoring event.
-* State transition.
-
-The logging system may use a circular buffer to prevent
-uncontrolled memory growth during long-running operation.
+Events may include information, warnings, errors, critical failures, security events, monitoring events, and meaningful state changes.
 
 [MANDATORY]
-The logger must not intentionally misrepresent event severity,
-origin, or timestamp.
+Logs must accurately represent event meaning, severity, source, and time.
 
 [MANDATORY]
-The logging system must protect sensitive information according
-to the Security and Privacy Policies.
+Secrets and protected information must be handled according to the applicable security and privacy requirements.
 
 [RECOMMENDED]
-Logs should provide enough context to reproduce or diagnose
-important problems.
+Logs should provide enough context to investigate important problems without unnecessary noise.
 
-============================================================
-5. TASKS SYSTEM
-===============
+TASKS SYSTEM
 
-The TASKS area provides information about active processes and
-relevant system activity.
+TASKS provides information about active processes and relevant system activity.
 
-Potential information includes:
-
-* Process identifier.
-* Process name.
-* CPU usage.
-* Memory usage.
-* GPU-related usage where available.
-* Process status.
-* Executable information.
-* Associated metadata.
+Possible information includes process identifiers, names, CPU and memory usage, GPU usage where available, status, executable information, and supported metadata.
 
 [MANDATORY]
-Values that cannot be reliably obtained must not be represented
-as verified measurements.
+Unavailable information must not be presented as verified measurements.
 
 [MANDATORY]
-Operations affecting another process must respect operating-system
-permissions and security restrictions.
+Process operations must respect operating-system permissions and security restrictions.
 
-============================================================
-6. USAGE SYSTEM
-===============
+USAGE SYSTEM
 
-The USAGE area provides an overview of system resource use.
-
-Primary monitoring categories include:
-
-* CPU.
-* RAM.
-* GPU.
-* Storage.
-* Network.
-* Temperature.
-
-The system may calculate additional derived values.
+USAGE provides an overview of CPU, RAM, GPU, storage, network, and temperature information.
 
 [MANDATORY]
-Displayed values must originate from available system information
-or be explicitly identified as calculated or estimated values.
+Displayed values must come from available system information or be explicitly identified as calculated or estimated.
 
-============================================================
-7. HARDWARE MONITORING
-======================
+HARDWARE MONITORING
 
-Monix may obtain hardware information through platform-specific
-interfaces.
-
-Possible measurements include:
-
-CPU:
-
-* Utilization.
-* Frequency.
-* Temperature where available.
-
-Memory:
-
-* Total memory.
-* Used memory.
-* Available memory.
-
-GPU:
-
-* Utilization.
-* Memory utilization.
-* Temperature where available.
-
-Storage:
-
-* Capacity.
-* Used space.
-* Available space.
-* Activity where available.
-
-Network:
-
-* Traffic.
-* Interface status.
-* Transfer rates.
+Monix may obtain CPU, memory, GPU, storage, network, temperature, and other supported hardware information through platform-specific interfaces.
 
 [MANDATORY]
-Missing hardware information must be handled gracefully.
+Missing or unsupported hardware data must be handled safely and must never be replaced with fabricated values.
+
+PROCESS ANALYSIS
+
+Monix may analyze process metadata, executable paths, signatures where available, runtime behavior, resource use, reputation information, and other indicators.
 
 [MANDATORY]
-Unsupported hardware must not cause the monitoring subsystem to
-behave as though valid data had been collected.
+Detection results must distinguish verified information from heuristic conclusions.
 
-============================================================
-8. PROCESS DETECTION
-====================
+PROCESS REPUTATION
 
-Monix may analyze processes for diagnostic and security purposes.
-
-Potential inputs include:
-
-* Process metadata.
-* Executable path.
-* Digital signature information where available.
-* Runtime behavior.
-* Resource usage.
-* Reputation information where available.
+Monix may use categories such as Trusted, Known, Unknown, Suspicious, or High Risk depending on the implemented detection model.
 
 [MANDATORY]
-Detection results must distinguish between verified information
-and heuristic conclusions.
+A heuristic reputation must not be presented as absolute proof of malicious behavior.
 
-============================================================
-9. PROCESS REPUTATION
-=====================
+HEURISTIC ANALYSIS
 
-Monix may assign or calculate a process reputation based on
-available indicators.
-
-Possible categories may include:
-
-* Trusted.
-* Known.
-* Unknown.
-* Suspicious.
-* High Risk.
+Heuristics may consider process behavior, executable characteristics, system changes, resource patterns, known indicators, and other available signals.
 
 [MANDATORY]
-A heuristic reputation result must not be presented as absolute
-proof that software is malicious.
+Heuristic results are assessments, not guaranteed facts.
 
-[RECOMMENDED]
-The interface should provide an explanation or relevant indicators
-for significant classifications.
+SECURITY RESPONSE
 
-============================================================
-10. HEURISTIC ANALYSIS
-======================
-
-Monix may use heuristic methods to identify potentially unusual
-or suspicious activity.
-
-Heuristics may consider:
-
-* Process behavior.
-* Executable characteristics.
-* System changes.
-* Resource patterns.
-* Known indicators.
-* Other available signals.
+Monix may provide alerts, process actions, isolation, state capture, configuration changes, or other protective responses where supported.
 
 [MANDATORY]
-Heuristic detection must be treated as probabilistic analysis.
+High-impact actions require the permissions and authorization appropriate to the operation.
 
-[MANDATORY]
-The system must avoid representing heuristic detection as a
-confirmed security fact unless independently verified.
+SCRAM
 
-============================================================
-11. SECURITY RESPONSE
-=====================
+SCRAM is Monix's emergency-response subsystem.
 
-Monix may contain mechanisms capable of responding to detected
-security or operational conditions.
-
-Possible responses may include:
-
-* Alert generation.
-* Process termination.
-* Isolation.
-* State capture.
-* Configuration changes.
-* Other protective actions.
-
-[MANDATORY]
-High-impact actions must respect operating-system permissions and
-authorized operating conditions.
-
-============================================================
-12. SCRAM
-=========
-
-SCRAM is an emergency-response mechanism within Monix.
-
-SCRAM may operate in:
+It has two operating contexts:
 
 TEST MODE
-
-or
+Controlled verification of SCRAM logic.
 
 REAL MODE
-
-TEST MODE is intended for controlled verification of SCRAM
-behavior.
-
-REAL MODE is intended for actual protective or emergency actions.
+Actual protective or emergency operation.
 
 [MANDATORY]
-TEST MODE must not intentionally execute REAL MODE actions.
+TEST mode must not intentionally execute actions reserved for REAL mode.
 
 [MANDATORY]
-REAL MODE actions must only be executed when appropriately
-authorized.
+REAL mode actions require appropriate authorization.
 
 [MANDATORY]
-The interface must provide a clear indication of the currently
-active SCRAM mode.
+The active SCRAM mode must be clearly identifiable.
 
-[RECOMMENDED]
-High-impact SCRAM operations should include safeguards against
-accidental activation.
+SNAPSHOT SYSTEM
 
-============================================================
-13. SNAPSHOT SYSTEM
-===================
-
-Monix may provide functionality for capturing application or
-system state.
-
-A snapshot may include:
-
-* Relevant configuration.
-* Monitoring values.
-* Process information.
-* Application state.
-* Diagnostic information.
-* Timestamp.
-* Version information.
+Monix may capture selected application or system state for diagnostics, comparison, support, development, or controlled recovery.
 
 [MANDATORY]
-A snapshot must not be represented as a complete system backup
-unless it actually contains sufficient information to restore the
-system.
+A snapshot must not be described as a complete system backup unless it actually contains sufficient information for that purpose.
 
-============================================================
-14. CONFIGURATION SYSTEM
-========================
+CONFIGURATION SYSTEM
 
-The SETTINGS area is responsible for user-configurable product
-behavior.
-
-Configuration may include:
-
-* Monitoring settings.
-* Logging settings.
-* Rendering settings.
-* Performance settings.
-* Security settings.
-* Shader settings.
-* Interface settings.
+Settings may control monitoring, logging, rendering, performance, security, shaders, interface behavior, updates, AI, and diagnostics.
 
 [MANDATORY]
-Configuration must be validated before being applied where invalid
-values could cause unsafe or unstable behavior.
+Configuration must be validated before application when invalid values could cause unsafe or unstable behavior.
 
 [MANDATORY]
-Configuration changes must not silently modify unrelated protected
-system settings.
+Configuration changes must not silently modify unrelated protected system settings.
 
-============================================================
-15. USER INTERFACE
-==================
+USER INTERFACE
 
-The Monix interface is based on a specialized visual design.
+The interface may include real-time monitoring panels, event streams, tables, status indicators, diagnostics, graphs, and CRT/VHS-inspired visual effects.
 
-Primary areas:
+[MANDATORY]
+Critical information must remain readable regardless of optional visual effects.
 
-LOG
-TASKS
-USAGE
+[MANDATORY]
+Visual effects must not obscure security-critical information.
+
 AI
-SETTINGS
 
-The interface may contain:
-
-* Real-time monitoring panels.
-* Event streams.
-* Tables.
-* Status indicators.
-* Diagnostic information.
-* Graphical elements.
-* CRT/VHS-inspired visual effects.
-
-[MANDATORY]
-Critical information must remain readable regardless of optional
-visual effects.
-
-[MANDATORY]
-Visual effects must not intentionally obscure security-critical
-information.
-
-============================================================
-16. AI AREA
-===========
-
-The AI interface area may provide functionality associated with
-analysis, assistance, interpretation, or other AI-supported
-features.
+The AI area may support analysis, interpretation, troubleshooting, or other approved AI functionality.
 
 [PENDING]
-
-Final AI functionality:
-
----
+Final AI functionality.
 
 [PENDING]
-
-AI provider or implementation:
-
----
+AI provider or implementation.
 
 [PENDING]
-
-Local / remote processing model:
-
----
+Local / remote processing model.
 
 [MANDATORY]
-AI-generated information must not automatically be treated as
-verified system information.
+AI-generated information must not automatically be treated as verified system information.
+
+RENDERING ARCHITECTURE
+
+Monix uses a Vulkan-oriented rendering system that may include Vulkan 1.3-class functionality where supported, Dynamic Rendering, SPIR-V, Slang shaders, multi-pass processing, presets, runtime shader management, and shader caching.
+
+[MANDATORY]
+Rendering failures must fail safely and must not intentionally compromise unrelated system functionality.
+
+SHADER PIPELINE
+
+The general shader path is:
+
+SOURCE
+-> PRESET / CONFIGURATION
+-> DEPENDENCIES
+-> VALIDATION
+-> COMPILATION
+-> SPIR-V
+-> PIPELINE
+-> VULKAN
+-> GPU
+
+Supported project resources may include .slang, .slangp, and SPIR-V.
+
+[MANDATORY]
+Invalid or incompatible shader data must not be treated as valid runtime state.
+
+[MANDATORY]
+Third-party shader resources must comply with their applicable licenses.
+
+MULTI-PASS RENDERING
+
+A rendering pipeline may contain several shader passes with their own inputs, outputs, parameters, dependencies, and feedback resources.
+
+[MANDATORY]
+Pass dependencies and resource lifetimes must be resolved correctly before execution.
+
+SHADER CACHE
+
+The shader cache may depend on source, stage, language, compiler version, dependency contents, and relevant configuration.
+
+[MANDATORY]
+Cache data must not be trusted when integrity or compatibility cannot be established.
+
+[MANDATORY]
+Relevant source, dependency, compiler, or compatibility changes must invalidate affected cache entries.
+
+ERROR HANDLING
+
+Monix must distinguish recoverable errors, configuration failures, resource failures, rendering failures, security problems, and critical failures where applicable.
+
+[MANDATORY]
+A failed operation must never be reported as successful.
+
+[MANDATORY]
+Errors must not unnecessarily expose secrets or other protected information.
+
+PERFORMANCE
+
+Performance-sensitive systems include monitoring, logging, rendering, shader compilation, shader caching, process analysis, and event processing.
+
+[MANDATORY]
+Performance optimization must not intentionally compromise security, correctness, or data integrity.
 
 [RECOMMENDED]
-AI-generated recommendations should be clearly distinguished from
-measured telemetry and deterministic system results.
+Performance regressions should be measured through testing or profiling where practical.
 
-============================================================
-17. RENDERING ARCHITECTURE
-==========================
-
-Monix uses a specialized graphics architecture.
-
-The intended rendering environment includes:
-
-* Vulkan.
-* Vulkan 1.3-class functionality where supported.
-* Dynamic Rendering.
-* SPIR-V.
-* Slang shaders.
-* Multi-pass shader processing.
-* Shader presets.
-* Runtime shader management.
-* Shader caching.
-
-[MANDATORY]
-The rendering system must fail safely when a shader or graphics
-operation cannot be initialized.
-
-[MANDATORY]
-Rendering failures must not intentionally compromise unrelated
-system functions.
-
-============================================================
-18. SHADER PIPELINE
-===================
-
-The shader pipeline may process:
-
-1. Shader source.
-2. Shader preset.
-3. Dependencies/includes.
-4. Compilation.
-5. SPIR-V generation.
-6. Pipeline creation.
-7. Runtime execution.
-
-Supported project formats may include:
-
-* .slang
-* .slangp
-* SPIR-V
-
-[MANDATORY]
-Invalid shaders must be rejected or handled safely.
-
-[MANDATORY]
-Third-party shader code must comply with applicable licenses.
-
-============================================================
-19. MULTI-PASS RENDERING
-========================
-
-Monix may support multiple shader passes in a single rendering
-pipeline.
-
-Each pass may define:
-
-* Input texture.
-* Output target.
-* Shader program.
-* Uniforms.
-* Resources.
-* Dependencies.
-* Feedback resources where supported.
-
-[MANDATORY]
-Pass dependencies must be resolved correctly before execution.
-
-[MANDATORY]
-An invalid pass configuration must not result in undefined
-application behavior where safe handling is possible.
-
-============================================================
-20. SHADER CACHE
-================
-
-Monix may maintain a shader cache to reduce unnecessary
-compilation.
-
-A cache entry may depend on:
-
-* Shader source.
-* Shader stage.
-* Shader language.
-* Compiler version.
-* Dependency content.
-* Relevant configuration.
-
-[MANDATORY]
-Cache contents must not be trusted as valid when integrity or
-compatibility cannot be established.
-
-[MANDATORY]
-Changes to relevant shader dependencies must invalidate affected
-cache entries.
-
-[RECOMMENDED]
-Cache eviction should prevent uncontrolled disk consumption.
-
-============================================================
-21. ERROR HANDLING
-==================
-
-Monix must distinguish between:
-
-* Recoverable errors.
-* Configuration errors.
-* Resource errors.
-* Rendering errors.
-* Security errors.
-* Critical failures.
-
-[MANDATORY]
-A failed operation must not be reported as successful.
-
-[MANDATORY]
-Errors must not unnecessarily expose secrets or other sensitive
-information.
-
-============================================================
-22. PERFORMANCE
-===============
-
-Monix is intended to provide continuous monitoring while
-maintaining reasonable system resource usage.
-
-Performance-sensitive subsystems include:
-
-* Monitoring.
-* Logging.
-* Rendering.
-* Shader compilation.
-* Shader caching.
-* Process analysis.
-* Event processing.
-
-[MANDATORY]
-Performance optimizations must not intentionally compromise
-security or data integrity.
-
-[RECOMMENDED]
-Performance regressions should be detected through testing or
-profiling where practical.
-
-============================================================
-23. RELIABILITY
-===============
+RELIABILITY
 
 [MANDATORY]
 Subsystem failures should be isolated where technically possible.
 
 [MANDATORY]
-An unavailable optional feature must not unnecessarily prevent
-the application from providing unrelated functionality.
+Failure of an optional feature must not unnecessarily prevent unrelated Monix functionality from operating.
 
 [RECOMMENDED]
-Critical subsystems should include recovery or fallback behavior.
+Critical systems should provide recovery or fallback behavior where practical.
 
-============================================================
-24. VERSIONING
-==============
+VERSIONING
 
-Every release of Monix must have an identifiable version.
-
-Possible release classifications include:
-
-* Development.
-* Experimental.
-* Alpha.
-* Beta.
-* Release Candidate.
-* Stable.
-* Maintenance.
-* Deprecated.
-* Retired.
+Possible release classifications include Development, Experimental, Alpha, Beta, Release Candidate, Stable, Maintenance, Deprecated, and Retired.
 
 [MANDATORY]
-The published status of a release must accurately reflect its
-actual classification.
+The published status of a build must accurately reflect its actual classification.
 
-============================================================
-25. RELEASE REQUIREMENTS
-========================
+RELEASE REQUIREMENTS
 
 Before a stable release:
 
 [MANDATORY]
+The build must succeed.
 
-The applicable release must:
+[MANDATORY]
+Applicable tests must pass.
 
-* Build successfully.
-* Pass applicable tests.
-* Have no unresolved release-blocking issue knowingly accepted.
-* Use valid release metadata.
-* Contain compatible dependencies.
-* Comply with applicable licensing requirements.
-* Meet applicable security requirements.
+[MANDATORY]
+Release-blocking issues must be resolved or formally accepted by the appropriate authority.
+
+[MANDATORY]
+Release metadata and dependencies must be valid.
+
+[MANDATORY]
+Applicable security and licensing requirements must be satisfied.
+
+AUTOMATIC UPDATES
+
+Monix may support automatic updates.
+
+[MANDATORY]
+Update packages must come from authorized distribution mechanisms.
+
+[MANDATORY]
+Update integrity and authenticity must be verified to the level required for safe installation.
 
 [RECOMMENDED]
-A final regression test should be performed before major releases.
+Release update packages should be cryptographically signed.
 
-============================================================
-26. AUTOMATIC UPDATES
-=====================
-
-Monix may support automatic updating.
-
-[MANDATORY]
-
-Update packages must be obtained through authorized distribution
-mechanisms.
-
-[MANDATORY]
-
-The update process must provide reasonable protection against
-tampered or unauthenticated packages.
-
-[RECOMMENDED]
-
-Update packages should be cryptographically signed.
-
-============================================================
-27. PRIVACY AND TELEMETRY
-=========================
+PRIVACY AND TELEMETRY
 
 [PENDING]
-
-Monix telemetry status:
-
----
+Final telemetry scope.
 
 [PENDING]
-
-Actual personal data processed by Monix:
-
----
+Personal data processed by Monix.
 
 [MANDATORY]
-
 Monix must comply with the applicable Weird Stuff Privacy Policy.
 
 [MANDATORY]
+Telemetry must not be described as anonymous or non-identifying when the actual implementation does not support that claim.
 
-Telemetry must not be enabled or represented as anonymous if the
-actual implementation does not support that characterization.
-
-============================================================
-28. SECURITY-SENSITIVE OPERATIONS
-=================================
-
-Monix may interact with operating-system processes and other
-security-sensitive resources.
+SECURITY-SENSITIVE OPERATIONS
 
 [MANDATORY]
-
-Privileged operations must only be attempted where the operating
-system and applicable authorization permit them.
+Privileged operations must only be attempted where the operating system and applicable authorization permit them.
 
 [MANDATORY]
+Monix must not intentionally bypass operating-system security protections.
 
-The application must not intentionally circumvent operating
-system security protections.
-
-============================================================
-29. TESTING REQUIREMENTS
-========================
+TESTING REQUIREMENTS
 
 Testing may include:
 
@@ -697,167 +314,50 @@ Testing may include:
 * Compatibility testing.
 
 [MANDATORY]
-
 Critical functionality must be tested before stable release.
 
 [RECOMMENDED]
+Tests should cover both normal operation and expected failure conditions.
 
-Testing should cover both normal operation and expected failure
-conditions.
+COMPATIBILITY
 
-============================================================
-30. DOCUMENTATION REQUIREMENTS
-==============================
+[PENDING]
+Official operating-system support.
 
-The Monix project should maintain documentation covering:
+[PENDING]
+Minimum hardware requirements.
 
-* Installation.
-* Configuration.
-* Supported platforms.
-* Architecture.
-* Dependencies.
-* Release procedures.
-* Troubleshooting.
-* Security-sensitive behavior.
+[PENDING]
+Recommended hardware requirements.
 
-[RECOMMENDED]
+[PENDING]
+Supported GPU vendors.
 
-Technical documentation should be updated alongside significant
-architectural changes.
+CURRENT PRODUCT STATUS
 
-============================================================
-31. LICENSE AND THIRD-PARTY COMPONENTS
-======================================
+ACTIVE DEVELOPMENT
+
+Monix remains an internal development product. Public claims must not present unfinished or unverified functionality as final.
+
+KNOWN LIMITATIONS
+
+[PENDING]
+Confirmed product limitations.
+
+DOCUMENTATION RELATIONSHIPS
+
+Monix documentation includes the Product Overview, Development Status, Architecture, Build and Release, Configuration, Debugging, Logging, Monitoring, Performance, Security, Shader System, State and Snapshot, Testing, User Interface, and related Weird Stuff corporate policies.
 
 [MANDATORY]
+Material changes to Monix's functional or technical contract must be reflected in the controlled documentation.
 
-Every third-party component included with Monix must be used
-according to its applicable license.
-
-[MANDATORY]
-
-Required copyright, attribution, and license notices must be
-preserved.
-
-[PENDING]
-
-Complete dependency and license inventory:
-
----
-
-============================================================
-32. SUPPORTED PLATFORMS
-=======================
-
-[PENDING]
-
-Operating systems:
-
----
-
-[PENDING]
-
-Minimum supported version:
-
----
-
-[PENDING]
-
-Supported graphics APIs:
-
----
-
-[PENDING]
-
-Minimum hardware requirements:
-
----
-
-============================================================
-33. KNOWN LIMITATIONS
-=====================
-
-[PENDING]
-
-Known limitations:
-
----
-
----
-
----
-
-============================================================
-34. TECHNICAL OWNERSHIP
-=======================
-
-[PENDING]
-
-Product Owner:
-
----
-
-[PENDING]
-
-Development Lead:
-
----
-
-[PENDING]
-
-QA Lead:
-
----
-
-[PENDING]
-
-Security Reviewer:
-
----
-
-============================================================
-35. RELATIONSHIP WITH WEIRD STUFF POLICIES
-==========================================
-
-Monix is subject to the applicable Weird Stuff documentation,
-including:
-
-* Corporate Manual.
-* Security Policy.
-* Privacy Policy.
-* Acceptable Use Policy.
-* Intellectual Property Policy.
-* Terms and Conditions.
-* Cookie Policy where applicable.
-
-Product-specific requirements may impose stricter controls than
-general requirements.
-
-============================================================
-36. SPECIFICATION STATUS
-========================
-
-This specification describes the current intended architecture
-and functionality of Monix.
-
-It may change as development continues.
-
-[MANDATORY]
-
-Material changes affecting security, privacy, licensing,
-compatibility, or user-facing behavior must be reflected in
-appropriate documentation before or alongside release where
-practical.
-
-============================================================
-37. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — PRODUCT SPECIFICATION
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL / DEVELOPMENT
@@ -869,8 +369,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
