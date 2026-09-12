@@ -1,0 +1,99 @@
+WEIRD STUFF
+ORGANIZATION
+
+Version: 1.0
+Status: IN FORCE
+Effective Date: September 12, 2026
+Owner: Weird Stuff
+Classification: INTERNAL
+
+============================================================
+1. PURPOSE
+============================================================
+
+This document records the current internal organizational model of Weird Stuff.
+
+============================================================
+2. AUTHORITY STRUCTURE
+============================================================
+
+CEO
+|
++-- Director
+|
++-- Manager
+|
++-- Specialized Teams
+
+[MANDATORY]
+Authority exists only within the role formally assigned to a person.
+
+[MANDATORY]
+A delegated responsibility does not automatically transfer the delegator's overall authority.
+
+============================================================
+3. CURRENT ASSIGNMENTS
+============================================================
+
+belfegor442
+Role: CEO
+
+Anti
+Role: Director
+
+Acrid
+Role: Manager
+
+Xtccy
+Role: Graphic Designer
+
+Terrorendi
+Role: Graphic Designer
+
+Aneley_567
+Role: Tester
+
+============================================================
+4. TEAMS
+============================================================
+
+Weird Stuff may operate specialized functions including:
+
+* Development
+* Design
+* QA / Testing
+* Product
+* Infrastructure
+* Security
+
+Team composition may change through authorized organizational decisions.
+
+============================================================
+5. ROLE CHANGES
+============================================================
+
+[MANDATORY]
+Promotions, demotions, transfers, suspensions, and removals must be authorized by the appropriate authority.
+
+[MANDATORY]
+Access permissions must reflect the person's current role and operational need.
+
+[MANDATORY]
+When a role changes, obsolete permissions must be reviewed and removed.
+
+============================================================
+6. ORGANIZATIONAL RECORD
+============================================================
+
+This document records the organizational model, not private personnel information.
+
+[PENDING]
+Formal employment or contractor records.
+[PENDING]
+Formal succession procedures.
+[PENDING]
+Formal delegation register.
+
+============================================================
+END OF DOCUMENT
+============================================================
