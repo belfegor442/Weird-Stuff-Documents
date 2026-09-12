@@ -1,0 +1,55 @@
+WEIRD STUFF
+QA STANDARDS
+
+Version: 1.0
+Status: IN FORCE
+Effective Date: September 12, 2026
+Owner: Weird Stuff
+Classification: INTERNAL
+
+1. PURPOSE
+
+QA verifies that releases meet their intended functional, security, stability, and compatibility requirements.
+
+2. TESTING
+
+[MANDATORY]
+Stable releases must undergo testing appropriate to their functionality and risk.
+
+[MANDATORY]
+Known critical defects must be evaluated before stable release.
+
+[RECOMMENDED]
+Major changes should receive regression testing.
+
+[RECOMMENDED]
+Important fixes should retain evidence that the fix was tested.
+
+3. BUG REPORTING
+
+[MANDATORY]
+Important bugs must contain enough information to determine impact and, where possible, reproduce the issue.
+
+A useful bug report should identify:
+
+* Affected product/version.
+* Expected behavior.
+* Actual behavior.
+* Reproduction steps.
+* Relevant logs or evidence.
+* Severity or impact.
+
+4. RELEASE GATES
+
+[MANDATORY]
+A release must not be marked stable solely because development is complete.
+
+[MANDATORY]
+Known unresolved critical issues must be explicitly accepted by the responsible authority or block release according to project risk.
+
+[PENDING]
+Formal severity matrix.
+[PENDING]
+Formal test-case management system.
+
+END OF DOCUMENT
