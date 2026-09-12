@@ -1,35 +1,22 @@
 WEIRD STUFF
-MONIX
+MONIX — STATE AND SNAPSHOT
 
-STATE AND SNAPSHOT
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL / DEVELOPMENT
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+PURPOSE
 
-1. PURPOSE
-   ============================================================
+This document defines how Monix manages runtime state and how selected state can be captured into snapshots for diagnostics, comparison, support, development, or controlled restoration.
 
-This document defines the internal state model and snapshot
-system of Monix.
+STATE MODEL
 
-It covers application state, runtime state, configuration state,
-monitoring state, diagnostic state, snapshot creation,
-serialization, validation, loading, compatibility, corruption
-handling, and recovery.
-
-============================================================
-2. STATE MODEL
-==============
-
-Monix may maintain several categories of state:
+Monix may maintain:
 
 * Application state.
-* User interface state.
+* User-interface state.
 * Configuration state.
 * Monitoring state.
 * Process state.
@@ -39,129 +26,50 @@ Monix may maintain several categories of state:
 * Cache state.
 * Snapshot state.
 
-State may exist temporarily in memory or be persisted to storage.
-
-============================================================
-3. STATE PRINCIPLES
-===================
+[MANDATORY]
+Each subsystem must have clear ownership of the state it modifies.
 
 [MANDATORY]
-
-Each subsystem must have a clearly defined ownership of the state
-it modifies.
+A subsystem must not silently modify unrelated state.
 
 [MANDATORY]
-
-A subsystem must not silently modify unrelated state without an
-appropriate reason.
-
-[MANDATORY]
-
 Invalid state must not knowingly be treated as valid state.
 
 [RECOMMENDED]
-
 State transitions should be deterministic and testable.
 
-============================================================
-4. RUNTIME STATE
-================
+RUNTIME STATE
 
-Runtime state may include:
-
-* Current application mode.
-* Active views.
-* Current configuration.
-* Monitoring values.
-* Active processes.
-* Security findings.
-* Renderer state.
-* Active shader state.
-* Cache state.
+Runtime state may contain the current application mode, active views, effective configuration, monitoring values, process information, security findings, renderer state, active shader state, and cache state.
 
 [MANDATORY]
+Unknown or unavailable information must not be represented as confirmed state.
 
-Runtime state must accurately represent the current known state
-of the application.
+STATE OWNERSHIP
 
-[MANDATORY]
+Subsystems should own the state directly related to their responsibilities. Cross-subsystem changes should pass through defined interfaces or another controlled mechanism.
 
-Unknown or unavailable information must not be represented as
-confirmed state.
-
-============================================================
-5. STATE OWNERSHIP
-==================
-
-Each subsystem should own the state directly related to its
-responsibility.
-
-Examples:
-
-LOGGER
-Owns runtime logging state.
-
-MONITORING
-Owns current monitoring state.
-
-SECURITY
-Owns security findings and security-related runtime state.
-
-RENDERER
-Owns rendering resources and rendering state.
-
-SHADER SYSTEM
-Owns active shader pipeline state.
-
-CONFIGURATION
-Owns effective configuration state.
-
-[MANDATORY]
-
-Cross-subsystem state changes must use defined interfaces or
-equivalent controlled mechanisms.
-
-============================================================
-6. STATE TRANSITIONS
-====================
-
-State transitions may follow:
+STATE TRANSITIONS
 
 CURRENT STATE
-|
-v
-VALIDATE CHANGE
-|
-v
-CANDIDATE STATE
-|
-v
-COMMIT
-|
-v
-NEW CURRENT STATE
+-> VALIDATE CHANGE
+-> CANDIDATE STATE
+-> COMMIT
+-> NEW CURRENT STATE
 
 [MANDATORY]
-
-A failed state transition must not leave the application in an
-undefined or partially applied state where safe recovery is
-possible.
+A failed transition must not leave the application in an undefined or partially applied state where safe recovery is possible.
 
 [RECOMMENDED]
+Critical transitions should appear atomic to dependent subsystems where practical.
 
-Critical state transitions should be atomic from the perspective
-of dependent subsystems.
+SNAPSHOTS
 
-============================================================
-7. SNAPSHOTS
-============
+A snapshot is a recorded representation of selected Monix state at a specific point in time.
 
-A snapshot is a recorded representation of selected Monix state
-at a specific point in time.
+It may include:
 
-A snapshot may contain:
-
-* Application version.
+* Monix version.
 * Build identifier.
 * Timestamp.
 * Configuration.
@@ -172,642 +80,249 @@ A snapshot may contain:
 * Shader information.
 * Relevant diagnostic state.
 
-============================================================
-8. SNAPSHOT OBJECTIVE
-=====================
-
-Snapshots may be used for:
-
-* Diagnostics.
-* Bug investigation.
-* State comparison.
-* Configuration inspection.
-* Support.
-* Development.
-* Reproduction of selected application states.
-
-============================================================
-9. SNAPSHOT SCOPE
-=================
-
-A snapshot must only contain the state intended to be captured.
+[MANDATORY]
+A snapshot must not claim to contain complete system state unless it actually does.
 
 [MANDATORY]
+Information that was unavailable or excluded must remain distinguishable from information that was captured.
 
-A snapshot must not claim to contain the complete system state
-unless it actually does.
+SNAPSHOT USES
 
-[MANDATORY]
+Snapshots may support diagnostics, bug investigation, state comparison, configuration inspection, support, development, and controlled reproduction of selected application states.
 
-The scope of captured information must be distinguishable from
-information that was unavailable or excluded.
+SNAPSHOT METADATA
 
-============================================================
-10. SNAPSHOT METADATA
-=====================
-
-A snapshot should identify, where available:
-
-* Monix version.
-* Build identifier.
-* Timestamp.
-* Operating system.
-* Relevant hardware.
-* Snapshot format version.
-* Configuration version.
-* Capture status.
-
-[RECOMMENDED]
-
-Additional metadata should only be included when it provides
-meaningful diagnostic value.
-
-============================================================
-11. SNAPSHOT FORMAT
-===================
+Where available, a snapshot should identify the Monix version, build, timestamp, operating system, relevant hardware, snapshot format version, configuration version, and capture status.
 
 [PENDING]
-
-Snapshot format:
-
----
+Snapshot format.
 
 [PENDING]
-
-Serialization method:
-
----
+Serialization method.
 
 [PENDING]
+Schema version.
 
-Schema version:
-
----
-
-[MANDATORY]
-
-The chosen format must allow Monix to distinguish compatible
-snapshots from unsupported or malformed data.
-
-============================================================
-12. SNAPSHOT VERSIONING
-=======================
-
-Snapshot data may change between Monix releases.
-
-[MANDATORY]
-
-The snapshot format version must be identifiable.
-
-[MANDATORY]
-
-An incompatible snapshot must not be silently interpreted as a
-valid snapshot using a different format.
-
-[RECOMMENDED]
-
-Backward compatibility should be supported where practical.
-
-============================================================
-13. SNAPSHOT CREATION
-=====================
-
-A snapshot creation process may follow:
+SNAPSHOT CREATION
 
 REQUEST
-|
-v
-STATE COLLECTION
-|
-v
-VALIDATION
-|
-v
-SERIALIZATION
-|
-v
-WRITE
-|
-v
-VERIFY
+-> STATE COLLECTION
+-> VALIDATION
+-> SERIALIZATION
+-> WRITE
+-> VERIFY
 
 [MANDATORY]
+Only successfully captured information may be represented as part of the final snapshot.
 
-Only successfully captured state may be represented as part of
-the final snapshot.
+PARTIAL SNAPSHOTS
 
-============================================================
-14. PARTIAL SNAPSHOTS
-=====================
-
-Some state may be unavailable during capture.
-
-Examples include:
-
-* Permission-restricted processes.
-* Missing sensors.
-* Unavailable GPU data.
-* Temporary subsystem failure.
+Some information may be unavailable because of permissions, missing sensors, unavailable GPU data, or temporary subsystem failures.
 
 [MANDATORY]
-
-Unavailable information must not be fabricated.
+Unavailable information must never be fabricated.
 
 [RECOMMENDED]
+Partially unavailable sections should be identified explicitly.
 
-The snapshot should identify partially unavailable sections.
-
-============================================================
-15. SNAPSHOT INTEGRITY
-======================
+SNAPSHOT INTEGRITY
 
 [MANDATORY]
+A snapshot must not be trusted when its integrity cannot be established where integrity verification is required.
 
-A snapshot must not be treated as trustworthy when its integrity
-cannot be established where integrity verification is required.
-
-Possible integrity mechanisms include:
-
-* Checksums.
-* Hashes.
-* Digital signatures.
+Possible mechanisms include hashes, checksums, and digital signatures.
 
 [RECOMMENDED]
-
 Important exported snapshots should use an integrity mechanism.
 
-============================================================
-16. SNAPSHOT STORAGE
-====================
-
-Snapshots may be stored locally or exported.
+STORAGE
 
 [PENDING]
-
-Default snapshot location:
-
----
+Default snapshot location.
 
 [PENDING]
-
-Maximum snapshot size:
-
----
+Maximum snapshot size.
 
 [PENDING]
-
-Snapshot retention:
-
----
+Retention policy.
 
 [MANDATORY]
+Snapshot storage must have an appropriate operational limit where uncontrolled growth could cause problems.
 
-Snapshot storage must not be allowed to grow without an
-appropriate operational limit where uncontrolled growth could
-cause problems.
+SNAPSHOT SECURITY
 
-============================================================
-17. SNAPSHOT SECURITY
-=====================
-
-Snapshots may contain system information that should not be
-publicly disclosed.
-
-Potentially sensitive information may include:
-
-* Process information.
-* File paths.
-* Hardware information.
-* Configuration.
-* Security findings.
-* Diagnostic information.
+Snapshots may contain process information, file paths, hardware details, configuration, security findings, and diagnostics.
 
 [MANDATORY]
-
-Sensitive snapshot data must be protected according to its
-classification.
+Sensitive snapshot data must be protected according to its classification.
 
 [MANDATORY]
+Snapshots must not intentionally contain passwords, API keys, private keys, authentication tokens, or other unnecessary secrets.
 
-Snapshots must not intentionally include secrets such as
-passwords, API keys, private keys, or authentication tokens.
-
-============================================================
-18. PERSONAL DATA
-=================
-
-Some snapshot information may constitute personal data depending
-on context.
+PRIVACY
 
 [MANDATORY]
-
-Personal data must only be captured when necessary for the
-documented purpose and permitted under applicable privacy
-requirements.
+Personal data may only be captured when necessary for the documented purpose and permitted under applicable privacy requirements.
 
 [MANDATORY]
+Snapshot exports must not intentionally disclose unnecessary personal information.
 
-Snapshot exports must not intentionally disclose unnecessary
-personal information.
-
-============================================================
-19. SNAPSHOT LOADING
-====================
-
-Loading may follow:
+SNAPSHOT LOADING
 
 FILE
-|
-v
-FORMAT DETECTION
-|
-v
-INTEGRITY CHECK
-|
-v
-SCHEMA VALIDATION
-|
-v
-CONTENT VALIDATION
-|
-v
-LOAD
-|
-v
-ACTIVE STATE
+-> FORMAT DETECTION
+-> INTEGRITY CHECK
+-> SCHEMA VALIDATION
+-> CONTENT VALIDATION
+-> LOAD
+-> ACTIVE STATE
 
 [MANDATORY]
+A snapshot must be validated before it can modify runtime state.
 
-A snapshot must be validated before being used to modify runtime
-state.
+MALFORMED SNAPSHOTS
 
-============================================================
-20. MALFORMED SNAPSHOTS
-=======================
-
-Malformed snapshots may contain:
-
-* Invalid structure.
-* Missing fields.
-* Invalid types.
-* Invalid values.
-* Unsupported versions.
-* Corrupted data.
+Malformed snapshots may contain invalid structure, missing fields, invalid values, unsupported versions, or corrupted data.
 
 [MANDATORY]
-
-Malformed snapshots must not be silently accepted.
+Malformed data must not be silently accepted.
 
 [MANDATORY]
+Loading malformed data must not intentionally create unsafe application state.
 
-Loading malformed data must not intentionally create unsafe
-application state.
-
-============================================================
-21. SNAPSHOT COMPATIBILITY
-==========================
+COMPATIBILITY
 
 A snapshot may be:
 
-COMPATIBLE
-Can be safely loaded.
+COMPATIBLE — safe to load.
 
-PARTIALLY COMPATIBLE
-Some information can be loaded while some is unavailable.
+PARTIALLY COMPATIBLE — some information can be loaded while other information is unavailable.
 
-INCOMPATIBLE
-Cannot be safely loaded.
+INCOMPATIBLE — cannot be safely loaded.
 
-INVALID
-Data is malformed or corrupted.
+INVALID — malformed or corrupted.
 
 [MANDATORY]
+Compatibility must be determined before loading.
 
-Compatibility status must be correctly determined before loading.
+MIGRATION
 
-============================================================
-22. SNAPSHOT MIGRATION
-======================
-
-Where snapshot formats evolve, Monix may support migration.
-
-Possible flow:
+When snapshot formats change, Monix may migrate older data.
 
 OLD FORMAT
-|
-v
-VERSION DETECTION
-|
-v
-MIGRATION
-|
-v
-VALIDATION
-|
-v
-CURRENT FORMAT
+-> VERSION DETECTION
+-> MIGRATION
+-> VALIDATION
+-> CURRENT FORMAT
 
 [MANDATORY]
+A failed migration must not be reported as successful.
 
-Failed migration must not produce a snapshot represented as
-successfully migrated.
+STATE RESTORATION
 
-============================================================
-23. STATE RESTORATION
-=====================
-
-If snapshots are used for state restoration:
+If snapshots support restoration:
 
 [MANDATORY]
-
-Only state explicitly supported for restoration may be restored.
+Only explicitly supported state may be restored.
 
 [MANDATORY]
-
 Restoration must not silently alter unrelated system settings.
 
 [MANDATORY]
+Security-sensitive settings must not be restored in a way that bypasses current security requirements.
 
-Security-sensitive settings must not be restored in a way that
-bypasses current security requirements.
+SNAPSHOT COMPARISON
 
-============================================================
-24. DIFFERENCE / COMPARISON
-===========================
-
-Monix may compare snapshots to identify changes.
-
-Comparison may include:
-
-* Configuration.
-* Resource usage.
-* Processes.
-* Security findings.
-* Renderer state.
-* Shader configuration.
+Monix may compare snapshots to identify changes in configuration, resource usage, processes, security findings, renderer state, or shader configuration.
 
 [MANDATORY]
+Actual changes must remain distinguishable from values that were unavailable or incomparable.
 
-The comparison must distinguish actual changes from unavailable
-or incomparable values.
-
-============================================================
-25. DIAGNOSTIC USE
-==================
-
-Snapshots may be attached to diagnostic reports.
+DIAGNOSTIC EXPORT
 
 [MANDATORY]
-
-Diagnostic exports must comply with the applicable security and
-privacy requirements.
+Snapshot exports must follow applicable security and privacy requirements.
 
 [RECOMMENDED]
+Exports should minimize unnecessary information and provide filtering or redaction where practical.
 
-Diagnostic exports should minimize unnecessary information.
+IMPORT
 
-============================================================
-26. SNAPSHOT RETENTION
-======================
-
-Snapshot retention may be determined by:
-
-* User settings.
-* Storage limits.
-* Support requirements.
-* Diagnostic use.
-* Privacy requirements.
-
-[PENDING]
-
-Default retention:
-
----
+Imported snapshots are untrusted until validated.
 
 [MANDATORY]
+Import must not automatically grant privileges or disable security controls.
 
-Personal data contained in snapshots must not be retained longer
-than permitted or necessary under the applicable requirements.
+CONFIGURATION VS RUNTIME STATE
 
-============================================================
-27. EXPORT
-==========
+Configuration describes intended behavior.
 
-Monix may export snapshots for:
-
-* Support.
-* Debugging.
-* Archiving.
-* Development.
+Runtime state describes what is currently active.
 
 [MANDATORY]
+A runtime change must not be represented as persistent configuration until it has actually been saved.
 
-Export must not intentionally include secrets.
+LOGGING
+
+Important state transitions may be logged, including configuration changes, mode changes, snapshot creation, loading, restoration, and security-state changes.
 
 [RECOMMENDED]
+Important transitions should contain enough context for diagnosis.
 
-Export should provide filtering or redaction where practical.
+RENDERER AND SHADER STATE
 
-============================================================
-28. IMPORT
-==========
-
-Imported snapshots may originate outside the trusted application
-environment.
+Renderer state may include active pipelines, shaders, render configuration, resources, and display configuration.
 
 [MANDATORY]
+Invalid renderer or shader state must not replace a valid active state when safe rollback is possible.
 
-Imported data must be treated as untrusted until validated.
+CONCURRENCY
 
-[MANDATORY]
-
-Import must not automatically grant privileges or disable
-security controls.
-
-============================================================
-29. STATE AND CONFIGURATION
-===========================
-
-Configuration state and runtime state are related but distinct.
-
-Configuration:
-Defines intended behavior.
-
-Runtime state:
-Represents the current active state.
+Multiple subsystems may access state concurrently.
 
 [MANDATORY]
-
-Monix must not falsely represent runtime state as persistent
-configuration when the change has not actually been saved.
-
-============================================================
-30. STATE AND LOGGING
-=====================
-
-Significant state transitions may be logged.
-
-Examples include:
-
-* Configuration changes.
-* Mode changes.
-* Snapshot creation.
-* Snapshot loading.
-* Restoration.
-* Security state changes.
-
-[RECOMMENDED]
-
-Important state transitions should contain sufficient diagnostic
-context.
-
-============================================================
-31. STATE AND SECURITY
-======================
-
-[MANDATORY]
-
-Security-related state must not be weakened through ordinary
-state-management operations.
-
-[MANDATORY]
-
-Restoring or importing state must not bypass current
-authentication, authorization, or security controls.
-
-============================================================
-32. STATE AND RENDERING
-=======================
-
-Renderer state may include:
-
-* Active pipeline.
-* Active shader.
-* Render configuration.
-* Resource state.
-* Display configuration.
-
-[MANDATORY]
-
-Invalid renderer state must not be activated when a valid
-alternative exists.
-
-[RECOMMENDED]
-
-Renderer state changes should be applied transactionally.
-
-============================================================
-33. STATE AND SHADERS
-=====================
-
-Shader-related state may include:
-
-* Active preset.
-* Current pass configuration.
-* Shader parameters.
-* Cache state.
-* Feedback state.
-
-[MANDATORY]
-
-An invalid shader state must not replace an active valid state
-when safe rollback is possible.
-
-============================================================
-34. CONCURRENCY
-===============
-
-Multiple subsystems may access or modify state concurrently.
-
-[MANDATORY]
-
 Shared mutable state must be synchronized appropriately.
 
 [MANDATORY]
+Concurrent operations must not create data races or state corruption.
 
-Concurrent operations must not create data races or state
-corruption.
+FAILURE RECOVERY
 
-============================================================
-35. FAILURE RECOVERY
-====================
-
-If a state update fails, Monix may:
-
-* Keep the previous state.
-* Restore the last valid state.
-* Disable the affected feature.
-* Report the failure.
+If a state update fails, Monix may keep the previous state, restore the last valid state, disable the affected feature, and report the failure.
 
 [MANDATORY]
+Recovery must not silently activate invalid state.
 
-Failure recovery must not silently activate invalid state.
+TESTING
 
-============================================================
-36. TESTING
-===========
-
-State and snapshot testing should include:
+State and snapshot testing should cover:
 
 * Valid snapshots.
-* Invalid snapshots.
-* Corrupted snapshots.
+* Invalid and corrupted snapshots.
 * Version mismatches.
 * Migration.
 * Partial state.
-* Export.
-* Import.
-* Reset.
+* Import and export.
 * Restoration.
-* Concurrent state changes.
+* Reset.
+* Concurrent changes.
 * Failure recovery.
 
 [MANDATORY]
+Important state and snapshot operations must be tested before stable release.
 
-Important snapshot and state operations must be tested before
-stable release.
-
-============================================================
-37. CURRENT STATUS
-==================
+CURRENT STATUS
 
 [PENDING]
-
-State system implementation:
-
----
+Final snapshot format.
 
 [PENDING]
-
-Snapshot implementation:
-
----
+Final serialization method.
 
 [PENDING]
+Final restoration scope.
 
-Snapshot format:
-
----
-
-============================================================
-38. KNOWN LIMITATIONS
-=====================
-
-[PENDING]
-
-Known state limitations:
-
----
-
----
-
----
-
-============================================================
-39. RELATED DOCUMENTATION
-=========================
-
-Related documents:
+RELATED DOCUMENTATION
 
 * Monix Product Overview.
 * Monix Product Specification.
@@ -818,19 +333,14 @@ Related documents:
 * Monix Security Documentation.
 * Monix Shader System.
 * Monix Testing Documentation.
-* Monix Debugging Documentation.
-* Monix Performance Documentation.
-* Monix Build and Release.
 
-============================================================
-40. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — STATE AND SNAPSHOT
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL / DEVELOPMENT
@@ -842,8 +352,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
