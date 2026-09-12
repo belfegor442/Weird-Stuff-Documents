@@ -1,0 +1,64 @@
+WEIRD STUFF
+BUG MANAGEMENT
+
+Version: 1.0
+Status: IN FORCE
+Effective Date: September 12, 2026
+Owner: Weird Stuff
+Classification: INTERNAL
+
+1. PURPOSE
+
+This document defines the baseline lifecycle for defects and operational issues.
+
+2. LIFECYCLE
+
+REPORTED -> TRIAGED -> ASSIGNED -> INVESTIGATING -> FIXED -> VERIFIED -> CLOSED
+
+An issue may instead be rejected, duplicated, deferred, or reopened when appropriate.
+
+3. REPORTING
+
+[MANDATORY]
+Important defects must be recorded in an authorized tracking system.
+
+[MANDATORY]
+Reports must contain enough information to assess impact and reproduce the issue where possible.
+
+4. TRIAGE
+
+Issues should be evaluated according to:
+
+* Security impact.
+* Data integrity impact.
+* Availability impact.
+* User impact.
+* Reproducibility.
+* Scope.
+
+5. SEVERITY
+
+CRITICAL
+Immediate or potentially severe impact to security, data integrity, or essential operation.
+
+HIGH
+Major functional, security, or reliability impact.
+
+MEDIUM
+Meaningful defect with limited scope or workaround.
+
+LOW
+Minor defect with limited operational impact.
+
+INFORMATIONAL
+Observation or improvement without material defect impact.
+
+6. CLOSURE
+
+[MANDATORY]
+A defect marked fixed must be verified before closure when verification is technically possible.
+
+[MANDATORY]
+Reopened issues must retain their prior history.
+
+END OF DOCUMENT
