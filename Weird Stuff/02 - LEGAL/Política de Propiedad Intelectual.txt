@@ -1,55 +1,53 @@
 WEIRD STUFF
 INTELLECTUAL PROPERTY POLICY
 
-Version: 1.0
+Version: 1.1
 Status: DRAFT FOR LEGAL REVIEW
 Publication Status: PENDING
 Effective Date: PENDING
-Last Updated: PENDING
+Last Updated: September 12, 2026
 Owner: Weird Stuff
 
 ============================================================
-
 1. PURPOSE
-   ============================================================
+============================================================
 
-This Intellectual Property Policy establishes the general rules
-governing intellectual property used, created, owned, licensed,
-distributed, or otherwise handled by Weird Stuff.
+This Policy sets out the general rules for intellectual property
+used, created, owned, licensed, distributed, or otherwise handled by
+Weird Stuff.
 
-This Policy applies to software, source code, compiled software,
-designs, graphics, branding, documentation, text, audiovisual
-materials, digital assets, websites, product names, repositories,
-and other intellectual property relevant to Weird Stuff.
+It covers software, source code, compiled software, designs,
+graphics, branding, documentation, text, audiovisual material,
+digital assets, websites, product names, repositories, and other
+relevant intellectual property.
 
 ============================================================
 2. SCOPE
-========
+============================================================
 
 This Policy applies to:
 
 * Weird Stuff products.
 * Internal projects.
 * Public releases.
-* Source code repositories.
+* Source-code repositories.
 * Designs and visual assets.
 * Documentation.
 * Websites.
 * Branding.
 * Custom applications.
 * Third-party software and assets.
-* User-submitted materials where applicable.
+* User-submitted material where applicable.
 
 [MANDATORY]
-
-Any person acting on behalf of Weird Stuff must comply with the
-intellectual property requirements applicable to their work.
+Anyone acting on behalf of Weird Stuff must follow the intellectual
+property requirements that apply to their work.
 
 ============================================================
 3. OWNERSHIP
-============
+============================================================
 
-Intellectual property rights may belong to:
+Intellectual property may belong to:
 
 * Weird Stuff.
 * Individual creators.
@@ -59,28 +57,23 @@ Intellectual property rights may belong to:
 * Other rights holders.
 
 [MANDATORY]
-
-No person may claim ownership of intellectual property solely
-because they have access to it.
+Access to intellectual property does not, by itself, create an
+ownership right.
 
 [MANDATORY]
-
-Ownership must be determined according to applicable law,
-agreements, licenses, and the circumstances under which the work
-was created.
+Ownership must be determined according to applicable law, contracts,
+licenses, and the circumstances in which the work was created.
 
 ============================================================
 4. WEIRD STUFF INTELLECTUAL PROPERTY
-====================================
+============================================================
 
-Weird Stuff may own or control rights relating to:
+Weird Stuff may own or control rights in:
 
-* Software.
-* Source code.
+* Software and source code.
 * Compiled binaries.
 * Product names.
-* Logos.
-* Brand assets.
+* Logos and brand assets.
 * User interfaces.
 * Graphics.
 * Documentation.
@@ -89,18 +82,15 @@ Weird Stuff may own or control rights relating to:
 * Original audiovisual content.
 * Other original works.
 
-[PENDING]
-
 The complete list of registered or formally protected Weird Stuff
-intellectual property is not publicly disclosed through this
-Policy.
+intellectual property is not published through this Policy.
 
 ============================================================
 5. PRODUCT INTELLECTUAL PROPERTY
-================================
+============================================================
 
-The following Weird Stuff projects may contain intellectual
-property belonging to Weird Stuff or other rights holders:
+The following Weird Stuff products may contain intellectual property
+belonging to Weird Stuff or other rights holders:
 
 * Monix
 * Datalog
@@ -109,51 +99,40 @@ property belonging to Weird Stuff or other rights holders:
 * Telenet
 
 [MANDATORY]
+Listing a product here does not mean that every component of that
+product is exclusively owned by Weird Stuff.
 
-The presence of a product in this list does not by itself
-constitute a statement that every component of that product is
-owned exclusively by Weird Stuff.
-
-Third-party components may remain subject to their own licenses.
+Third-party components remain subject to their own licenses.
 
 ============================================================
 6. SOURCE CODE
-==============
+============================================================
 
 [MANDATORY]
-
-Source code belonging to Weird Stuff must not be:
-
-* Reproduced without authorization where prohibited.
-* Re-distributed without authorization where prohibited.
-* Sold without authorization where prohibited.
-* Publicly disclosed where it is not intended to be public.
-* Incorporated into another project in violation of applicable
-  rights or licenses.
+Source code belonging to Weird Stuff must not be reproduced,
+redistributed, sold, publicly disclosed, or incorporated into another
+project in a way that violates applicable rights, agreements, or
+licenses.
 
 [MANDATORY]
-
-Open-source repositories must be treated according to the license
-attached to the relevant repository or component.
+Open-source repositories must be handled according to the license
+that applies to the relevant repository or component.
 
 ============================================================
 7. SOFTWARE LICENSES
-====================
+============================================================
 
-Software made available by Weird Stuff may be distributed under
-specific licenses.
+Software distributed by Weird Stuff may be subject to product-
+specific license terms.
 
 [MANDATORY]
+Users must comply with the license that applies to the software they
+use.
 
-Users must comply with the license applicable to the software
-they use.
+Before a public product is released, its applicable license should be
+identified.
 
-[PENDING]
-
-Each public Weird Stuff product must identify its applicable
-software license before publication.
-
-Possible licensing models may include:
+Possible models include:
 
 * Proprietary.
 * Open source.
@@ -161,42 +140,38 @@ Possible licensing models may include:
 * Custom license.
 * Third-party licensed software.
 
-The actual model must be determined individually for each product.
+The actual model must be determined for each product.
 
 ============================================================
 8. OPEN SOURCE
-==============
+============================================================
 
 Weird Stuff may use, modify, distribute, or contribute to
 open-source software.
 
 [MANDATORY]
-
-All applicable open-source license requirements must be respected.
-
-This may include:
+Applicable open-source license requirements must be respected. These
+may include:
 
 * Attribution.
 * Copyright notices.
 * License notices.
 * Redistribution requirements.
-* Source-code availability requirements where applicable.
-* Modification notices where required.
+* Source-code availability requirements.
+* Modification notices.
 * Other license conditions.
 
 [MANDATORY]
-
-A developer must not intentionally remove an applicable open-source
-license requirement.
+Developers must not intentionally remove or bypass an applicable
+open-source license requirement.
 
 [RECOMMENDED]
-
-Projects should maintain a record of relevant open-source
-dependencies and their licenses.
+Projects should keep a record of important open-source dependencies
+and their licenses.
 
 ============================================================
 9. THIRD-PARTY ASSETS
-=====================
+============================================================
 
 Third-party assets may include:
 
@@ -214,49 +189,43 @@ Third-party assets may include:
 * Other digital resources.
 
 [MANDATORY]
-
-Third-party assets must only be used where Weird Stuff has a
-sufficient legal right or license to use them.
+Third-party assets may only be used when Weird Stuff has a sufficient
+legal right or license to use them.
 
 [MANDATORY]
-
-The source and applicable license of important third-party assets
+For important third-party assets, the source and applicable license
 should be known before distribution.
 
 ============================================================
 10. COPYRIGHT
-=============
+============================================================
 
-Copyright may apply to original works used or created by Weird
-Stuff, subject to applicable law.
-
-[MANDATORY]
-
-Copyright notices, attribution statements, and license
-requirements must be preserved when required.
+Copyright may protect original works used or created by Weird Stuff,
+subject to applicable law.
 
 [MANDATORY]
-
-A person must not falsely claim authorship of work created by
-another party.
+Copyright notices, attribution statements, and license requirements
+must be preserved when required.
 
 [MANDATORY]
+No person may falsely claim authorship of work created by someone
+else.
 
-Original works created by third parties remain subject to the
-rights of their creators unless rights have been validly
-transferred, licensed, or otherwise obtained.
+[MANDATORY]
+Third-party works remain subject to their creators' rights unless
+those rights have been validly transferred, licensed, or otherwise
+obtained.
 
 ============================================================
 11. TRADEMARKS AND BRANDING
-===========================
+============================================================
 
-Weird Stuff may use names, logos, visual identities, product
-names, and other branding elements.
+Weird Stuff may use company names, product names, logos, visual
+identities, and other branding elements.
 
 [MANDATORY]
-
-Weird Stuff branding must not knowingly be used in a manner that
-falsely suggests:
+Weird Stuff branding must not knowingly be used in a way that falsely
+suggests:
 
 * Official endorsement.
 * Official representation.
@@ -265,109 +234,84 @@ falsely suggests:
 * Sponsorship where none exists.
 
 [MANDATORY]
-
-Only authorized people may approve official modifications to
-company branding.
+Official changes to company branding require authorization.
 
 ============================================================
 12. INTERNAL CREATIONS
-======================
+============================================================
 
-Where a person creates code, graphics, documentation, or other
-material for Weird Stuff:
-
-[MANDATORY]
-
-The ownership and usage rights must be determined according to
-applicable agreements and law.
+When a person creates code, graphics, documentation, or other work
+for Weird Stuff:
 
 [MANDATORY]
+Ownership and usage rights must be determined according to applicable
+agreements and law.
 
-No person should assume that participation in a project
-automatically transfers every legal right to Weird Stuff.
+[MANDATORY]
+Participation in a project does not automatically transfer every
+legal right to Weird Stuff.
 
-[PENDING]
-
-Standard agreements governing ownership and assignment of
-intellectual property have not been defined in this document.
+Standard agreements for ownership and assignment remain to be
+defined where necessary.
 
 ============================================================
 13. COLLABORATORS AND CONTRACTORS
-=================================
+============================================================
 
-Where external collaborators create material for Weird Stuff:
+When an external collaborator creates material for Weird Stuff:
 
 [MANDATORY]
-
 The relevant ownership or licensing rights should be established
 through an appropriate agreement where necessary.
 
 [MANDATORY]
-
-Weird Stuff must not represent that it owns rights that it has
-not legally obtained.
-
-[PENDING]
-
-Standard contractor and collaborator intellectual property
-agreements.
+Weird Stuff must not claim rights that it has not legally obtained.
 
 ============================================================
 14. CUSTOM APPLICATIONS
-=======================
+============================================================
 
 Custom applications may involve contributions from Weird Stuff,
 Users, clients, or other parties.
 
 [MANDATORY]
+Ownership and licensing of custom work must be defined before the
+project is completed where the issue is legally relevant.
 
-The ownership and licensing of custom application work must be
-defined before the relevant project is completed where the issue
-is legally relevant.
-
-[PENDING]
-
-Specific custom application intellectual property terms.
-
-The Custom Applications Policy provides additional rules for this
-process.
+The Custom Applications Policy provides additional rules for these
+projects.
 
 ============================================================
 15. USER CONTENT
-================
+============================================================
 
 Users may provide content to Weird Stuff services.
 
 [MANDATORY]
-
 Users must not submit material they do not have the right to use
-where such submission would violate applicable law or rights.
+when doing so would violate applicable law or another person's
+rights.
 
 [MANDATORY]
+Weird Stuff must not claim ownership of User content merely because
+the User submitted it, unless an applicable agreement expressly
+provides otherwise.
 
-Weird Stuff must not claim ownership of User content solely
-because the User submitted it unless an applicable agreement
-expressly provides otherwise.
-
-[PENDING]
-
-The exact license, if any, granted by Users to Weird Stuff must
-be established separately for each service that accepts User
-content.
+Any license granted by Users to Weird Stuff must be defined by the
+relevant service or agreement.
 
 ============================================================
 16. LICENSE GRANTS
-==================
+============================================================
 
 When Weird Stuff grants a User a license to software or other
 intellectual property:
 
 [MANDATORY]
+The scope of the license is determined by the applicable license
+terms.
 
-The scope of the license must be determined by the applicable
-license terms.
-
-Possible license characteristics may include:
+Possible characteristics include:
 
 * Personal use.
 * Commercial use.
@@ -378,19 +322,16 @@ Possible license characteristics may include:
 * Territory.
 * Platform restrictions.
 
-[PENDING]
-
-Product-specific license terms.
+Product-specific license terms remain to be defined where needed.
 
 ============================================================
 17. UNAUTHORIZED COPYING
-========================
+============================================================
 
 [MANDATORY]
-
 Users and members must not knowingly reproduce or distribute
-protected Weird Stuff material beyond the permissions granted by
-the applicable license or law.
+protected Weird Stuff material beyond the permissions granted by the
+applicable license or law.
 
 This may include:
 
@@ -403,89 +344,73 @@ This may include:
 
 ============================================================
 18. REVERSE ENGINEERING
-=======================
+============================================================
 
-[PENDING]
-
-The final policy regarding reverse engineering, decompilation,
-disassembly, or modification must be defined separately for each
-product and reviewed against applicable law.
+The final rules concerning reverse engineering, decompilation,
+disassembly, and modification must be defined for each product and
+reviewed against applicable law.
 
 [MANDATORY]
-
 Nothing in this Policy is intended to restrict rights that cannot
 legally be restricted.
 
 ============================================================
 19. INTELLECTUAL PROPERTY INFRINGEMENT
-======================================
+============================================================
 
-If Weird Stuff receives a credible report that content, code,
+If Weird Stuff receives a credible report that code, content,
 design, or another asset may infringe third-party rights:
 
 [MANDATORY]
-
 The relevant material must be reviewed.
 
-[MANDATORY]
-
-Appropriate temporary or permanent measures may be considered
-where legally and operationally justified.
-
-Possible measures may include:
+Appropriate measures may be considered where legally and
+operationally justified, including:
 
 * Investigation.
 * Temporary removal.
 * Replacement.
 * License verification.
 * Contact with the rights holder.
-* Correction of attribution.
+* Attribution correction.
 * Legal review.
 
 ============================================================
 20. REPORTING INFRINGEMENT
-==========================
+============================================================
 
-[PENDING]
-
-Official intellectual property contact:
-
+Official intellectual-property contact:
 ---
 
 Email:
-
 ---
 
 Website:
-
 ---
 
 ============================================================
 21. PROOF OF RIGHTS
-===================
+============================================================
 
 [RECOMMENDED]
-
 For important third-party material, Weird Stuff should retain
-reasonable evidence showing:
+reasonable evidence of:
 
 * Source.
 * License.
-* Purchase or authorization, where applicable.
+* Purchase or authorization where applicable.
 * Attribution requirements.
 * Relevant terms.
 
 [MANDATORY]
-
 Where licensing documentation is required for lawful use,
 reasonable records must be maintained.
 
 ============================================================
 22. INTELLECTUAL PROPERTY INVENTORY
-===================================
+============================================================
 
 [RECOMMENDED]
-
 Weird Stuff should maintain an internal inventory of important
 intellectual property, including where relevant:
 
@@ -501,49 +426,44 @@ intellectual property, including where relevant:
 
 ============================================================
 23. DOMAINS AND DIGITAL IDENTIFIERS
-===================================
+============================================================
 
 Domains and official digital identifiers may form part of Weird
 Stuff's business identity.
 
 [MANDATORY]
-
-Official domains and account identifiers must not knowingly be
+Official domains and important account identifiers must not be
 transferred, disclosed, or modified without authorization.
 
 [MANDATORY]
-
-Access credentials for important domains and digital identity
-systems must be protected.
+Credentials for important domains and digital identity systems must
+be protected.
 
 ============================================================
 24. PUBLICATION
-===============
+============================================================
 
 [MANDATORY]
-
-Before publishing intellectual property belonging to another
-party, Weird Stuff must verify that the publication is permitted.
+Before publishing intellectual property belonging to another party,
+Weird Stuff must verify that publication is permitted.
 
 [MANDATORY]
-
-Required attribution or license notices must be included when
+Required attribution and license notices must be included where
 applicable.
 
 [RECOMMENDED]
-
-Major publications should be reviewed before release.
+Major publications should receive an appropriate review before
+release.
 
 ============================================================
 25. ENFORCEMENT
-===============
+============================================================
 
 [MANDATORY]
+Violations of this Policy may result in internal action appropriate
+to the circumstances.
 
-Violations of this Policy may result in internal action
-appropriate to the circumstances.
-
-Potential actions may include:
+Possible measures include:
 
 * Removal of unauthorized material.
 * Access restriction.
@@ -555,7 +475,7 @@ Potential actions may include:
 
 ============================================================
 26. RELATIONSHIP WITH OTHER POLICIES
-====================================
+============================================================
 
 This Policy complements:
 
@@ -568,21 +488,18 @@ This Policy complements:
 * Custom Applications Policy.
 
 [MANDATORY]
-
-Where intellectual property rights are governed by a specific
-license or contract, that license or contract must be respected.
+Specific licenses and contracts governing intellectual property must
+be respected.
 
 ============================================================
 27. POLICY UPDATES
-==================
+============================================================
 
 [MANDATORY]
-
-This Policy must be reviewed when there are significant changes
-to:
+This Policy must be reviewed when there are significant changes to:
 
 * Product licensing.
-* Intellectual property ownership.
+* Intellectual-property ownership.
 * Open-source use.
 * Custom application arrangements.
 * Branding.
@@ -592,30 +509,29 @@ Material revisions must receive an appropriate version number.
 
 ============================================================
 28. LEGAL LIMITATION
-====================
+============================================================
 
 Nothing in this Policy is intended to:
 
 * Transfer ownership merely by declaration.
 * Override applicable law.
-* Eliminate non-waivable legal rights.
+* Remove non-waivable legal rights.
 * Create ownership where no legal basis exists.
-* Replace a necessary intellectual property agreement.
+* Replace a necessary intellectual-property agreement.
 
 [MANDATORY]
-
 Where ownership or licensing requires a formal agreement, the
 appropriate agreement must be used.
 
 ============================================================
 29. DOCUMENT CONTROL
-====================
+============================================================
 
 Document:
 WEIRD STUFF — INTELLECTUAL PROPERTY POLICY
 
 Version:
-1.0
+1.1
 
 Status:
 DRAFT FOR LEGAL REVIEW
@@ -627,11 +543,11 @@ Effective Date:
 PENDING
 
 Last Updated:
-PENDING
+September 12, 2026
 
 Owner:
 Weird Stuff
 
 ============================================================
 END OF DOCUMENT
-===============
+============================================================
