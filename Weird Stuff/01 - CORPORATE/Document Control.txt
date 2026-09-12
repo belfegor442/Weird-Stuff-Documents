@@ -1,7 +1,7 @@
 WEIRD STUFF
 DOCUMENT CONTROL
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Effective Date: September 12, 2026
 Owner: Weird Stuff
@@ -11,39 +11,45 @@ Classification: INTERNAL
 1. PURPOSE
 ============================================================
 
-This document defines the mandatory control framework for Weird Stuff documentation.
+This document explains how Weird Stuff keeps its controlled documentation consistent, current, and traceable.
+
+The purpose is not to add unnecessary bureaucracy. It is to make it clear which document is current, what a document means, and when a change became effective.
 
 [MANDATORY]
-Controlled documents must have an identifiable title, version, status, owner, classification, and effective date when applicable.
+A controlled document must have an identifiable title, version, status, owner, classification, and effective date when an effective date is applicable.
 
 [MANDATORY]
-A superseded document must not be treated as the current authoritative version.
+A superseded document must not be presented or treated as the current authoritative version.
 
 ============================================================
 2. DOCUMENT STATUS
 ============================================================
 
 IN FORCE
-Currently authoritative and applicable.
+The document is currently approved and applicable.
 
 DRAFT FOR REVIEW
-Prepared for review and not yet authoritative.
+The document is being prepared or reviewed. It is not yet authoritative.
 
 PENDING
-Structure exists but required information or approval remains incomplete.
+The document structure exists, but required information, decisions, or approval are still missing.
 
 RETIRED
-No longer applicable and retained for historical reference.
+The document is no longer applicable but is being retained for reference.
 
 ARCHIVED
-Superseded or historical material retained under archive controls.
+The document is historical or superseded material retained under archive controls.
+
+A document's status is part of its meaning. The existence of a file in the repository does not, by itself, make that file an active policy.
 
 ============================================================
 3. VERSIONING
 ============================================================
 
+Versions exist to make meaningful changes identifiable. They are not intended to be changed merely because a file was opened or reformatted.
+
 [MANDATORY]
-Material changes require a new document version.
+A material change requires a new document version.
 
 [MANDATORY]
 The effective date must be updated when a new version enters into force.
@@ -56,42 +62,46 @@ Changes to legal documents must not be represented as legally effective until th
 ============================================================
 
 PUBLIC
-Approved for public distribution.
+Information approved for public distribution.
 
 INTERNAL
-For Weird Stuff personnel and authorized collaborators.
+Information intended for Weird Stuff personnel and authorized collaborators.
 
 RESTRICTED
-For specifically authorized recipients.
+Information available only to specifically authorized recipients.
 
 CONFIDENTIAL
 Information whose unauthorized disclosure could materially harm Weird Stuff, its users, members, or projects.
 
 RESERVED
-Information intentionally withheld from publication.
+Information intentionally withheld from publication, whether because it is private, undecided, or otherwise restricted.
 
 ============================================================
 5. CHANGE CONTROL
 ============================================================
 
+Documentation should be understandable not only when it is written, but also when someone needs to understand it months later.
+
 [MANDATORY]
 Important changes must be traceable through version control.
 
 [MANDATORY]
-Documents must not be silently replaced while retaining an obsolete version identifier.
+A document must not be silently replaced while retaining an obsolete version identifier.
 
 [RECOMMENDED]
-Material documents should include a revision history.
+Material documents should include a revision history when the history is useful for understanding their development.
 
 ============================================================
 6. ARCHIVE
 ============================================================
 
+Old documentation is not automatically useless. Historical versions can be important when investigating past decisions, understanding a product's development, or establishing what rules were previously in force.
+
 [MANDATORY]
 Superseded documents must be retained when historical traceability is required.
 
 [MANDATORY]
-Archived documents must not be presented as current policy.
+Archived documents must be clearly distinguishable from current policy and must not be presented as authoritative.
 
 ============================================================
 END OF DOCUMENT
