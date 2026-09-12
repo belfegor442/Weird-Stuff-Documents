@@ -1,41 +1,51 @@
 WEIRD STUFF
 DOCUMENTATION ROOT
 
-Version: 1.3
+Version: 1.4
 Status: IN FORCE
 Updated: September 12, 2026
 
 ABOUT THIS REPOSITORY
 
-This is the working documentation for Weird Stuff. It is where we keep the rules, decisions, product records, and public material that the team actually needs to refer back to.
+This is the working documentation for Weird Stuff. It is where the company keeps its rules, decisions, product records, operational standards, and public material.
 
-The goal is simple: if something matters to the company, there should be a clear place for it here. Documents should be understandable on their own, easy to find, and honest about what is decided and what is still being worked out.
+The structure is intentionally numbered so the main areas remain easy to find and sort consistently. Each major section has its own README.txt that acts as a local index.
 
-HOW THE REPOSITORY IS ORGANIZED
+DOCUMENT STRUCTURE
 
 01 - CORPORATE
-How Weird Stuff is organized, who is responsible for what, and how controlled documents are managed.
+Company structure, responsibilities, and document control.
 
 02 - LEGAL
-Terms, privacy, cookies, acceptable use, security, intellectual property, and custom application policies.
+Terms, policies, privacy, cookies, security, intellectual property, and custom-application rules.
 
 03 - PRODUCTS
-Product records, specifications, development notes, technical documentation, and release history.
+Product overviews, specifications, development records, technical documentation, and release history.
 
 04 - OPERATIONS
-Development, QA, design, infrastructure, and security procedures used to run projects.
+Design, development, infrastructure, QA, and security procedures.
 
 05 - BRAND
-Brand identity, design rules, and marketing guidance.
+Brand identity, design rules, and marketing standards.
 
 06 - PUBLIC
-Material intended to be published or shared outside the team.
+Material intended for external publication, including announcements, Discord communication, and website standards.
 
 07 - INTERNAL
-Team communication, meetings, and other internal working rules.
+Internal communication, meetings, and team rules.
 
 08 - ARCHIVE
-Older material that is no longer current but is kept for historical or operational reasons.
+Superseded, retired, and historical documentation.
+
+NAVIGATION
+
+Start here when you need to understand the repository as a whole.
+
+Use the README.txt inside a numbered section when you need to understand that section before opening individual documents.
+
+Use DOCUMENT INVENTORY.txt when you need the complete controlled-document list.
+
+For Monix technical material, use 03 - PRODUCTS/Monix/Documentation/README.txt as the technical documentation index.
 
 DOCUMENT STATUS
 
@@ -65,6 +75,6 @@ Old documents are not deleted just because they are old. When historical retenti
 
 DOCUMENT INVENTORY
 
-DOCUMENT INVENTORY.txt lists the controlled documentation expected in the repository. Keep it aligned with the actual structure.
+DOCUMENT INVENTORY.txt lists the controlled documentation expected in the repository. Keep it aligned with the actual structure, including section indexes.
 
 END OF DOCUMENT
