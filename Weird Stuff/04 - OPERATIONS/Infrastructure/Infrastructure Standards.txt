@@ -1,63 +1,73 @@
 WEIRD STUFF
 INFRASTRUCTURE STANDARDS
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Effective Date: September 12, 2026
 Owner: Weird Stuff
 Classification: INTERNAL
 
-1. SCOPE
+PURPOSE
 
-These standards apply to repositories, domains, DNS, email, communication services, build systems, hosting, storage, servers, and other organizational infrastructure.
+These standards set the basic expectations for the infrastructure Weird Stuff relies on: repositories, domains, DNS, email, communication services, build systems, hosting, storage, servers, and related services.
 
-2. ACCESS
+The goal is straightforward: infrastructure should be accessible to the people who need it, protected from unnecessary access, and changed in a way that can be understood and recovered when something goes wrong.
 
-[MANDATORY]
-Infrastructure access must be granted according to operational need.
-
-[MANDATORY]
-Administrative credentials must not be shared.
+1. ACCESS
 
 [MANDATORY]
-Access must be revoked when the associated need ends.
+Infrastructure access must be granted according to actual operational need. Having a role in the company does not automatically mean having administrative access to every service.
+
+[MANDATORY]
+Administrative credentials must not be shared between people.
+
+[MANDATORY]
+Access must be removed when the reason for that access ends, including when a person leaves a project or the company.
 
 [RECOMMENDED]
-Critical infrastructure should use multi-factor authentication where available.
+Critical infrastructure should use multi-factor authentication whenever the service supports it.
 
-3. CHANGES
-
-[MANDATORY]
-Material infrastructure changes must be traceable.
+2. CHANGES
 
 [MANDATORY]
-Production changes must be performed by authorized personnel.
+Material infrastructure changes must be traceable. The team should be able to identify what changed, who made the change, and why it was made.
+
+[MANDATORY]
+Changes to production infrastructure must be performed by authorized personnel.
 
 [RECOMMENDED]
-High-risk changes should have a rollback or recovery plan.
+High-risk changes should have a rollback or recovery plan before they are applied.
 
-4. SECRETS
-
-[MANDATORY]
-API keys, passwords, tokens, private keys, and similar secrets must be stored using appropriate secret-management controls.
+3. SECRETS
 
 [MANDATORY]
-Compromised credentials must be revoked or rotated as soon as reasonably possible.
+API keys, passwords, access tokens, private keys, and similar secrets must be kept using appropriate secret-management controls. They must not be placed in source code or public repositories.
 
-5. RECOVERY
+[MANDATORY]
+Credentials that are known or reasonably suspected to be compromised must be revoked or rotated as soon as reasonably possible.
+
+4. RECOVERY
 
 [MANDATORY]
 Critical information must have a reasonable recovery mechanism where technically possible.
 
 [PENDING]
-Production architecture.
+Formal production architecture.
 [PENDING]
-Hosting providers.
+Approved hosting providers.
 [PENDING]
 Infrastructure inventory.
 [PENDING]
-Backup schedule and retention.
+Backup schedule and retention requirements.
 [PENDING]
-RPO/RTO requirements.
+Formal RPO/RTO requirements.
+
+5. RESPONSIBILITY
+
+[MANDATORY]
+Infrastructure owners must keep access and configuration information reasonably current.
+
+[RECOMMENDED]
+Important infrastructure decisions should be documented in a way that another authorized team member can understand without relying entirely on personal knowledge.
 
 END OF DOCUMENT
