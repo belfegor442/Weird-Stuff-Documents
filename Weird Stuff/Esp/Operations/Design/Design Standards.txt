@@ -1,0 +1,52 @@
+WEIRD STUFF
+DESIGN STANDARDS
+
+Version: 1.0
+Status: IN FORCE
+Effective Date: September 12, 2026
+Owner: Weird Stuff
+Classification: INTERNAL
+
+1. PURPOSE
+
+These standards define the baseline requirements for product and communication design.
+
+2. DESIGN PRINCIPLES
+
+[MANDATORY]
+Design must serve a defined product, communication, or usability objective.
+
+[MANDATORY]
+Design assets must not intentionally misrepresent product capabilities or status.
+
+[MANDATORY]
+Brand assets must follow the approved Weird Stuff brand guidelines.
+
+[RECOMMENDED]
+Interfaces should prioritize readability, consistency, accessibility, and predictable interaction.
+
+3. PRODUCT UI
+
+[MANDATORY]
+Critical actions must have distinguishable states and appropriate feedback.
+
+[MANDATORY]
+Error states must communicate enough information for the user to understand the problem without exposing secrets.
+
+[RECOMMENDED]
+Repeated interface patterns should behave consistently across a product.
+
+4. ASSETS
+
+[MANDATORY]
+Third-party assets must be used according to their applicable licenses.
+
+[MANDATORY]
+Final assets must be stored in an authorized repository or asset system.
+
+[PENDING]
+Formal asset naming convention.
+[PENDING]
+Formal design review workflow.
+
+END OF DOCUMENT
