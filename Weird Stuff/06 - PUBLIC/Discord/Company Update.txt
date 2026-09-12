@@ -1,15 +1,15 @@
 WEIRD STUFF
 PUBLIC DISCORD COMPANY UPDATE STANDARD
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Classification: PUBLIC
 
-1. PURPOSE
+PURPOSE
 
-This document defines the baseline for official Weird Stuff company updates distributed through Discord.
+This document defines the baseline for official Weird Stuff company updates published through Discord. The aim is to keep public updates clear, accurate, and safe to publish.
 
-2. REQUIREMENTS
+1. REQUIREMENTS
 
 [MANDATORY]
 Official updates must be truthful and attributable to Weird Stuff.
@@ -21,11 +21,14 @@ Confidential or restricted internal information must not be included.
 Product withdrawals, retirements, major releases, and significant organizational changes must be described accurately.
 
 [RECOMMENDED]
-Updates should state the affected product or area, current status, effective date where relevant, and the practical consequence for users or team members.
+Updates should identify the affected product or area, its current status, the effective date when relevant, and the practical consequence for users or team members.
 
-3. SECURITY
+2. SECURITY
 
 [MANDATORY]
 Credentials, tokens, private infrastructure information, and other secrets must never be published.
+
+[RECOMMENDED]
+When an update concerns a security or operational incident, it should communicate what users need to know without exposing information that could create additional risk.
 
 END OF DOCUMENT
