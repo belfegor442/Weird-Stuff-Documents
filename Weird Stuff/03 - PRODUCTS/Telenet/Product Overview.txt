@@ -1,25 +1,38 @@
 WEIRD STUFF
 TELENET — PRODUCT OVERVIEW
 
-Version: 1.0
+Version: 1.1
 Status: PENDING PRODUCT DEFINITION
 Owner: Weird Stuff
 Classification: INTERNAL
 
-This document is the controlled overview record for Telenet.
+ABOUT TELENET
+
+Telenet is currently a product placeholder. Its final purpose and scope have not been formally defined, so this record deliberately leaves those parts open instead of inventing details.
+
+WHAT IS STILL TO BE DECIDED
 
 [PENDING]
 Approved purpose.
+
 [PENDING]
 Lifecycle state.
+
 [PENDING]
 Supported platforms.
+
 [PENDING]
 Responsible team.
+
 [PENDING]
-Public description.
+Approved public description.
+
+PRODUCT STATUS
 
 [MANDATORY]
-Product status must be represented accurately.
+Telenet's status must be represented accurately wherever the product is documented or discussed publicly.
+
+[MANDATORY]
+Planned functionality must not be presented as existing functionality.
 
 END OF DOCUMENT
