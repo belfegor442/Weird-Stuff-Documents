@@ -1,675 +1,264 @@
 WEIRD STUFF
-MONIX
+MONIX — AI DOCUMENTATION
 
-AI DOCUMENTATION
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL / DEVELOPMENT
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+PURPOSE
 
-1. PURPOSE
-   ============================================================
+This document describes the intended role of artificial intelligence in Monix: what AI may do, what information it may receive, what it is allowed to influence, and where normal security and validation controls still apply.
 
-This document defines the intended role, architecture, security,
-privacy, behavior, and limitations of artificial intelligence
-functionality within Monix.
+AI functionality is still being developed. Nothing described as pending should be treated as a finished product feature.
 
-AI functionality may evolve during development and must not be
-considered final until explicitly defined and released.
+CURRENT SCOPE
 
-============================================================
-2. AI SCOPE
-===========
-
-The AI subsystem may provide assistance related to:
+AI may eventually assist with:
 
 * System information analysis.
 * Diagnostic interpretation.
-* Event analysis.
-* Log interpretation.
+* Event and log analysis.
 * Configuration assistance.
-* Troubleshooting assistance.
+* Troubleshooting.
 * Explanations of detected conditions.
-* Other approved Monix functionality.
+* Other approved Monix functions.
 
 [PENDING]
+Final AI feature set.
 
-Final AI feature set:
+PROCESSING MODEL
 
----
-
----
-
-============================================================
-3. AI OPERATING MODEL
-=====================
-
-Monix may support:
-
-* Local AI processing.
-* Remote AI processing.
-* Hybrid processing.
+Monix may eventually use local, remote, or hybrid AI processing.
 
 [PENDING]
-
-Current model:
-
----
+Current processing model.
 
 [PENDING]
-
-AI provider:
-
----
+AI provider.
 
 [PENDING]
+AI model.
 
-AI model:
+DATA FLOW
 
----
-
-============================================================
-4. AI DATA FLOW
-===============
-
-Where AI processing is used, the conceptual flow may be:
+When AI is used, the intended flow is:
 
 MONIX DATA
-|
-v
-DATA SELECTION
-|
-v
-SANITIZATION
-|
-v
-AI INPUT
-|
-v
-AI PROCESSING
-|
-v
-AI OUTPUT
-|
-v
-VALIDATION
-|
-v
-USER
+-> DATA SELECTION
+-> SANITIZATION
+-> AI PROCESSING
+-> OUTPUT
+-> VALIDATION
+-> USER
 
 [MANDATORY]
-
-Only information necessary for the intended AI function should be
-provided to the AI subsystem.
-
-============================================================
-5. LOCAL AI
-===========
-
-If AI processing is performed locally:
+Only information necessary for the requested AI function may be supplied.
 
 [MANDATORY]
+AI processing must respect the same security and privacy boundaries as the rest of Monix.
 
-Information processed locally must remain on the device unless
-another feature explicitly transmits it externally.
+LOCAL AND REMOTE PROCESSING
 
-[MANDATORY]
+If processing is local, information should remain on the device unless another feature explicitly sends it elsewhere.
 
-Local AI functionality must respect the same security boundaries
-as other Monix subsystems.
-
-============================================================
-6. REMOTE AI
-============
-
-If an external AI service is used:
+If an external provider is used, transmission must have a legitimate purpose and must follow the applicable privacy and security requirements.
 
 [MANDATORY]
-
-Data must not be transmitted to the external provider without an
-appropriate purpose and authorization.
-
-[MANDATORY]
-
-Sensitive information must not be transmitted unnecessarily.
-
-[MANDATORY]
-
-External AI processing must comply with the applicable privacy
-requirements.
+Sensitive information must not be sent to an external provider unnecessarily.
 
 [PENDING]
+Remote provider and data-retention requirements.
 
-Remote provider:
+SENSITIVE INFORMATION
 
----
-
-============================================================
-7. AI INPUTS
-============
-
-Possible AI inputs may include:
-
-* User-provided questions.
-* Selected logs.
-* Selected monitoring information.
-* Diagnostic information.
-* Configuration information.
-* Other approved data.
-
-[MANDATORY]
-
-AI inputs must be limited to the scope required for the requested
-operation.
-
-============================================================
-8. SENSITIVE INFORMATION
-========================
-
-Potentially sensitive information may include:
+Potentially sensitive data includes:
 
 * Passwords.
-* API keys.
-* Authentication tokens.
+* API keys and tokens.
 * Private keys.
 * Personal data.
-* Internal system paths.
 * Confidential logs.
+* Internal paths.
 * Security-sensitive information.
 
 [MANDATORY]
-
-Secrets must not intentionally be provided to an AI subsystem
-unless strictly required, authorized, and appropriately protected.
+Secrets must not intentionally be supplied to AI unless they are genuinely required, authorized, and appropriately protected.
 
 [MANDATORY]
-
-AI functionality must not be used as a justification for
-unnecessary collection or disclosure of sensitive information.
-
-============================================================
-9. AI OUTPUT
-============
-
-AI output may include:
-
-* Explanations.
-* Recommendations.
-* Summaries.
-* Diagnostic hypotheses.
-* Suggested actions.
-* Natural-language interpretations.
-
-[MANDATORY]
-
-AI-generated information must not automatically be treated as
-verified system information.
-
-[MANDATORY]
-
-AI output must not silently override authoritative system
-measurements or deterministic security results.
-
-============================================================
-10. HALLUCINATIONS AND INCORRECT OUTPUT
-=======================================
-
-AI systems may produce inaccurate, incomplete, or misleading
-information.
-
-[MANDATORY]
-
-Monix must not present uncertain AI output as a guaranteed fact.
-
-[RECOMMENDED]
-
-Important recommendations should be accompanied by enough context
-for the User to verify the underlying information.
-
-============================================================
-11. SECURITY DECISIONS
-======================
-
-AI may assist with security analysis.
-
-[MANDATORY]
-
-AI output must not independently authorize high-impact security
-operations.
-
-[MANDATORY]
-
-Critical actions such as process termination, isolation, SCRAM
-activation, or other high-impact operations must be controlled by
-deterministic authorization and validation mechanisms.
-
-============================================================
-12. AI AND MONITORING
-=====================
-
-AI may interpret monitoring information.
-
-Example:
-
-MONITORING
-->
-CPU / RAM / GPU / TEMP / PROCESS DATA
-->
-AI ANALYSIS
-->
-EXPLANATION
-
-[MANDATORY]
-
-AI interpretation must remain distinguishable from the underlying
-measured telemetry.
-
-============================================================
-13. AI AND LOGGING
-==================
-
-AI may analyze selected logs.
-
-[MANDATORY]
-
-Only logs necessary for the requested analysis should be supplied.
-
-[MANDATORY]
-
-Secrets must be filtered or protected before transmission to an
-external provider.
-
-[RECOMMENDED]
-
-Sensitive values should be redacted before AI processing.
-
-============================================================
-14. AI AND CONFIGURATION
-========================
-
-AI may suggest configuration changes.
-
-[MANDATORY]
-
-AI-generated configuration recommendations must not automatically
-be applied to security-critical settings.
-
-[MANDATORY]
-
-Configuration changes must still pass the normal validation
-pipeline.
-
-============================================================
-15. AI AND SNAPSHOTS
-====================
-
-AI may analyze selected snapshot data.
-
-[MANDATORY]
-
-Only relevant snapshot information should be provided.
-
-[MANDATORY]
-
-Snapshot contents must continue to follow the applicable privacy
-and security requirements during AI processing.
-
-============================================================
-16. AI ACTIONS
-==============
-
-AI functionality may suggest actions such as:
-
-* Restarting a feature.
-* Changing a configuration.
-* Investigating an event.
-* Running a diagnostic.
-* Adjusting a non-critical setting.
-
-[MANDATORY]
-
-AI-generated suggestions must not automatically be treated as
-authorized actions.
-
-[MANDATORY]
-
-High-impact operations require independent validation and
-authorization.
-
-============================================================
-17. USER CONTROL
-================
-
-[PENDING]
-
-AI enable / disable mechanism:
-
----
-
-[RECOMMENDED]
-
-Users should be able to determine when AI assistance is active.
-
-============================================================
-18. AI DISCLOSURE
-=================
-
-[MANDATORY]
-
-User-facing AI functionality must be identifiable as AI-generated
-where failure to identify it could reasonably mislead the User.
-
-============================================================
-19. AI PRIVACY
-==============
-
-[MANDATORY]
-
-AI processing involving personal data must comply with the
-applicable Privacy Policy and data protection requirements.
-
-[PENDING]
-
-AI data retention:
-
----
-
-[PENDING]
-
-AI provider data retention:
-
----
-
-[PENDING]
-
-Training or secondary use of User data by external providers:
-
----
-
-============================================================
-20. AI LOGGING
-==============
-
-AI operations may generate internal logs.
-
-Possible information includes:
-
-* Request identifier.
-* Feature used.
-* Processing result.
-* Error state.
-* Provider failure.
-
-[MANDATORY]
-
-AI logs must not intentionally contain secrets.
-
-[RECOMMENDED]
-
-AI requests and responses should be logged only where there is a
-legitimate diagnostic or operational reason.
-
-============================================================
-21. AI FAILURE MODES
-====================
-
-AI functionality may fail because of:
-
-* Provider outage.
-* Model error.
-* Invalid input.
-* Network failure.
-* Resource exhaustion.
-* Local model failure.
-* Configuration failure.
-
-[MANDATORY]
-
-AI failure must not prevent unrelated Monix functionality from
-operating unless the AI functionality is required for that
-function.
-
-============================================================
-22. OFFLINE OPERATION
-=====================
-
-[PENDING]
-
-Offline AI support:
-
----
-
-[MANDATORY]
-
-If the product claims to operate without network access for a
-specific AI function, that behavior must accurately match the
-implementation.
-
-============================================================
-23. EXTERNAL PROVIDER SECURITY
-==============================
-
-If an external AI provider is used:
-
-[MANDATORY]
-
-The provider must be evaluated according to the applicable
-security and privacy requirements.
-
-Relevant considerations may include:
-
-* Data handling.
-* Encryption.
-* Authentication.
-* Retention.
-* Sub-processors.
-* International transfers.
-* Security incidents.
-
-============================================================
-24. PROMPT INJECTION
-====================
-
-AI functionality may process text originating from Users, logs,
-files, or other sources.
-
-[MANDATORY]
-
-Untrusted text must not automatically be treated as trusted
-instructions for privileged Monix operations.
-
-[MANDATORY]
-
-AI-generated instructions must not bypass normal authorization
-controls.
-
-============================================================
-25. TOOL USE
-============
-
-If the AI subsystem is capable of invoking tools or actions:
-
-[MANDATORY]
-
-Tool access must be explicitly defined.
-
-[MANDATORY]
-
-Each tool must have an appropriate authorization boundary.
-
-[MANDATORY]
-
-The AI must not gain privileges merely because it generated a
-request to use a tool.
-
-[PENDING]
-
-AI-enabled tools:
-
----
-
----
-
-============================================================
-26. AI OUTPUT VALIDATION
-========================
-
-Where AI output can influence product behavior:
+AI functionality must never be used as an excuse to collect or disclose unnecessary sensitive information.
 
 AI OUTPUT
-->
-VALIDATION
-->
-POLICY CHECK
-->
-AUTHORIZATION
-->
-EXECUTION
+
+AI may produce explanations, summaries, recommendations, diagnostic hypotheses, or suggested actions.
 
 [MANDATORY]
-
-Validation must occur before AI output is converted into an
-action affecting protected resources.
-
-============================================================
-27. AI PERFORMANCE
-==================
-
-AI processing may consume:
-
-* CPU.
-* RAM.
-* GPU.
-* Network bandwidth.
-* Storage.
+AI output must remain distinguishable from verified telemetry and other authoritative system information.
 
 [MANDATORY]
+An AI response must not silently override deterministic measurements, security results, or established configuration rules.
 
-AI functionality must not intentionally create uncontrolled
-resource consumption.
+[MANDATORY]
+Uncertain or potentially incorrect AI output must not be presented as guaranteed fact.
+
+SECURITY DECISIONS
+
+AI may assist with security analysis, but it is not an authorization mechanism.
+
+[MANDATORY]
+AI must not independently authorize high-impact operations such as process termination, isolation, SCRAM activation, or changes to protected resources.
+
+High-impact actions must pass the normal deterministic validation and authorization path.
+
+MONITORING AND LOGGING
+
+AI may interpret selected monitoring data such as CPU, RAM, GPU, temperature, process, or event information.
+
+[MANDATORY]
+The original telemetry must remain distinguishable from the AI interpretation of that telemetry.
+
+AI may also analyze selected logs.
+
+[MANDATORY]
+Only the logs needed for the requested analysis should be supplied.
+
+[MANDATORY]
+Secrets must be filtered or protected before information is sent to an external provider.
+
+CONFIGURATION AND ACTIONS
+
+AI may suggest configuration changes, diagnostics, investigations, or other actions.
+
+[MANDATORY]
+AI suggestions are recommendations, not authorization.
+
+[MANDATORY]
+Configuration changes must still pass the normal Monix validation pipeline.
+
+[MANDATORY]
+Security-critical settings and high-impact operations must never be changed solely because an AI model requested it.
+
+USER CONTROL AND DISCLOSURE
+
+[PENDING]
+Final mechanism for enabling and disabling AI assistance.
 
 [RECOMMENDED]
-
-Expensive AI processing should be isolated from critical UI
-operations where practical.
-
-============================================================
-28. AI AVAILABILITY
-===================
-
-AI functionality may depend on external or local resources.
+Users should be able to tell when AI assistance is active.
 
 [MANDATORY]
+User-facing AI output must be identifiable as AI-generated whenever failing to identify it could reasonably mislead the User.
 
-Failure of AI services must be handled without falsely reporting
-successful AI processing.
+PROMPT INJECTION AND UNTRUSTED INPUT
 
-============================================================
-29. AI TESTING
-==============
+AI may process text from users, logs, files, or other untrusted sources.
+
+[MANDATORY]
+Untrusted text must never automatically become a trusted instruction for privileged Monix operations.
+
+[MANDATORY]
+AI-generated instructions must not bypass authentication, authorization, policy checks, or other security controls.
+
+TOOL USE
+
+If AI is eventually allowed to invoke tools or perform actions, each tool must have an explicit authorization boundary.
+
+[MANDATORY]
+Generating a request for a tool must not grant the AI additional privileges.
+
+[PENDING]
+AI-enabled tools.
+
+AI OUTPUT VALIDATION
+
+Any AI output capable of influencing product behavior must pass through the normal control path:
+
+AI OUTPUT
+-> VALIDATION
+-> POLICY CHECK
+-> AUTHORIZATION
+-> EXECUTION
+
+[MANDATORY]
+No protected action may skip this process merely because the request originated from AI.
+
+FAILURE AND AVAILABILITY
+
+AI may fail because of provider outages, model errors, invalid input, network problems, local model failures, configuration errors, or resource exhaustion.
+
+[MANDATORY]
+An AI failure must not be reported as successful processing.
+
+[MANDATORY]
+AI failures must not unnecessarily prevent unrelated Monix functionality from operating.
+
+[PENDING]
+Offline AI support.
+
+PERFORMANCE
+
+AI processing may consume CPU, RAM, GPU, network bandwidth, and storage.
+
+[MANDATORY]
+AI functionality must not create uncontrolled resource consumption.
+
+[RECOMMENDED]
+Expensive AI processing should be kept away from critical UI operations where practical.
+
+PRIVACY AND EXTERNAL PROVIDERS
+
+AI processing involving personal data must follow the applicable Weird Stuff Privacy Policy and data-protection requirements.
+
+Where an external provider is used, Weird Stuff must consider its data handling, encryption, authentication, retention, subprocessors, international transfers, and security practices.
+
+[PENDING]
+AI data retention.
+
+[PENDING]
+Provider retention.
+
+[PENDING]
+Training or secondary use of User data by external providers.
+
+TESTING
 
 AI functionality should be tested for:
 
-* Incorrect output.
+* Incorrect or incomplete output.
 * Missing context.
-* Invalid input.
-* Sensitive data leakage.
+* Sensitive-data leakage.
 * Prompt injection.
 * Tool misuse.
 * Unauthorized actions.
-* Provider failures.
-* Network failures.
+* Provider and network failures.
 * Resource exhaustion.
 * Recovery behavior.
 
 [MANDATORY]
+AI must not be capable of bypassing mandatory security controls through normal Monix functionality.
 
-AI must not be capable of bypassing mandatory security controls
-through normal user-facing functionality.
+KNOWN LIMITATIONS
 
-============================================================
-30. AI LIMITATIONS
-==================
-
-The following limitations may apply:
-
-* AI output may be inaccurate.
-* AI output may be incomplete.
-* AI may misunderstand context.
-* AI may provide an incorrect diagnosis.
-* AI may depend on incomplete telemetry.
+AI output may be inaccurate, incomplete, or based on incomplete telemetry. It may misunderstand context or provide an incorrect diagnosis.
 
 [MANDATORY]
+These limitations must not be hidden when they materially affect the reliability of an AI result.
 
-These limitations must not be concealed when they are relevant
-to the reliability of the result.
-
-============================================================
-31. PUBLIC CLAIMS
-=================
+PUBLIC CLAIMS
 
 [MANDATORY]
+Weird Stuff must not claim that Monix's AI guarantees correct diagnosis, complete security detection, or infallible decisions unless those claims are demonstrably supported.
 
-Weird Stuff must not make claims that Monix's AI can guarantee
-correct diagnosis, complete security detection, or infallible
-decision-making unless such claims are demonstrably supported.
+CURRENT STATUS
 
-============================================================
-32. AI CONFIGURATION
-====================
-
-Possible settings include:
-
-* AI enabled / disabled.
-* Provider.
-* Model.
-* Local / remote mode.
-* Data-sharing behavior.
-* Response limits.
-* Processing options.
-
-Detailed settings are defined in the Monix Configuration
-Documentation.
-
-============================================================
-33. AI SECURITY RESPONSIBILITY
-==============================
-
-[PENDING]
-
-AI subsystem owner:
-
----
-
-[PENDING]
-
-AI security reviewer:
-
----
-
-============================================================
-34. CURRENT STATUS
-==================
-
-AI functionality is considered:
-
+AI functionality:
 IN DEVELOPMENT / NOT FINAL
 
 [PENDING]
+Current implementation status.
 
-Current implementation status:
-
----
-
-============================================================
-35. RELATED DOCUMENTATION
-=========================
-
-Related documents:
+RELATED DOCUMENTATION
 
 * Monix Product Overview.
 * Monix Product Specification.
@@ -683,15 +272,13 @@ Related documents:
 * Weird Stuff Privacy Policy.
 * Weird Stuff Security Policy.
 
-============================================================
-36. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — AI DOCUMENTATION
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL / DEVELOPMENT
@@ -703,8 +290,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
