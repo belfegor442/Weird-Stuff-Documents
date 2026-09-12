@@ -1,0 +1,39 @@
+WEIRD STUFF
+BRAND GUIDELINES
+
+Version: 1.0
+Status: IN FORCE
+Effective Date: September 12, 2026
+Owner: Weird Stuff
+Classification: INTERNAL
+
+1. BRAND IDENTITY
+
+Weird Stuff is presented as an independent software studio.
+
+[MANDATORY]
+The Weird Stuff name and logo must not be altered in a way that falsely represents an official Weird Stuff communication.
+
+2. VOICE
+
+Public communication should be clear, direct, technically credible, and consistent.
+
+[MANDATORY]
+Marketing must not knowingly make false claims about products, security, performance, availability, or capabilities.
+
+3. VISUAL ASSETS
+
+[MANDATORY]
+Approved logos and assets must be used where an official identity is required.
+
+[MANDATORY]
+Third-party assets must comply with their applicable licenses.
+
+[PENDING]
+Formal color palette.
+[PENDING]
+Formal typography specification.
+[PENDING]
+Logo spacing and minimum-size rules.
+
+END OF DOCUMENT
