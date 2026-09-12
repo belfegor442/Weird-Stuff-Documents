@@ -1,11 +1,15 @@
 WEIRD STUFF
 ACCESS CONTROL
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Effective Date: September 12, 2026
 Owner: Weird Stuff
 Classification: RESTRICTED
+
+PURPOSE
+
+Access to Weird Stuff systems and information should follow a simple rule: people receive the permissions they need for their work, and no more than that without a clear reason.
 
 1. PRINCIPLES
 
@@ -13,7 +17,7 @@ Classification: RESTRICTED
 Access must be based on operational need.
 
 [MANDATORY]
-Permissions must be limited to what is reasonably necessary.
+Permissions must be limited to what is reasonably necessary for the person's responsibilities.
 
 [MANDATORY]
 Credentials must not be shared.
@@ -23,13 +27,13 @@ Access must be revoked when the operational need ends.
 
 2. ROLE-BASED ACCESS
 
-Access should correspond to the person's actual role and assigned responsibilities.
+Access should match the person's actual role and assigned responsibilities rather than a generic assumption about their position.
 
 [MANDATORY]
-A role change requires an access review.
+A role change requires an access review so that permissions can be added, removed, or adjusted as appropriate.
 
 [MANDATORY]
-Termination or removal requires prompt revocation of applicable access.
+Termination or removal from a relevant responsibility requires prompt revocation of applicable access.
 
 3. ADMINISTRATIVE ACCESS
 
@@ -37,7 +41,7 @@ Termination or removal requires prompt revocation of applicable access.
 Administrative access must receive stronger protection than ordinary access.
 
 [RECOMMENDED]
-Multi-factor authentication should be enabled on critical accounts where available.
+Multi-factor authentication should be enabled on critical accounts whenever available.
 
 [RECOMMENDED]
 Critical permissions should be reviewed periodically.
