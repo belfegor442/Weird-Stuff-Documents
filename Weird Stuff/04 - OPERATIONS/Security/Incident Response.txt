@@ -1,17 +1,19 @@
 WEIRD STUFF
 INCIDENT RESPONSE
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Effective Date: September 12, 2026
 Owner: Weird Stuff
 Classification: RESTRICTED
 
-1. PURPOSE
+PURPOSE
 
-This procedure defines the baseline response to security and major operational incidents.
+This procedure defines the basic response expected when Weird Stuff experiences a security incident or a major operational incident.
 
-2. INCIDENT TYPES
+The priority is to limit harm first, restore safe operation, and then understand what happened well enough to prevent the same problem from repeating.
+
+1. INCIDENT TYPES
 
 An incident may affect:
 
@@ -22,7 +24,7 @@ An incident may affect:
 * User security.
 * Organizational infrastructure.
 
-3. RESPONSE ORDER
+2. RESPONSE ORDER
 
 1. DETECT
 2. CONTAIN
@@ -32,7 +34,9 @@ An incident may affect:
 6. CORRECT
 7. PREVENT RECURRENCE
 
-4. MANDATORY ACTIONS
+The exact actions may vary with the incident, but containment and protection should not be delayed unnecessarily while waiting for a complete investigation.
+
+3. MANDATORY ACTIONS
 
 [MANDATORY]
 Significant incidents must be reported to the appropriate responsible person as soon as reasonably possible.
@@ -41,15 +45,15 @@ Significant incidents must be reported to the appropriate responsible person as 
 Known compromised credentials must be secured.
 
 [MANDATORY]
-Evidence relevant to understanding the incident should not be intentionally destroyed.
+Evidence relevant to understanding the incident must not be intentionally destroyed.
 
 [MANDATORY]
-Recovery actions must not knowingly create additional unacceptable security risk.
+Recovery actions must not knowingly create an additional unacceptable security risk.
 
-5. POST-INCIDENT
+4. POST-INCIDENT REVIEW
 
 [RECOMMENDED]
-Significant incidents should receive a post-incident review.
+Significant incidents should receive a post-incident review once the immediate situation is under control.
 
 The review should identify:
 
