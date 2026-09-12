@@ -1,20 +1,36 @@
 WEIRD STUFF
 DRAFTPAD — PRODUCT SPECIFICATION
 
-Version: 1.0
+Version: 1.1
 Status: RETIRED / HISTORICAL RECORD
 Classification: INTERNAL
+Last Updated: September 12, 2026
+Owner: Weird Stuff
 
-This document preserves the controlled specification record for DraftPad.
+PURPOSE
 
-[MANDATORY]
-Retired functionality must not be presented as currently supported.
+This document preserves the technical specification record for DraftPad. The project is retired, so this document is maintained as historical documentation rather than as a description of an actively supported product.
+
+CURRENT RECORD
 
 [PENDING]
 Final historical technical specification.
+
 [PENDING]
 Final archived version identifier.
+
 [PENDING]
 Retirement record.
+
+DOCUMENTATION RULES
+
+[MANDATORY]
+Retired functionality must not be presented as currently supported or actively maintained.
+
+[MANDATORY]
+Historical information must be clearly distinguished from current product information.
+
+[MANDATORY]
+Any future change to DraftPad's lifecycle status must be reflected in the controlled product documentation.
 
 END OF DOCUMENT
