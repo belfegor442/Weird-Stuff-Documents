@@ -1,47 +1,31 @@
 WEIRD STUFF
-MONIX
+MONIX — USER INTERFACE
 
-USER INTERFACE
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL / DEVELOPMENT
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+PURPOSE
 
-1. PURPOSE
-   ============================================================
+The Monix interface exists to make system information, diagnostics, security state, and controls understandable without hiding important information behind the visual style.
 
-This document defines the functional and presentation requirements
-of the Monix user interface.
+UI OBJECTIVES
 
-It describes the principal views, information hierarchy,
-interaction behavior, visual requirements, state presentation,
-accessibility considerations, and rules for displaying system and
-security information.
-
-============================================================
-2. UI OBJECTIVES
-================
-
-The Monix interface is intended to provide:
+The interface should provide:
 
 * Clear system information.
-* Fast access to important functionality.
-* Consistent navigation.
+* Predictable navigation.
 * Readable diagnostics.
 * Clear system states.
 * Distinguishable warnings and errors.
-* Controlled access to high-impact operations.
+* Controlled access to high-impact actions.
 * A consistent Weird Stuff visual identity.
 
-============================================================
-3. PRIMARY NAVIGATION
-=====================
+PRIMARY NAVIGATION
 
-The main Monix interface is organized around:
+The main structure is:
 
 LOG
 TASKS
@@ -49,26 +33,17 @@ USAGE
 AI
 SETTINGS
 
-Additional views may be added during development.
+Additional views may be added as the product develops.
 
 [MANDATORY]
-
-Every primary navigation item must lead to the functionality
-represented by its label.
+A navigation item must lead to the functionality represented by its label.
 
 [MANDATORY]
+Unavailable functionality must not be presented as fully operational.
 
-Unavailable functionality must not be presented as fully
-operational.
+INFORMATION HIERARCHY
 
-============================================================
-4. INTERFACE HIERARCHY
-======================
-
-The interface should prioritize information according to
-importance.
-
-Recommended hierarchy:
+The recommended priority is:
 
 1. Critical system or security state.
 2. Errors and warnings.
@@ -78,169 +53,74 @@ Recommended hierarchy:
 6. Secondary information.
 
 [MANDATORY]
+Critical information must not be intentionally hidden behind non-essential effects or controls.
 
-Critical information must not be intentionally hidden behind
-non-essential visual effects or controls.
+LOG VIEW
 
-============================================================
-5. LOG VIEW
-===========
+The LOG view displays application, monitoring, diagnostic, and security events.
 
-The LOG view displays application, monitoring, diagnostic, and
-security-related events.
-
-Possible elements include:
-
-* Event stream.
-* Timestamp.
-* Severity.
-* Source.
-* Event identifier.
-* Message.
-* Context.
-* Filters.
-* Search.
-* Clear or export controls where supported.
+It may include timestamps, severity, source, categories, messages, context, filters, search, and supported export controls.
 
 [MANDATORY]
-
-Log severity must be visually distinguishable.
+Severity must be visually distinguishable.
 
 [MANDATORY]
-
-The interface must not claim that an event is successful when
-the corresponding operation failed.
+The UI must not report an operation as successful when it failed.
 
 [RECOMMENDED]
+Important events should expose their source and severity without requiring the User to open unrelated screens.
 
-The User should be able to identify the source and severity of an
-important event without opening multiple unrelated screens.
+TASKS VIEW
 
-============================================================
-6. TASKS VIEW
-=============
-
-The TASKS view provides process and task information.
-
-Possible columns include:
-
-* Process name.
-* Process identifier.
-* CPU usage.
-* Memory usage.
-* GPU usage where available.
-* Status.
-* Executable path.
-* Security classification where supported.
+The TASKS view provides process information such as name, identifier, CPU and memory usage, GPU usage where available, status, executable path, and security classification where supported.
 
 [MANDATORY]
-
 Displayed values must correspond to available system data.
 
 [MANDATORY]
-
 Unavailable values must not be presented as valid measurements.
 
 [MANDATORY]
+Process actions require the appropriate authorization.
 
-Actions affecting a process must only be available when the
-relevant authorization exists.
+USAGE VIEW
 
-============================================================
-7. USAGE VIEW
-=============
+The USAGE view provides a high-level view of CPU, RAM, GPU, temperature, storage, and network activity.
 
-The USAGE view provides a high-level overview of resource
-consumption.
-
-Primary categories include:
-
-* CPU.
-* RAM.
-* GPU.
-* Temperature.
-* Storage.
-* Network.
-
-Possible presentation methods include:
-
-* Numeric values.
-* Progress indicators.
-* Graphs.
-* Status indicators.
-* Historical information.
+It may use numeric values, indicators, graphs, and historical information.
 
 [MANDATORY]
-
 Units must be clear.
 
 [MANDATORY]
+Displayed state must match the current available telemetry.
 
-The displayed state must match the currently available telemetry.
+AI VIEW
 
-============================================================
-8. AI VIEW
-==========
-
-The AI view provides AI-assisted features where implemented.
-
-Possible functionality includes:
-
-* Diagnostics.
-* Log analysis.
-* Monitoring interpretation.
-* Troubleshooting assistance.
-* Configuration suggestions.
+The AI view provides AI-assisted features where implemented, such as diagnostics, log analysis, monitoring interpretation, troubleshooting, and configuration suggestions.
 
 [MANDATORY]
-
-AI-generated information must be distinguishable from directly
-measured system information.
+AI-generated information must remain distinguishable from measured system information.
 
 [MANDATORY]
-
-AI-generated recommendations must not automatically bypass
-authorization or validation.
+AI recommendations must not bypass normal authorization or validation.
 
 [RECOMMENDED]
+AI-generated responses should be clearly identified as such.
 
-The UI should clearly identify when a response was generated by
-AI.
+SETTINGS VIEW
 
-============================================================
-9. SETTINGS VIEW
-================
-
-The SETTINGS view provides configuration controls.
-
-Possible categories include:
-
-* General.
-* Appearance.
-* Monitoring.
-* Logging.
-* Rendering.
-* Shaders.
-* Security.
-* Updates.
-* AI.
-* Diagnostics.
+Settings may include general, appearance, monitoring, logging, rendering, shaders, security, updates, AI, and diagnostics.
 
 [MANDATORY]
-
-Configuration controls must validate values before applying them
-where invalid values could cause unsafe or unstable behavior.
+Settings must validate values before applying them when invalid values could cause unsafe or unstable behavior.
 
 [MANDATORY]
+Security-critical settings must not be presented as ordinary cosmetic options when they have significant operational effects.
 
-Security-critical settings must not be presented as ordinary
-cosmetic options when they have significant operational effects.
+STATUS INDICATORS
 
-============================================================
-10. STATUS INDICATORS
-=====================
-
-Monix may use status indicators for:
+Monix may represent states such as:
 
 * Normal.
 * Information.
@@ -251,754 +131,289 @@ Monix may use status indicators for:
 * Disabled.
 * Loading.
 * Processing.
-
-[MANDATORY]
-
-Status indicators must accurately represent the associated state.
-
-[MANDATORY]
-
-The meaning of a status indicator must remain consistent across
-the application.
-
-============================================================
-11. COLOR AND VISUAL SIGNALS
-============================
-
-Color may be used to communicate:
-
-* Severity.
-* Status.
-* Selection.
-* Availability.
-* Interaction state.
-
-[MANDATORY]
-
-Critical information must not rely exclusively on color.
-
-[RECOMMENDED]
-
-Icons, labels, or other visual indicators should accompany
-important color-based status information.
-
-============================================================
-12. TYPOGRAPHY
-==============
-
-The Monix interface may use a distinctive typography system
-consistent with Weird Stuff branding.
-
-[PENDING]
-
-Primary font:
-
----
-
-[PENDING]
-
-Secondary font:
-
----
-
-[MANDATORY]
-
-Text used for critical diagnostics must remain readable at the
-supported display configurations.
-
-============================================================
-13. CRT / VHS VISUAL SYSTEM
-===========================
-
-Monix may use CRT- and VHS-inspired effects as part of its visual
-identity.
-
-Potential effects include:
-
-* Scanlines.
-* Screen curvature.
-* Bloom.
-* Noise.
-* Distortion.
-* Ghosting.
-* Color effects.
-* Bezel effects.
-* Other shader-based presentation effects.
-
-[MANDATORY]
-
-Visual effects must not prevent the User from reading critical
-information.
-
-[MANDATORY]
-
-Effects must not alter the underlying meaning of telemetry,
-logging, or security results.
-
-[RECOMMENDED]
-
-High-cost visual effects should have a configurable or reduced
-mode where practical.
-
-============================================================
-14. RENDERING FAILURE
-=====================
-
-If a visual effect or shader fails:
-
-[MANDATORY]
-
-The interface must not represent the failed effect as active.
-
-[RECOMMENDED]
-
-Monix should fall back to a valid rendering path where practical.
-
-============================================================
-15. NAVIGATION
-==============
-
-Navigation should provide predictable movement between primary
-views.
-
-[MANDATORY]
-
-A navigation action must not unintentionally execute a
-high-impact operation.
-
-[MANDATORY]
-
-Destructive or high-impact actions must not be triggered solely
-through accidental navigation where reasonable safeguards are
-possible.
-
-============================================================
-16. BUTTONS AND CONTROLS
-========================
-
-Controls may perform:
-
-* Navigation.
-* Configuration.
-* Refresh.
-* Diagnostics.
-* Export.
-* Security actions.
-* Process actions.
-
-[MANDATORY]
-
-A control must have behavior consistent with its label.
-
-[MANDATORY]
-
-High-impact controls must be distinguishable from ordinary
-controls.
-
-[RECOMMENDED]
-
-High-impact actions should provide an additional confirmation
-mechanism where accidental activation could have significant
-consequences.
-
-============================================================
-17. DESTRUCTIVE ACTIONS
-=======================
-
-Destructive or high-impact actions may include:
-
-* Terminating processes.
-* Disabling security-related functionality.
-* Resetting configuration.
-* Deleting stored information.
-* Activating emergency mechanisms.
-
-[MANDATORY]
-
-The User must be able to understand the nature of a high-impact
-action before execution where reasonably possible.
-
-[MANDATORY]
-
-The interface must not falsely describe a destructive action as
-non-destructive.
-
-============================================================
-18. SCRAM INTERFACE
-===================
-
-SCRAM requires explicit state presentation.
-
-The interface should identify:
-
-* Whether SCRAM is available.
-* Current mode.
-* Trigger state.
-* Authorization state.
-* Action state.
-* Result.
-
-[MANDATORY]
-
-TEST and REAL modes must be visually distinguishable.
-
-[MANDATORY]
-
-The interface must not display a false active state.
-
-[MANDATORY]
-
-A failed SCRAM operation must not be represented as successful.
-
-============================================================
-19. CONFIRMATIONS
-=================
-
-Confirmation may be used for high-impact operations.
-
-[MANDATORY]
-
-A confirmation prompt must describe the actual action that will
-be performed.
-
-[MANDATORY]
-
-Confirmation must not be presented when the underlying action
-has already occurred.
-
-[RECOMMENDED]
-
-Confirmation should identify the relevant target when doing so
-improves safety.
-
-============================================================
-20. DIALOGS
-===========
-
-Dialogs may be used for:
-
-* Errors.
-* Warnings.
-* Configuration.
-* Confirmation.
-* Information.
-* Security events.
-
-[MANDATORY]
-
-Critical errors must not be silently dismissed without an
-appropriate record where one is required.
-
-============================================================
-21. ERROR PRESENTATION
-======================
-
-Errors should provide:
-
-* What failed.
-* Relevant subsystem.
-* Severity.
-* Available next step.
-
-[MANDATORY]
-
-The UI must not claim recovery when recovery did not occur.
-
-[RECOMMENDED]
-
-Technical details may be available through a diagnostic view
-without overwhelming ordinary Users.
-
-============================================================
-22. LOADING STATES
-==================
-
-Long-running operations may display:
-
-* Loading.
-* Processing.
-* Compiling.
-* Updating.
-* Recovering.
-
-[MANDATORY]
-
-The UI must distinguish between an operation that is still
-running and one that has failed.
-
-============================================================
-23. EMPTY STATES
-================
-
-Empty states may occur when:
-
-* No events exist.
-* No processes were found.
-* No historical data exists.
-* A sensor is unavailable.
-* A feature is disabled.
-
-[MANDATORY]
-
-An empty state must not be represented as an error unless an
-actual error occurred.
-
-============================================================
-24. UNAVAILABLE DATA
-====================
-
-When a measurement is unavailable, the UI may use:
-
-* N/A.
-* Unavailable.
-* Unsupported.
-* Error.
 * Stale.
 
 [MANDATORY]
-
-An unavailable value must not be replaced by a fabricated
-numeric value.
-
-============================================================
-25. REFRESH AND LIVE DATA
-=========================
-
-Views that display live data may refresh periodically.
+A status indicator must accurately represent its associated state.
 
 [MANDATORY]
+The meaning of a status must remain consistent throughout the application.
 
-The UI must not imply that a value is live when it is known to
-be stale.
+COLOR AND VISUAL SIGNALS
+
+Color may communicate severity, status, selection, availability, and interaction state.
+
+[MANDATORY]
+Critical information must not rely exclusively on color.
 
 [RECOMMENDED]
+Important color-based states should also use labels, symbols, or another clear visual signal.
 
-A last-update indicator should be provided for important
-monitoring information where practical.
+TYPOGRAPHY
 
-============================================================
-26. RESPONSIVENESS
-==================
-
-The user interface should remain responsive while background
-operations occur.
-
-Potential background operations include:
-
-* Shader compilation.
-* Cache processing.
-* Monitoring.
-* Diagnostics.
-* Network requests.
-* Large log processing.
-
-[MANDATORY]
-
-An operation that can be performed asynchronously must not
-intentionally block critical UI functionality without a valid
-reason.
-
-============================================================
-27. PERFORMANCE
-===============
-
-UI performance may be affected by:
-
-* High-frequency log events.
-* Large process lists.
-* Graph rendering.
-* Shader effects.
-* Monitoring refresh rates.
-* Data processing.
-
-[MANDATORY]
-
-The UI must not intentionally create uncontrolled resource
-consumption.
-
-[RECOMMENDED]
-
-Large datasets should use virtualization, pagination, filtering,
-or another appropriate strategy where practical.
-
-============================================================
-28. ACCESSIBILITY
-=================
-
-[MANDATORY]
-
-Critical information must remain distinguishable without relying
-only on color.
-
-[MANDATORY]
-
-Interactive controls must remain understandable through their
-labels or other accessible descriptions where applicable.
-
-[RECOMMENDED]
-
-The interface should support readable scaling and reasonable
-contrast.
-
-============================================================
-29. RESPONSIVE LAYOUT
-=====================
-
-Monix may operate across different window sizes and display
-configurations.
-
-[MANDATORY]
-
-Essential controls and critical information must remain usable
-within supported window sizes.
+Monix may use a distinctive typography system consistent with Weird Stuff's visual identity.
 
 [PENDING]
-
-Minimum supported window size:
-
----
-
-============================================================
-30. DISPLAY SCALING
-===================
-
-Monix may support display scaling and high-DPI environments.
+Final primary and secondary fonts.
 
 [MANDATORY]
+Critical diagnostic text must remain readable on supported displays.
 
-Text and critical controls must remain usable when supported
-display scaling is enabled.
+CRT / VHS VISUAL SYSTEM
 
-============================================================
-31. KEYBOARD INPUT
-==================
+Monix may use CRT- and VHS-inspired presentation, including scanlines, curvature, bloom, noise, distortion, ghosting, color effects, bezel effects, and shader-based presentation.
+
+[MANDATORY]
+Visual effects must not make critical information unreadable.
+
+[MANDATORY]
+Visual effects must not alter the meaning of telemetry, logs, or security results.
+
+[RECOMMENDED]
+Expensive effects should have a reduced or configurable mode where practical.
+
+RENDERING FAILURE
+
+[MANDATORY]
+A failed visual effect or shader must not be presented as active.
+
+[RECOMMENDED]
+Monix should fall back to a valid rendering path where practical.
+
+NAVIGATION AND CONTROLS
+
+Navigation must remain predictable.
+
+[MANDATORY]
+Navigation must not unintentionally execute a high-impact operation.
+
+Controls must behave consistently with their labels.
+
+[MANDATORY]
+High-impact controls must be distinguishable from ordinary controls.
+
+[RECOMMENDED]
+Actions with significant consequences should require an additional confirmation where accidental activation is reasonably possible.
+
+DESTRUCTIVE ACTIONS
+
+High-impact actions may include process termination, security changes, configuration reset, deletion, or emergency-response operations.
+
+[MANDATORY]
+The User must be able to understand the nature of a high-impact action before execution where reasonably possible.
+
+[MANDATORY]
+The interface must not describe a destructive action as harmless.
+
+SCRAM INTERFACE
+
+The UI should show whether SCRAM is available, its current mode, trigger state, authorization state, action state, and result.
+
+[MANDATORY]
+TEST and REAL modes must be visually distinct.
+
+[MANDATORY]
+The UI must not display a false active state.
+
+[MANDATORY]
+A failed SCRAM operation must not be represented as successful.
+
+CONFIRMATIONS
+
+[MANDATORY]
+A confirmation prompt must describe the action that will actually be performed.
+
+[MANDATORY]
+Confirmation must not be shown as if an action were still pending after it has already occurred.
+
+[RECOMMENDED]
+The target of a high-impact action should be identified when doing so improves safety.
+
+ERROR PRESENTATION
+
+An error should communicate what failed, the relevant subsystem or category, its severity, and an available next step when one exists.
+
+[MANDATORY]
+The UI must not claim recovery when recovery did not occur.
+
+[RECOMMENDED]
+Technical diagnostic details should be available without overwhelming ordinary Users.
+
+LOADING AND EMPTY STATES
+
+Long-running operations may display loading, processing, compiling, updating, or recovering states.
+
+[MANDATORY]
+The UI must distinguish an operation that is still running from one that has failed.
+
+Empty states may mean that no data exists, no process was found, a sensor is unavailable, or a feature is disabled.
+
+[MANDATORY]
+An empty state must not be called an error unless an actual error occurred.
+
+UNAVAILABLE DATA
+
+The interface may use labels such as N/A, Unavailable, Unsupported, Error, or Stale.
+
+[MANDATORY]
+Unavailable measurements must not be replaced with fabricated numbers.
+
+LIVE DATA
+
+Views showing live data may refresh periodically.
+
+[MANDATORY]
+The UI must not imply that a value is current when it is known to be stale.
+
+[RECOMMENDED]
+Important live data should expose a last-update indication where practical.
+
+RESPONSIVENESS
+
+Background work may include shader compilation, cache processing, monitoring, diagnostics, network requests, and large log processing.
+
+[MANDATORY]
+Long-running work must not unnecessarily block critical UI functionality.
+
+PERFORMANCE
+
+UI performance can be affected by large logs, process lists, graphs, shader effects, monitoring frequency, and data processing.
+
+[MANDATORY]
+The UI must not intentionally create uncontrolled resource consumption.
+
+[RECOMMENDED]
+Large datasets should use filtering, virtualization, pagination, or another appropriate strategy where practical.
+
+ACCESSIBILITY
+
+[MANDATORY]
+Critical information must remain distinguishable without relying only on color.
+
+[MANDATORY]
+Interactive controls must remain understandable through their labels or equivalent descriptions where applicable.
+
+[RECOMMENDED]
+The interface should support readable scaling and reasonable contrast.
+
+RESPONSIVE LAYOUT
+
+[MANDATORY]
+Essential controls and critical information must remain usable within supported window sizes.
 
 [PENDING]
+Minimum supported window size.
 
-Keyboard shortcuts may be defined for commonly used functions.
-
-[MANDATORY]
-
-Keyboard shortcuts must not unintentionally trigger high-impact
-operations without appropriate safeguards.
-
-============================================================
-32. MOUSE AND POINTER INPUT
-===========================
-
-Controls must provide clear interaction states where applicable.
-
-Possible states include:
-
-* Normal.
-* Hover.
-* Focused.
-* Pressed.
-* Disabled.
+DISPLAY SCALING
 
 [MANDATORY]
+Text and critical controls must remain usable on supported high-DPI and scaled displays.
 
-A disabled control must not appear to have successfully executed
-its associated action.
+KEYBOARD AND POINTER INPUT
 
-============================================================
-33. NOTIFICATIONS
-=================
-
-Monix may provide notifications for:
-
-* Errors.
-* Security events.
-* Updates.
-* Long-running operations.
-* Important system conditions.
+[PENDING]
+Final keyboard shortcuts.
 
 [MANDATORY]
+Shortcuts must not unintentionally trigger high-impact actions without appropriate safeguards.
 
+Controls may expose normal, hover, focused, pressed, and disabled states.
+
+[MANDATORY]
+A disabled control must not appear to have successfully executed its action.
+
+NOTIFICATIONS
+
+Notifications may communicate errors, security events, updates, long-running operations, and important system conditions.
+
+[MANDATORY]
 Notifications must accurately describe their underlying event.
 
 [RECOMMENDED]
+Critical notifications should remain visible long enough to be understood.
 
-Critical notifications should remain visible long enough for the
-User to understand them.
+UI AND LOGGING
 
-============================================================
-34. UI AND LOGGING
-==================
-
-Important UI actions may produce log events.
-
-Examples include:
-
-* Configuration changes.
-* Security actions.
-* SCRAM actions.
-* Update events.
-* Error states.
+Important UI actions may produce log events, including configuration changes, security actions, SCRAM operations, and other meaningful state transitions.
 
 [MANDATORY]
+UI logging must follow the Monix Logging Documentation and must not expose secrets.
 
-Logging a UI action must not expose secrets.
-
-============================================================
-35. UI AND SECURITY
-===================
+UI AND SECURITY
 
 [MANDATORY]
-
-The interface must not provide a path around backend security
-controls.
+The interface must not provide a way around backend authorization, validation, or security controls.
 
 [MANDATORY]
+Hiding a control is not a substitute for enforcing its permission requirements in the underlying subsystem.
 
-Hiding a control visually does not constitute authorization.
-
-[MANDATORY]
-
-Security authorization must be enforced by the underlying logic,
-not solely by the UI.
-
-============================================================
-36. UI AND CONFIGURATION
-========================
-
-UI settings may update application configuration.
+UI STATES MUST BE REAL
 
 [MANDATORY]
+The interface must represent actual application state rather than an assumed or desired state.
 
-Changes must pass through the configuration validation system.
+Examples:
 
-[MANDATORY]
+A shader that failed to compile must not appear active.
 
-A UI error must not leave a partially invalid configuration
-without controlled recovery where practical.
+A measurement that is unavailable must not appear as zero merely because zero is easier to display.
 
-============================================================
-37. UI AND AI
-=============
+An update that failed must not appear installed.
 
-AI-generated information may appear alongside system telemetry.
+A security action that was rejected must not appear completed.
 
-[MANDATORY]
+TESTING
 
-The two sources must remain distinguishable.
-
-[MANDATORY]
-
-The UI must not imply that AI-generated text is a direct sensor
-measurement.
-
-============================================================
-38. UI AND MONITORING
-=====================
-
-Monitoring information must be rendered according to the current
-validated state.
-
-[MANDATORY]
-
-Stale, unavailable, or unsupported data must remain distinguishable
-when the distinction matters.
-
-============================================================
-39. UI AND SHADERS
-==================
-
-Visual effects may be implemented through the Monix shader system.
-
-[MANDATORY]
-
-A shader failure must not cause the interface to report that the
-effect is active when it is not.
-
-[RECOMMENDED]
-
-A fallback visual state should be available when practical.
-
-============================================================
-40. UI AND SNAPSHOTS
-====================
-
-Snapshots may capture relevant UI or configuration state.
-
-[MANDATORY]
-
-A snapshot must not claim to restore UI state that it does not
-actually contain.
-
-============================================================
-41. UI STATE PERSISTENCE
-========================
-
-Monix may persist interface preferences such as:
-
-* Selected view.
-* Window size.
-* Layout.
-* Visual settings.
-* Display preferences.
-
-[PENDING]
-
-Persistent UI state:
-
----
-
-[MANDATORY]
-
-Persistent UI state must not override mandatory security settings.
-
-============================================================
-42. INTERNATIONALIZATION
-========================
-
-[PENDING]
-
-Supported languages:
-
----
-
-[RECOMMENDED]
-
-User-facing text should be structured so that localization can
-be added without changing underlying application logic.
-
-============================================================
-43. USER-FACING TERMINOLOGY
-===========================
-
-[MANDATORY]
-
-The same technical concept must use consistent terminology
-throughout the interface.
-
-[MANDATORY]
-
-A technical term must not have conflicting meanings between
-different views.
-
-============================================================
-44. UI TESTING
-==============
-
-The interface should be tested for:
+UI testing should cover:
 
 * Navigation.
-* Controls.
-* Error states.
+* Data presentation.
+* Status indicators.
+* Errors.
 * Loading states.
-* Responsive layout.
-* Display scaling.
-* Live data.
-* Stale data.
 * Unavailable data.
-* High-impact actions.
-* SCRAM state.
+* Settings.
+* High-impact confirmations.
+* SCRAM state display.
+* Scaling.
+* Keyboard and pointer input.
 * Rendering failures.
-* Configuration changes.
+* Performance.
+* Accessibility.
 
 [MANDATORY]
+UI tests must verify that the displayed state matches the underlying application state.
 
-Critical user-interface paths must be tested before stable
-release.
-
-============================================================
-45. VISUAL REGRESSION
-=====================
-
-[RECOMMENDED]
-
-Major UI changes should be evaluated for visual regression.
-
-Relevant areas include:
-
-* Layout.
-* Typography.
-* Spacing.
-* Scaling.
-* Status indicators.
-* Tables.
-* Graphs.
-* Shader effects.
-
-============================================================
-46. UI SECURITY TESTING
-=======================
-
-Security testing should verify that:
-
-* Hidden controls cannot bypass authorization.
-* Unauthorized operations are rejected.
-* High-impact controls use correct state.
-* Sensitive information is not exposed.
-* AI output cannot bypass authorization.
-* Configuration changes remain validated.
-
-============================================================
-47. CURRENT UI STATUS
-=====================
+CURRENT STATUS
 
 [PENDING]
-
-Current UI implementation:
-
----
+Final UI component inventory.
 
 [PENDING]
-
-Current navigation implementation:
-
----
+Final typography system.
 
 [PENDING]
+Minimum supported display configuration.
 
-Current visual system:
-
----
-
-============================================================
-48. KNOWN LIMITATIONS
-=====================
-
-[PENDING]
-
-Known UI limitations:
-
----
-
----
-
----
-
-============================================================
-49. RELATED DOCUMENTATION
-=========================
-
-Related documents:
+RELATED DOCUMENTATION
 
 * Monix Product Overview.
 * Monix Product Specification.
 * Monix Architecture.
-* Monix Configuration Documentation.
-* Monix Monitoring Documentation.
 * Monix Logging Documentation.
-* Monix State and Snapshot.
-* Monix AI Documentation.
-* Monix Shader System.
+* Monix Monitoring Documentation.
+* Monix Configuration Documentation.
 * Monix Security Documentation.
+* Monix Shader System.
 * Monix Testing Documentation.
-* Monix Performance Documentation.
-* Monix Debugging Documentation.
 
-============================================================
-50. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — USER INTERFACE
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL / DEVELOPMENT
@@ -1010,8 +425,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
