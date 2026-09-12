@@ -1,668 +1,289 @@
 WEIRD STUFF
-MONIX
+MONIX — TESTING DOCUMENTATION
 
-TESTING DOCUMENTATION
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL / DEVELOPMENT
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+PURPOSE
 
-1. PURPOSE
-   ============================================================
+Testing exists to provide reasonable evidence that Monix behaves as intended. It is part of normal development, not a final step performed only before release.
 
-This document defines the testing framework for Monix.
-
-Its purpose is to establish what must be tested, how testing is
-organized, how failures are classified, and what conditions must
-be considered before a release is approved.
-
-============================================================
-2. TESTING PRINCIPLES
-=====================
+CORE RULES
 
 [MANDATORY]
-
-Testing must provide reasonable evidence that the tested
-functionality behaves as intended.
+Tests must provide evidence relevant to the functionality being tested.
 
 [MANDATORY]
-
-Tests must not knowingly be represented as passing when they
-have actually failed or have not been executed.
+A test that failed or did not run must never be reported as passed.
 
 [MANDATORY]
-
-Known critical failures must be evaluated before a stable release.
+Known critical failures must be evaluated before stable release.
 
 [RECOMMENDED]
+Tests should be deterministic and reproducible where practical.
 
-Tests should be deterministic and reproducible whenever practical.
+TEST LEVELS
 
-============================================================
-3. TEST LEVELS
-==============
+Monix may use:
 
-Monix may use the following testing levels:
+* Unit tests.
+* Integration tests.
+* End-to-end tests.
+* System tests.
+* Regression tests.
+* Performance tests.
+* Security tests.
+* Rendering tests.
+* Compatibility tests.
 
-* Unit Testing.
-* Integration Testing.
-* End-to-End Testing.
-* System Testing.
-* Regression Testing.
-* Performance Testing.
-* Security Testing.
-* Rendering Testing.
-* Compatibility Testing.
+UNIT TESTING
 
-============================================================
-4. UNIT TESTING
-===============
-
-Unit tests validate isolated components or pieces of logic.
-
-Potential targets include:
-
-* Parsers.
-* Configuration.
-* Logging.
-* Data models.
-* Detection logic.
-* Cache logic.
-* Utility functions.
-* Validation logic.
+Unit tests cover isolated components such as parsers, configuration, logging, data models, detection logic, caches, utilities, and validation.
 
 [MANDATORY]
+Important components should be tested under normal and relevant failure conditions.
 
-Unit tests must validate the expected behavior of the component
-under normal and relevant failure conditions.
+INTEGRATION TESTING
+
+Integration tests verify that connected components exchange and process data correctly.
+
+Examples include monitoring with processing, logging with storage, configuration with runtime state, shader parsing with compilation, shader compilation with caching, rendering with the application, and security analysis with events.
+
+[MANDATORY]
+Important subsystem interactions must be tested rather than assumed to work because each component works independently.
+
+END-TO-END TESTING
+
+End-to-end tests cover complete workflows such as startup, configuration loading, monitoring initialization, logging, shader loading, rendering initialization, settings changes, and shutdown.
+
+[MANDATORY]
+Critical User-facing workflows must be tested before stable release.
+
+REGRESSION TESTING
+
+Regression testing checks that a change has not broken functionality that previously worked.
 
 [RECOMMENDED]
+Major changes to rendering, shaders, monitoring, logging, security, configuration, or updates should receive regression testing.
 
-New complex logic should have corresponding unit tests.
+RENDERING TESTING
 
-============================================================
-5. INTEGRATION TESTING
-======================
-
-Integration tests validate interactions between multiple
-components.
-
-Potential combinations include:
-
-* Monitoring + processing.
-* Logging + storage.
-* Configuration + runtime.
-* Shader parser + compiler.
-* Shader compiler + cache.
-* Application + renderer.
-* Security analysis + event system.
+Rendering tests may cover Vulkan initialization, device selection, resources, pipelines, shader compilation, multi-pass execution, feedback resources, render targets, resizing, shutdown, and recovery.
 
 [MANDATORY]
+Starting the application successfully is not enough to call a rendering test successful. The relevant rendering operation must actually be validated.
 
-Integration tests must verify that connected components exchange
-data correctly where the interaction is important to product
-functionality.
+SHADER TESTING
 
-============================================================
-6. END-TO-END TESTING
-=====================
-
-End-to-end tests validate complete application workflows.
-
-Possible workflows include:
-
-* Application startup.
-* Configuration loading.
-* Monitoring initialization.
-* Logging.
-* Shader loading.
-* Rendering initialization.
-* Settings changes.
-* Product shutdown.
+Shader testing may cover parsing, presets, includes, dependencies, compilation, SPIR-V, reflection, pipeline creation, runtime execution, multi-pass behavior, feedback, and cache interaction.
 
 [MANDATORY]
-
-Critical user-facing workflows must be tested before stable
-release.
-
-============================================================
-7. REGRESSION TESTING
-=====================
-
-Regression testing verifies that changes have not unintentionally
-broken existing functionality.
-
-[RECOMMENDED]
-
-Regression testing should be performed after major changes to:
-
-* Rendering.
-* Shaders.
-* Monitoring.
-* Logging.
-* Security systems.
-* Configuration.
-* Update mechanisms.
-
-============================================================
-8. RENDERING TESTING
-====================
-
-Rendering tests validate the graphics pipeline.
-
-Potential areas include:
-
-* Vulkan initialization.
-* Device selection.
-* Resource creation.
-* Pipeline creation.
-* Shader compilation.
-* Shader loading.
-* Multi-pass execution.
-* Feedback resources.
-* Render targets.
-* Resize handling.
-* Shutdown.
-* Recovery from failures.
-
-[MANDATORY]
-
-A rendering test must not be considered successful solely because
-the application starts. The relevant rendering operation must
-actually be validated.
-
-============================================================
-9. SHADER TESTING
-=================
-
-Shader testing may cover:
-
-* Shader parsing.
-* Preset parsing.
-* Include resolution.
-* Dependency resolution.
-* Compilation.
-* SPIR-V generation.
-* Reflection.
-* Pipeline creation.
-* Runtime execution.
-* Multi-pass execution.
-* Feedback behavior.
-* Cache interaction.
-
-[MANDATORY]
-
 Invalid shaders must produce an appropriate failure result.
 
 [MANDATORY]
+Shader compilation failures must never be reported as successful compilation.
 
-Shader compilation failures must not be reported as successful
-compilation.
+SHADER CACHE TESTING
+
+The cache should be tested for hits, misses, invalidation, dependency changes, compiler changes, corruption, manifest errors, atomic writes, and eviction.
+
+[MANDATORY]
+Stale cache data must not be used when relevant source, dependency, compiler, or compatibility information has changed.
+
+MONITORING TESTING
+
+Monitoring tests may cover CPU, memory, GPU, temperature, storage, network, and process information.
+
+[MANDATORY]
+Unavailable hardware data must be handled safely and must not be replaced with invented values.
+
+PROCESS TESTING
+
+Process analysis may be tested for discovery, metadata, resource measurements, classification, reputation, and heuristic analysis.
+
+[MANDATORY]
+Heuristic classifications must remain distinguishable from verified facts.
+
+SECURITY TESTING
+
+Security tests may cover authentication, authorization, access control, secret handling, input validation, update verification, security logging, privileged operations, process actions, and configuration security.
+
+[MANDATORY]
+Security-critical functionality must be tested before stable release.
+
+[MANDATORY]
+Testing must not use uncontrolled real-world targets without appropriate authorization.
+
+SCRAM TESTING
+
+SCRAM requires separate consideration of TEST and REAL behavior.
+
+[MANDATORY]
+TEST mode must validate logic without intentionally executing actions reserved for real emergency operation.
+
+[MANDATORY]
+REAL-mode testing may only occur when the environment, permissions, and consequences are properly controlled.
+
+[MANDATORY]
+The active mode must be verified before any high-impact action.
+
+CONFIGURATION TESTING
+
+Configuration tests may cover valid and invalid values, missing values, defaults, corruption, migration, and runtime changes.
+
+[MANDATORY]
+Invalid configuration must not silently create unsafe or undefined behavior.
+
+LOGGING TESTING
+
+Logging tests may cover event creation, severity, formatting, timestamps, source information, buffers, persistence, rotation, and failure handling.
+
+[MANDATORY]
+Tests must verify that credentials and other secrets are not unintentionally written to logs.
+
+SNAPSHOT TESTING
+
+Snapshot tests may cover capture, serialization, storage, loading, validation, corruption, compatibility, migration, import, export, and restoration.
+
+[MANDATORY]
+Corrupted or incompatible snapshots must not be silently accepted as valid.
+
+PERFORMANCE TESTING
+
+Performance tests may measure CPU, memory, GPU, startup, rendering, shader compilation, cache behavior, logging, and monitoring overhead.
 
 [RECOMMENDED]
-
-Representative valid and invalid shader inputs should be tested.
-
-============================================================
-10. SHADER CACHE TESTING
-========================
-
-The shader cache must be tested for:
-
-* Cache hit.
-* Cache miss.
-* Cache invalidation.
-* Dependency changes.
-* Compiler version changes.
-* Corrupted entries.
-* Manifest errors.
-* Atomic writes.
-* Eviction behavior.
+Representative workloads should be used.
 
 [MANDATORY]
+A performance improvement must not be accepted when it introduces an unacceptable correctness or security regression.
 
-A stale cache entry must not be used when relevant source,
-dependency, compiler, or compatibility information has changed.
+COMPATIBILITY TESTING
 
-============================================================
-11. MONITORING TESTING
-======================
-
-Monitoring tests may validate:
-
-* CPU readings.
-* Memory readings.
-* GPU readings.
-* Temperature readings.
-* Storage readings.
-* Network readings.
-* Process enumeration.
-
-[MANDATORY]
-
-Unavailable hardware data must be handled safely.
-
-[MANDATORY]
-
-Test results must distinguish between valid data and intentionally
-simulated or unavailable data.
-
-============================================================
-12. PROCESS TESTING
-===================
-
-Process analysis may be tested using controlled test cases.
-
-Potential areas include:
-
-* Process discovery.
-* Metadata extraction.
-* Resource measurements.
-* Classification.
-* Reputation.
-* Heuristic analysis.
-
-[MANDATORY]
-
-A test must verify that heuristic classifications are not
-incorrectly presented as verified facts.
-
-============================================================
-13. SECURITY TESTING
-====================
-
-Security testing may cover:
-
-* Authentication.
-* Authorization.
-* Access control.
-* Secrets handling.
-* Input validation.
-* Update verification.
-* Security logging.
-* Privileged operations.
-* Process actions.
-* Configuration security.
-
-[MANDATORY]
-
-Security-critical functionality must be tested before a stable
-release.
-
-[MANDATORY]
-
-Tests must not use uncontrolled real-world targets without
-appropriate authorization.
-
-============================================================
-14. SCRAM TESTING
-=================
-
-SCRAM must be tested separately in TEST and REAL configurations.
-
-TEST MODE:
-
-[MANDATORY]
-
-Test mode must verify SCRAM logic without intentionally
-performing actions reserved for real emergency operation.
-
-REAL MODE:
-
-[MANDATORY]
-
-Real-mode testing must only be performed when the relevant
-environment, permissions, and consequences are appropriately
-controlled.
-
-[MANDATORY]
-
-Testing must verify that the active mode is correctly detected
-before any high-impact action.
-
-============================================================
-15. CONFIGURATION TESTING
-=========================
-
-Configuration testing may cover:
-
-* Valid values.
-* Invalid values.
-* Missing values.
-* Default values.
-* Corrupted configuration.
-* Version migration.
-* Runtime changes.
-
-[MANDATORY]
-
-Invalid configuration must not silently produce unsafe or
-undefined behavior.
-
-============================================================
-16. LOGGING TESTING
-===================
-
-Logging tests may validate:
-
-* Event creation.
-* Severity.
-* Formatting.
-* Timestamps.
-* Source information.
-* Buffer behavior.
-* Rotation or persistence where applicable.
-* Error handling.
-
-[MANDATORY]
-
-Tests must verify that sensitive credentials and secrets are not
-unintentionally written to logs.
-
-============================================================
-17. SNAPSHOT TESTING
-====================
-
-Snapshot functionality may be tested for:
-
-* Capture.
-* Serialization.
-* Storage.
-* Loading.
-* Validation.
-* Corruption handling.
-* Version compatibility.
-
-[MANDATORY]
-
-A corrupted or incompatible snapshot must not be silently treated
-as valid.
-
-============================================================
-18. PERFORMANCE TESTING
-=======================
-
-Performance testing may measure:
-
-* CPU usage.
-* Memory usage.
-* GPU usage.
-* Startup time.
-* Rendering performance.
-* Shader compilation time.
-* Cache performance.
-* Logging performance.
-* Monitoring overhead.
-
-[RECOMMENDED]
-
-Performance testing should use representative workloads.
-
-[MANDATORY]
-
-A performance optimization must not be accepted when it
-knowingly introduces an unacceptable security or correctness
-regression.
-
-============================================================
-19. COMPATIBILITY TESTING
-=========================
-
-Compatibility testing may include:
-
-* Operating system versions.
-* Hardware configurations.
-* GPU vendors.
-* Graphics drivers.
-* Display configurations.
-* Storage configurations.
+Compatibility may cover operating-system versions, hardware, GPU vendors, graphics drivers, displays, storage, and other supported configurations.
 
 [PENDING]
+Official compatibility matrix.
 
-Official compatibility matrix:
+FAILURE TESTING
 
----
-
----
-
-============================================================
-20. FAILURE TESTING
-===================
-
-Monix should be tested under controlled failure conditions.
-
-Examples include:
-
-* Missing files.
-* Invalid configuration.
-* Corrupted cache.
-* Shader compilation failure.
-* GPU initialization failure.
-* Unsupported hardware.
-* Missing sensor data.
-* Network failure.
-* Permission denial.
-* Unexpected process termination.
+Monix should be tested under controlled failures such as missing files, invalid configuration, corrupted cache, shader compilation errors, GPU initialization failure, unsupported hardware, missing sensors, network failures, permission denial, and unexpected process termination.
 
 [MANDATORY]
+Expected failures must be handled without falsely reporting successful operation.
 
-Expected failure conditions must be handled without falsely
-reporting successful operation.
-
-============================================================
-21. TEST DATA
-=============
+TEST DATA
 
 [MANDATORY]
-
-Test data must be appropriate for the purpose of the test.
+Test data must be appropriate for the test being performed.
 
 [MANDATORY]
-
-Production secrets and unnecessary real personal data must not
-be used in testing.
+Production secrets and unnecessary real personal data must not be used in testing.
 
 [RECOMMENDED]
+Synthetic or controlled test data should be preferred.
 
-Synthetic or controlled test data should be preferred whenever
-possible.
+TEST ENVIRONMENTS
 
-============================================================
-22. TEST ENVIRONMENTS
-=====================
-
-Testing may be conducted in:
-
-* Development.
-* Dedicated test environments.
-* Staging.
-* Controlled production validation where necessary.
+Testing may occur in development, dedicated test environments, staging, or controlled production validation where necessary.
 
 [MANDATORY]
+Tests capable of modifying real data or production systems require appropriate authorization and controls.
 
-Tests that could modify real user data or production systems must
-not be executed without appropriate authorization and controls.
+TEST RESULTS
 
-============================================================
-23. TEST RESULTS
-================
+PASS — expected behavior confirmed.
 
-A test may be classified as:
+FAIL — expected behavior not confirmed.
 
-PASS
-Expected behavior confirmed.
+BLOCKED — testing could not be completed because of an external condition.
 
-FAIL
-Expected behavior not confirmed.
+SKIPPED — testing was intentionally not executed.
 
-BLOCKED
-Testing could not be completed because of an external condition.
-
-SKIPPED
-Testing was intentionally not executed.
-
-NOT APPLICABLE
-The test does not apply to the tested configuration.
+NOT APPLICABLE — the test does not apply to the tested configuration.
 
 [MANDATORY]
+Anything that was not executed must not be represented as PASS.
 
-A test that was not executed must not be represented as PASS.
+DEFECT SEVERITY
 
-============================================================
-24. BUG SEVERITY
-================
+CRITICAL — severe security, data-integrity, essential-functionality, or stability impact.
 
-Monix may classify defects as:
+HIGH — major functional or operational impact.
 
-CRITICAL
-Severe issue affecting security, data integrity, essential
-functionality, or system stability.
+MEDIUM — meaningful issue without normally preventing general use.
 
-HIGH
-Major issue with substantial functional or operational impact.
-
-MEDIUM
-Meaningful issue that does not normally prevent general use.
-
-LOW
-Minor issue with limited impact.
+LOW — limited-impact issue.
 
 [MANDATORY]
-
 Severity must reflect the actual or reasonably assessed impact.
 
-============================================================
-25. RELEASE BLOCKERS
-====================
+RELEASE BLOCKERS
 
-A defect may be considered a release blocker when it:
-
-* Creates a critical security problem.
-* Causes serious data corruption.
-* Prevents essential functionality.
-* Causes repeatable catastrophic failure.
-* Breaks a mandatory release requirement.
+A defect may block a release when it creates a critical security problem, serious data corruption, loss of essential functionality, repeatable catastrophic failure, or violation of a mandatory release requirement.
 
 [MANDATORY]
-
-Known release blockers must be evaluated before a stable release.
+Known release blockers must be evaluated before stable release.
 
 [MANDATORY]
+Release blockers must not be deliberately hidden from the release decision process.
 
-A release blocker must not be deliberately hidden from the
-release decision process.
-
-============================================================
-26. TEST EVIDENCE
-=================
+TEST EVIDENCE
 
 [RECOMMENDED]
-
-Important test runs should retain:
-
-* Test name.
-* Test version.
-* Environment.
-* Result.
-* Date.
-* Relevant logs.
-* Failure information.
-* Associated change or build.
+Important test runs should retain the test name, version, environment, result, date, relevant logs, failure information, and associated build or change.
 
 [MANDATORY]
+Evidence must not be altered to manufacture a false result.
 
-Evidence must not be intentionally altered to produce a false
-result.
-
-============================================================
-27. CONTINUOUS TESTING
-======================
+AUTOMATED TESTING
 
 [RECOMMENDED]
+Automated build validation, unit tests, integration tests, shader tests, security checks, and regression tests should be used where practical.
 
-Automated testing should be integrated into the development
-process where practical.
-
-Potential automated stages include:
-
-* Build validation.
-* Unit tests.
-* Integration tests.
-* Shader tests.
-* Security checks.
-* Regression tests.
-
-============================================================
-28. RELEASE TEST GATE
-=====================
+RELEASE TEST GATE
 
 Before a stable release:
 
 [MANDATORY]
-
-The release must have:
-
-* A successful build.
-* Required tests executed.
-* Critical failures evaluated.
-* Applicable security checks completed.
-* Applicable compatibility checks completed.
-* Release artifacts identified.
+There must be a successful build, required tests must have been executed, critical failures must have been evaluated, and applicable security and compatibility checks must be complete.
 
 [MANDATORY]
+A failed mandatory gate must be resolved, formally accepted by the appropriate authority, or prevent the release.
 
-Failure of a mandatory release gate must be resolved, formally
-accepted by the appropriate authority, or prevent the release.
-
-============================================================
-29. TEST OWNERSHIP
-==================
+TEST OWNERSHIP
 
 [PENDING]
-
-QA Lead:
-
----
+QA Lead.
 
 [PENDING]
-
-Development Lead:
-
----
+Development Lead.
 
 [PENDING]
+Security Reviewer.
 
-Security Reviewer:
-
----
-
-============================================================
-30. RELATED DOCUMENTATION
-=========================
-
-This document relates to:
+RELATED DOCUMENTATION
 
 * Monix Product Overview.
 * Monix Product Specification.
 * Monix Development Status.
 * Monix Release History.
 * Monix Architecture.
-* Weird Stuff Security Policy.
-* Weird Stuff Intellectual Property Policy.
+* Monix Debugging Documentation.
+* Monix Security Documentation.
+* Monix Shader System.
+* Monix Performance Documentation.
 
-============================================================
-31. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — TESTING DOCUMENTATION
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL / DEVELOPMENT
@@ -674,8 +295,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
