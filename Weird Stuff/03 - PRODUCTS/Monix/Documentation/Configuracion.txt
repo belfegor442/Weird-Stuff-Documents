@@ -1,784 +1,331 @@
 WEIRD STUFF
-MONIX
+MONIX — CONFIGURATION DOCUMENTATION
 
-CONFIGURATION DOCUMENTATION
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL / DEVELOPMENT
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+PURPOSE
 
-1. PURPOSE
-   ============================================================
+This document explains how Monix configuration is defined, loaded, validated, stored, migrated, changed at runtime, and recovered when something goes wrong.
 
-This document defines the configuration model of Monix.
+Configuration covers values that affect application behavior, appearance, performance, monitoring, rendering, security, snapshots, updates, AI, and diagnostics.
 
-It describes configuration categories, validation, persistence,
-migration, defaults, runtime changes, security considerations,
-and failure handling.
-
-Configuration refers to values that influence the behavior,
-appearance, performance, monitoring, rendering, security, or other
-functions of Monix.
-
-============================================================
-2. CONFIGURATION PRINCIPLES
-===========================
+CORE RULES
 
 [MANDATORY]
-
-Configuration must be explicitly defined before it is used by a
-subsystem when the value is required for correct operation.
+Configuration must be defined before a subsystem relies on it for correct operation.
 
 [MANDATORY]
-
-Invalid configuration values must not intentionally produce
-undefined or unsafe behavior.
+Invalid configuration must not intentionally produce undefined or unsafe behavior.
 
 [MANDATORY]
-
-Configuration changes must not silently modify unrelated critical
-system settings.
+A configuration change must not silently alter unrelated critical settings.
 
 [RECOMMENDED]
+Configuration should be understandable and predictable to the User.
 
-Configuration should remain understandable and predictable to the
-User.
+CONFIGURATION CATEGORIES
 
-============================================================
-3. CONFIGURATION CATEGORIES
-===========================
+Monix may contain settings for:
 
-Monix configuration may include:
+* General application behavior.
+* Interface.
+* Logging.
+* Monitoring.
+* Performance.
+* Rendering.
+* Shaders.
+* Security.
+* Snapshots.
+* Updates.
+* AI.
+* Diagnostics.
 
-* General application settings.
-* Interface settings.
-* Logging settings.
-* Monitoring settings.
-* Performance settings.
-* Rendering settings.
-* Shader settings.
-* Security settings.
-* Snapshot settings.
-* Update settings.
-* AI settings.
-* Diagnostic settings.
+CONFIGURATION SOURCES
 
-============================================================
-4. CONFIGURATION SOURCES
-========================
-
-Configuration may originate from:
-
-* Default values.
-* Configuration files.
-* User interface settings.
-* Command-line parameters where supported.
-* Environment-specific settings.
-* Runtime state.
-* Other explicitly authorized sources.
+Values may come from defaults, configuration files, User settings, command-line parameters where supported, environment-specific settings, runtime state, or another explicitly authorized source.
 
 [MANDATORY]
-
-The effective source of a configuration value must be
-deterministic.
+The effective source of a configuration value must be deterministic.
 
 [MANDATORY]
+A lower-priority source must not unexpectedly override a higher-priority value.
 
-A lower-priority configuration source must not unexpectedly
-override a higher-priority value.
-
-============================================================
-5. DEFAULT CONFIGURATION
-========================
-
-Every configuration option should have a defined default where
-appropriate.
+DEFAULTS
 
 [MANDATORY]
-
 Defaults must be safe for the intended environment.
 
 [MANDATORY]
-
-A default value must not intentionally enable a high-impact
-security operation without the required authorization.
+A default must not silently enable a high-impact security operation without the required authorization.
 
 [RECOMMENDED]
-
 Defaults should favor stable and predictable behavior.
 
-============================================================
-6. CONFIGURATION PRECEDENCE
-===========================
-
-Where multiple configuration sources exist, Monix should apply
-a defined precedence order.
-
-Possible order:
-
-DEFAULT
-->
-CONFIG FILE
-->
-USER SETTINGS
-->
-RUNTIME OVERRIDE
-
 [PENDING]
+Official configuration precedence.
 
-Official configuration precedence:
+VALIDATION
 
----
-
-============================================================
-7. VALIDATION
-=============
-
-Configuration validation may include:
-
-* Type validation.
-* Range validation.
-* Format validation.
-* Dependency validation.
-* Compatibility validation.
-* Security validation.
+Configuration validation may cover type, range, format, dependencies, compatibility, and security.
 
 [MANDATORY]
-
-A value must be rejected when it is incompatible with the
-required type or permitted range.
+Values outside the allowed type or range must be rejected.
 
 [MANDATORY]
+Related settings must be validated together when one depends on another.
 
-Interdependent settings must be validated together where
-necessary.
+INVALID OR CORRUPTED CONFIGURATION
 
-============================================================
-8. INVALID CONFIGURATION
-========================
-
-Invalid configuration may result from:
-
-* Manual editing.
-* Corruption.
-* Version mismatch.
-* Missing values.
-* Unsupported values.
-* Conflicting settings.
-* External modification.
+Configuration may become invalid because of manual edits, corruption, version changes, missing values, unsupported values, conflicts, or external modification.
 
 [MANDATORY]
-
-Invalid configuration must not be silently interpreted as valid.
+Invalid or corrupted configuration must not be silently accepted as valid.
 
 [RECOMMENDED]
+When safe, Monix should recover affected settings using a known-good default or previous valid value.
 
-Where safe, Monix should restore the affected value to a known
-safe default.
-
-============================================================
-9. CORRUPTED CONFIGURATION
-==========================
-
-If a configuration file is partially or completely corrupted:
-
-[MANDATORY]
-
-Monix must detect the failure to the extent reasonably possible.
-
-[MANDATORY]
-
-Corrupted data must not be treated as trusted configuration.
-
-[RECOMMENDED]
-
-Monix should preserve the corrupted configuration for
-diagnostic purposes only when doing so does not create a security
-or privacy risk.
-
-============================================================
-10. CONFIGURATION VERSIONING
-============================
+CONFIGURATION VERSIONING AND MIGRATION
 
 Configuration formats may change between Monix releases.
 
 [MANDATORY]
-
-A configuration format change that affects compatibility must be
-identifiable.
+Compatibility-affecting format changes must be identifiable.
 
 [RECOMMENDED]
+A schema or format version should be stored when migration may be required.
 
-The configuration should contain a format or schema version when
-migration may be required.
-
-============================================================
-11. CONFIGURATION MIGRATION
-===========================
-
-When a new version changes the configuration format, Monix may
-perform migration.
-
-Possible flow:
+Typical migration flow:
 
 OLD CONFIGURATION
-|
-v
-VERSION DETECTION
-|
-v
-MIGRATION
-|
-v
-VALIDATION
-|
-v
-NEW CONFIGURATION
+-> VERSION DETECTION
+-> MIGRATION
+-> VALIDATION
+-> NEW CONFIGURATION
 
 [MANDATORY]
-
-A migration failure must not result in an invalid configuration
-being silently accepted.
+A failed migration must not silently produce an invalid configuration.
 
 [RECOMMENDED]
+A backup of the original configuration should be created before significant migrations where practical.
 
-A backup of the original configuration should be created before
-a significant migration where practical.
+RUNTIME CHANGES
 
-============================================================
-12. RUNTIME CONFIGURATION
-=========================
-
-Some settings may be changed while Monix is running.
-
-Examples may include:
-
-* Interface preferences.
-* Monitoring intervals.
-* Logging level.
-* Shader selection.
-* Visual effects.
-* Performance options.
+Some settings may be changed while Monix is running, such as interface preferences, monitoring intervals, logging level, shader selection, visual effects, or performance options.
 
 [MANDATORY]
-
-Runtime changes must be validated before being applied.
+Runtime changes must be validated before they are applied.
 
 [MANDATORY]
-
-A failed runtime configuration change must not leave the
-application in an invalid state.
+A failed runtime change must not leave the application in an invalid state.
 
 [RECOMMENDED]
-
 Runtime changes should be applied transactionally where practical.
 
-============================================================
-13. RESTART-REQUIRED SETTINGS
-=============================
-
-Some configuration changes may require an application restart.
-
 [PENDING]
+Settings that require a restart.
 
-Settings requiring restart:
+SECURITY
 
----
-
-[MANDATORY]
-
-Monix must not imply that a restart-required change has already
-taken effect when it has not.
-
-============================================================
-14. CONFIGURATION AND SECURITY
-==============================
-
-Configuration may influence security-sensitive behavior.
+Configuration can influence security-sensitive behavior.
 
 [MANDATORY]
-
-Security-critical configuration must receive appropriate
-validation.
+Security-critical settings require appropriate validation.
 
 [MANDATORY]
-
-A configuration file must not automatically be considered
-trusted solely because it exists in an expected directory.
+A configuration file must not be considered trusted merely because it exists in an expected location.
 
 [MANDATORY]
+Configuration must not be used to bypass security controls unless the behavior is explicitly authorized and appropriate.
 
-Configuration must not intentionally bypass security controls
-unless the behavior has been explicitly authorized and is
-appropriate to the environment.
+SENSITIVE CONFIGURATION
 
-============================================================
-15. SENSITIVE CONFIGURATION
-===========================
-
-Sensitive configuration may include:
-
-* API keys.
-* Authentication tokens.
-* Private endpoints.
-* Credentials.
-* Signing information.
-* Other secrets.
+Sensitive values may include API keys, authentication tokens, credentials, private endpoints, signing information, and other secrets.
 
 [MANDATORY]
-
-Sensitive configuration must be protected from unauthorized
-access.
+Sensitive configuration must be protected from unauthorized access.
 
 [MANDATORY]
-
-Sensitive values must not be written to normal diagnostic logs.
+Sensitive values must not be written to ordinary diagnostic logs.
 
 [MANDATORY]
-
 Secrets must not be committed to source repositories.
 
 [RECOMMENDED]
-
-Secrets should be separated from ordinary configuration when
-practical.
-
-============================================================
-16. CONFIGURATION FILE LOCATION
-===============================
+Secrets should be separated from ordinary configuration where practical.
 
 [PENDING]
-
-User configuration location:
-
----
+User configuration location.
 
 [PENDING]
-
-System configuration location:
-
----
+System configuration location.
 
 [PENDING]
-
-Cache location:
-
----
+Cache location.
 
 [PENDING]
-
-Snapshot location:
-
----
-
-============================================================
-17. FILE FORMAT
-===============
+Snapshot location.
 
 [PENDING]
+Primary configuration format.
 
-Primary configuration format:
+SHADER AND RENDERING CONFIGURATION
 
----
+Shader settings may include presets, paths, pass parameters, resources, and visual effects.
 
-Possible formats include:
-
-* JSON.
-* TOML.
-* INI.
-* YAML.
-* Custom format.
+Rendering settings may include resolution, scaling, synchronization, rendering mode, visual effects, and shader selection.
 
 [MANDATORY]
-
-The selected format must be parsed safely and validated before
-values are applied.
-
-============================================================
-18. SHADER CONFIGURATION
-========================
-
-Shader-related configuration may include:
-
-* Shader preset.
-* Shader path.
-* Pass parameters.
-* Rendering options.
-* Resource settings.
-* Visual effects.
+Shader and rendering configuration must be validated before use.
 
 [MANDATORY]
+Values incompatible with the active graphics environment must be rejected or safely adjusted.
 
-Shader configuration must be validated before use.
+MONITORING CONFIGURATION
 
-[MANDATORY]
-
-Missing or invalid shader configuration must not be treated as
-valid shader state.
-
-============================================================
-19. RENDERING CONFIGURATION
-===========================
-
-Rendering configuration may include:
-
-* Resolution.
-* Scaling.
-* Visual effects.
-* Rendering mode.
-* Synchronization options.
-* Shader selection.
+Monitoring settings may include sampling intervals, enabled metrics, process monitoring, temperature sources, network monitoring, and logging frequency.
 
 [MANDATORY]
+Monitoring configuration must not intentionally create uncontrolled resource consumption.
 
-Values incompatible with the active graphics environment must
-be rejected or safely adjusted.
+LOGGING CONFIGURATION
 
-============================================================
-20. MONITORING CONFIGURATION
-============================
-
-Monitoring configuration may include:
-
-* Sampling intervals.
-* Enabled metrics.
-* Process monitoring.
-* Temperature sources.
-* Network monitoring.
-* Logging frequency.
+Logging settings may include level, output destination, buffer limits, retention, and diagnostic mode.
 
 [MANDATORY]
-
-Monitoring configuration must not intentionally create
-uncontrolled resource consumption.
-
-============================================================
-21. LOGGING CONFIGURATION
-=========================
-
-Logging configuration may include:
-
-* Log level.
-* Output destination.
-* Buffer limits.
-* Retention behavior.
-* Diagnostic mode.
-
-[MANDATORY]
-
-Logging configuration must not intentionally disable required
-security or error reporting.
+Configuration must not intentionally disable required security or error reporting.
 
 [RECOMMENDED]
+Verbose logging should be limited when it creates unnecessary performance or storage overhead.
 
-Verbose logging should be limited when it creates unnecessary
-performance or storage overhead.
+SECURITY AND SCRAM CONFIGURATION
 
-============================================================
-22. SECURITY CONFIGURATION
-==========================
-
-Security configuration may include:
-
-* Detection settings.
-* Alert behavior.
-* Process handling.
-* SCRAM configuration.
-* Security logging.
+Security settings may control detections, alerts, process handling, security logging, and SCRAM behavior.
 
 [MANDATORY]
-
-High-impact security settings must be clearly distinguishable
-from ordinary configuration.
+High-impact security settings must be clearly distinguishable from ordinary preferences.
 
 [MANDATORY]
-
-Security configuration must not be silently changed by unrelated
-features.
-
-============================================================
-23. SCRAM CONFIGURATION
-=======================
-
-SCRAM configuration may define:
-
-* Active mode.
-* Trigger conditions.
-* Safeguards.
-* Response behavior.
+Unrelated features must not silently change security configuration.
 
 [MANDATORY]
-
-TEST mode must remain distinguishable from REAL mode.
+TEST and REAL SCRAM modes must remain clearly distinguishable.
 
 [MANDATORY]
+A configuration change must not silently activate REAL mode where explicit authorization is required.
 
-A configuration change must not silently activate REAL mode when
-such activation requires explicit authorization.
-
-[RECOMMENDED]
-
-Changes to high-impact SCRAM settings should require additional
-confirmation.
-
-============================================================
-24. AI CONFIGURATION
-====================
+AI CONFIGURATION
 
 [PENDING]
-
-AI configuration:
-
----
-
-Possible configuration may include:
-
-* AI provider.
-* Endpoint.
-* Model.
-* Local / remote mode.
-* Feature enablement.
-* Data-sharing behavior.
+AI provider, model, endpoint, local/remote mode, feature enablement, and data-sharing configuration.
 
 [MANDATORY]
+External AI configuration must not cause sensitive information to be transmitted without appropriate authorization and legal basis where required.
 
-External AI configuration must not cause sensitive information
-to be transmitted without appropriate authorization and legal
-basis where required.
+UPDATE CONFIGURATION
 
-============================================================
-25. UPDATE CONFIGURATION
-========================
-
-Update configuration may include:
-
-* Update channel.
-* Automatic updates.
-* Update frequency.
-* Distribution endpoint.
+Update settings may include channel, automatic updates, frequency, and distribution endpoint.
 
 [MANDATORY]
+An unauthorized update source must never be treated as trusted merely because it is configured locally.
 
-Update configuration must not allow unauthorized update sources
-to be treated as trusted.
+USER PREFERENCES
 
-============================================================
-26. USER PROFILE / PREFERENCES
-==============================
-
-Monix may store User preferences such as:
-
-* Interface settings.
-* Display settings.
-* Monitoring preferences.
-* Shader preferences.
-* Performance settings.
+Monix may store interface, display, monitoring, shader, and performance preferences.
 
 [MANDATORY]
+User preferences must not override mandatory security requirements.
 
-User preferences must not override mandatory security
-requirements.
+RESET, IMPORT, AND EXPORT
 
-============================================================
-27. CONFIGURATION RESET
-=======================
-
-Monix may provide a configuration reset mechanism.
+Monix may provide configuration reset, import, and export functions.
 
 [MANDATORY]
+Imported configuration must be validated before it is applied.
 
-A reset operation must clearly identify what configuration will
-be affected where the distinction is important.
+[MANDATORY]
+Importing configuration must not grant privileges or bypass security controls.
 
 [RECOMMENDED]
-
-The reset mechanism should provide a safe recovery path for
-corrupted or incompatible configuration.
-
-============================================================
-28. EXPORT AND IMPORT
-=====================
-
-Monix may support configuration export and import.
-
-[MANDATORY]
-
-Imported configuration must be validated before being applied.
-
-[MANDATORY]
-
-Importing a configuration must not automatically grant new
-privileges or bypass security restrictions.
+Exported configuration should exclude secrets by default.
 
 [RECOMMENDED]
+Important configuration should be backed up before destructive migration or reset operations where practical.
 
-Exported configuration should avoid including secrets by default.
-
-============================================================
-29. CONFIGURATION BACKUP
-========================
+AUDITABILITY
 
 [RECOMMENDED]
+Important configuration changes should be traceable where practical.
 
-Important configuration should be backed up before destructive
-migration or reset operations when practical.
+Useful information may include the previous value, new value, time, source, and responsible User or process.
 
-[MANDATORY]
+FAILURE RECOVERY
 
-A backup must not be presented as valid if its integrity cannot
-be established where integrity is required.
-
-============================================================
-30. CONFIGURATION AUDITABILITY
-==============================
-
-[RECOMMENDED]
-
-Important configuration changes should be traceable where
-practical.
-
-Potential information includes:
-
-* Previous value.
-* New value.
-* Time of change.
-* Source of change.
-* Responsible User or process.
-
-============================================================
-31. CONFIGURATION ERRORS
-========================
-
-Configuration errors may generate:
-
-* Validation errors.
-* Warnings.
-* Recovery actions.
-* Fallback values.
+When configuration loading fails, Monix may retry, use a safe default, restore a previous valid configuration, disable the affected feature, and report the problem.
 
 [MANDATORY]
-
-The result of configuration validation must be accurately
-communicated to the appropriate subsystem.
-
-============================================================
-32. FAILURE RECOVERY
-====================
-
-If configuration loading fails, Monix may:
-
-1. Retry.
-2. Use a safe default.
-3. Use a previous valid configuration.
-4. Disable the affected feature.
-5. Report the problem.
-
-[MANDATORY]
-
 Recovery must not intentionally create an unsafe configuration.
 
-============================================================
-33. PERFORMANCE
-===============
-
-Configuration operations should have minimal unnecessary impact
-on runtime performance.
+PERFORMANCE
 
 [RECOMMENDED]
+Configuration that changes infrequently should not be repeatedly reparsed without a reason.
 
-Configuration that changes infrequently should not be repeatedly
-reparsed without reason.
+TESTING
 
-============================================================
-34. TESTING
-===========
+Configuration testing should cover:
 
-Configuration testing should include:
-
-* Valid configuration.
-* Invalid configuration.
-* Missing configuration.
-* Corrupted configuration.
+* Valid values.
+* Invalid values.
+* Missing values.
+* Corrupted files.
 * Version migration.
 * Reset.
-* Import.
-* Export.
+* Import and export.
 * Runtime changes.
 * Conflicting settings.
 * Security-sensitive settings.
 
 [MANDATORY]
+Configuration affecting critical functionality must be tested before stable release.
 
-Configuration behavior must be tested before stable release when
-the configuration affects critical functionality.
+DOCUMENTATION
 
-============================================================
-35. DOCUMENTATION
-=================
+Important configuration options should document their name, purpose, type, default, valid range, restart requirements, security impact, and compatibility requirements.
 
-Important configuration options should document:
-
-* Name.
-* Purpose.
-* Type.
-* Default value.
-* Valid range.
-* Restart requirement.
-* Security impact.
-* Compatibility requirements.
-
-============================================================
-36. CURRENT CONFIGURATION STATUS
-================================
+CURRENT STATUS
 
 [PENDING]
-
-Configuration implementation status:
-
----
+Configuration implementation status.
 
 [PENDING]
-
-Configuration format:
-
----
+Configuration format.
 
 [PENDING]
+Migration status.
 
-Configuration migration status:
-
----
-
-============================================================
-37. RELATED DOCUMENTATION
-=========================
-
-Related documents:
+RELATED DOCUMENTATION
 
 * Monix Product Overview.
 * Monix Product Specification.
 * Monix Architecture.
-* Monix Testing Documentation.
 * Monix Security Documentation.
+* Monix Logging Documentation.
+* Monix Monitoring Documentation.
 * Monix Shader System.
-* Monix Performance Documentation.
-* Monix Debugging Documentation.
-* Monix Build and Release.
-* Monix Development Status.
+* Monix AI Documentation.
+* Monix Testing Documentation.
 
-============================================================
-38. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — CONFIGURATION DOCUMENTATION
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL / DEVELOPMENT
@@ -790,8 +337,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
