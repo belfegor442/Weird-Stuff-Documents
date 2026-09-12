@@ -1,0 +1,41 @@
+WEIRD STUFF
+MARKETING STANDARDS
+
+Version: 1.0
+Status: IN FORCE
+Effective Date: September 12, 2026
+Owner: Weird Stuff
+Classification: INTERNAL
+
+1. PURPOSE
+
+These standards govern public promotional communication by Weird Stuff.
+
+[MANDATORY]
+Marketing must be accurate and must not knowingly misrepresent product capabilities, availability, security, pricing, status, or ownership.
+
+[MANDATORY]
+Experimental, beta, preview, and development products must be identified accurately where their status is material.
+
+[MANDATORY]
+Third-party trademarks and assets must be used according to applicable rights and licenses.
+
+2. CLAIMS
+
+[MANDATORY]
+Performance or security claims must have a reasonable factual basis.
+
+[MANDATORY]
+Testimonials, comparisons, and endorsements must not be fabricated.
+
+3. PUBLICATION
+
+[RECOMMENDED]
+Material announcements should be reviewed before publication.
+
+[PENDING]
+Formal campaign approval workflow.
+[PENDING]
+Formal advertising archive.
+
+END OF DOCUMENT
