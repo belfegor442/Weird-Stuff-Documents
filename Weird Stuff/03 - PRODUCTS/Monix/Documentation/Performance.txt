@@ -1,639 +1,273 @@
 WEIRD STUFF
-MONIX
+MONIX — PERFORMANCE DOCUMENTATION
 
-PERFORMANCE DOCUMENTATION
-
-Version: 1.0
+Version: 1.1
 Status: INTERNAL / DEVELOPMENT
 Owner: Weird Stuff
 Product: Monix
-Last Updated: September 7, 2026
+Last Updated: September 12, 2026
 
-============================================================
+PURPOSE
 
-1. PURPOSE
-   ============================================================
+This document defines how Monix performance is measured and improved. Performance work must be based on evidence and must not trade correctness, security, stability, or data integrity for a benchmark number.
 
-This document defines the performance objectives, measurement
-areas, constraints, and optimization requirements for Monix.
-
-Its purpose is to ensure that performance improvements are
-measurable and do not compromise correctness, security, or
-stability.
-
-============================================================
-2. PERFORMANCE PRINCIPLES
-=========================
+CORE RULES
 
 [MANDATORY]
-
-Performance improvements must not knowingly compromise:
-
-* Correctness.
-* Security.
-* Data integrity.
-* Stability.
-* Resource safety.
+Performance claims must be based on measurable results.
 
 [MANDATORY]
-
-Performance claims must be based on measurable results rather
-than assumptions.
+An optimization must not knowingly compromise correctness, security, data integrity, stability, or resource safety.
 
 [RECOMMENDED]
+Performance tests should use representative hardware, workloads, and configurations.
 
-Performance testing should use representative workloads and
-hardware.
-
-============================================================
-3. PERFORMANCE AREAS
-====================
+PERFORMANCE AREAS
 
 Monix performance may be evaluated across:
 
-* Application startup.
+* Startup and shutdown.
 * CPU usage.
 * Memory usage.
 * GPU usage.
-* Rendering performance.
-* Frame timing.
+* Rendering and frame timing.
 * Shader compilation.
-* Shader cache performance.
+* Shader cache behavior.
 * Logging overhead.
 * Monitoring overhead.
 * Process analysis.
 * Disk I/O.
 * Network activity.
-* Shutdown time.
+* Background work.
 
-============================================================
-4. CPU USAGE
-============
-
-Monix performs continuous monitoring, processing, logging, and
-rendering tasks.
+CPU
 
 [MANDATORY]
-
-Background processing must not intentionally consume excessive
-CPU resources without an operational reason.
+Background processing must not intentionally consume excessive CPU without an operational reason.
 
 [RECOMMENDED]
+Periodic work should use sensible sampling intervals and avoid repeated work that does not provide additional value.
 
-Periodic monitoring operations should use appropriate sampling
-intervals and avoid unnecessary repeated work.
+MEMORY
 
-============================================================
-5. MEMORY USAGE
-===============
-
-Monix may allocate memory for:
-
-* Application state.
-* Logs.
-* Monitoring data.
-* Shader resources.
-* Cache metadata.
-* Rendering resources.
-* Snapshots.
+Monix may allocate memory for application state, logs, monitoring data, shader resources, cache metadata, rendering resources, and snapshots.
 
 [MANDATORY]
-
-The application must avoid uncontrolled memory growth.
-
-[MANDATORY]
-
-Memory must be released when owned resources are no longer
-required.
-
-[RECOMMENDED]
-
-Long-running components should be evaluated for memory leaks and
-unbounded allocations.
-
-============================================================
-6. LOGGING PERFORMANCE
-======================
-
-Logging can generate significant activity during long-running
-operation.
+Memory usage must not grow without control during normal operation.
 
 [MANDATORY]
-
-Logging must not intentionally create uncontrolled memory growth.
+Owned resources must be released when they are no longer required.
 
 [RECOMMENDED]
+Long-running components should be checked for leaks and unbounded allocations.
 
-High-frequency events should use buffering, batching, filtering,
-or other appropriate techniques where practical.
+LOGGING AND MONITORING
 
-============================================================
-7. MONITORING PERFORMANCE
-=========================
-
-Continuous telemetry can produce processing overhead.
+Logging and monitoring can create significant CPU, memory, I/O, and storage overhead.
 
 [MANDATORY]
-
-Monitoring must be implemented so that normal operation does not
-create unreasonable resource consumption for its intended use.
+Neither subsystem may intentionally create uncontrolled resource consumption.
 
 [RECOMMENDED]
+High-frequency work should use buffering, batching, filtering, sampling, or rate limiting where appropriate.
 
-Sampling frequency should be configurable where appropriate.
+PROCESS ANALYSIS
 
-============================================================
-8. PROCESS ANALYSIS PERFORMANCE
-===============================
-
-Process analysis may require frequent enumeration and inspection
-of system processes.
+Process analysis may require frequent enumeration and inspection.
 
 [MANDATORY]
-
-Process analysis must not intentionally perform unnecessary
-repeated work that could significantly degrade system
-performance.
+It must not repeatedly perform expensive work without a useful reason.
 
 [RECOMMENDED]
+Expensive analysis should be cached or rate-limited where appropriate.
 
-Expensive analysis should be cached or rate-limited where
-appropriate.
+RENDERING
 
-============================================================
-9. RENDERING PERFORMANCE
-========================
-
-Rendering is a primary performance-sensitive subsystem.
-
-Potential factors include:
-
-* Resolution.
-* Number of shader passes.
-* Shader complexity.
-* Texture size.
-* GPU capabilities.
-* Driver behavior.
-* Synchronization.
-* Resource transfers.
+Rendering performance depends on resolution, shader complexity, number of passes, texture sizes, GPU capability, driver behavior, synchronization, and resource transfers.
 
 [MANDATORY]
-
-Rendering optimizations must not knowingly introduce rendering
-corruption or incorrect resource synchronization.
+Rendering optimizations must not introduce invalid resource synchronization or rendering corruption.
 
 [RECOMMENDED]
+Frame time should be measured instead of relying only on average FPS.
 
-Rendering performance should be evaluated using frame-time
-measurements rather than average FPS alone.
+FRAME TIMING
 
-============================================================
-10. FRAME TIMING
-================
-
-Frame timing provides information about rendering consistency.
-
-Relevant measurements may include:
-
-* Average frame time.
-* Minimum frame rate.
-* Maximum frame time.
-* Frame-time variance.
-* Frame-time spikes.
+Useful measurements include average frame time, maximum frame time, frame-time variance, and significant spikes.
 
 [RECOMMENDED]
+A short but severe frame-time spike should be investigated separately from a healthy average.
 
-Significant frame-time spikes should be investigated separately
-from average performance.
+SHADER COMPILATION
 
-============================================================
-11. SHADER COMPILATION
-======================
-
-Shader compilation may create temporary CPU, memory, and storage
-loads.
+Shader compilation can consume CPU, memory, and storage and can make startup or runtime operations slower.
 
 [MANDATORY]
-
-Shader compilation must not block unrelated critical operations
-unnecessarily.
+Shader compilation must not unnecessarily block unrelated critical operations.
 
 [RECOMMENDED]
+Compilation should run asynchronously where practical, and a valid shader cache should be used to avoid repeated compilation.
 
-Compilation should be performed asynchronously where practical.
+SHADER CACHE
 
-[RECOMMENDED]
-
-The shader cache should be used to avoid repeated compilation
-when the cached result remains valid.
-
-============================================================
-12. SHADER CACHE PERFORMANCE
-============================
-
-Cache performance may be measured through:
-
-* Cache hit rate.
-* Cache lookup time.
-* Compilation avoided.
-* Storage overhead.
-* Eviction frequency.
+Cache performance may be evaluated through lookup time, hit rate, avoided compilation, storage overhead, and eviction frequency.
 
 [MANDATORY]
-
 Performance optimizations must not bypass cache validation.
 
 [MANDATORY]
+A faster cache path must not use stale or incompatible shader data.
 
-A faster cache path must not use invalid or stale shader data.
+GPU RESOURCES
 
-============================================================
-13. GPU RESOURCE MANAGEMENT
-===========================
-
-Monix may manage:
-
-* Textures.
-* Buffers.
-* Pipelines.
-* Descriptor resources.
-* Render targets.
-* Shader modules.
+Monix may manage textures, buffers, pipelines, descriptor resources, render targets, and shader modules.
 
 [MANDATORY]
-
-GPU resources must be released appropriately.
-
-[MANDATORY]
-
-Resource reuse must not create invalid synchronization or lifetime
-conditions.
-
-============================================================
-14. STORAGE PERFORMANCE
-=======================
-
-Disk operations may include:
-
-* Logs.
-* Cache access.
-* Configuration.
-* Snapshots.
-* Update files.
+GPU resources must be released correctly.
 
 [MANDATORY]
+Resource reuse must respect synchronization and lifetime requirements.
 
-Disk operations must not intentionally cause uncontrolled growth.
+STORAGE AND NETWORK
 
-[RECOMMENDED]
-
-Frequent writes should be buffered or batched where appropriate.
-
-============================================================
-15. NETWORK PERFORMANCE
-=======================
-
-Where Monix communicates with external services, network activity
-may contribute to application overhead.
+Disk operations may involve logs, caches, configuration, snapshots, and updates. Network operations may be used by external services or update systems.
 
 [MANDATORY]
-
-Network operations must not unnecessarily block critical UI or
-rendering operations.
+Neither storage nor network operations should unnecessarily block critical UI or rendering work.
 
 [RECOMMENDED]
+Frequent disk writes should be buffered or batched, and non-critical network work should be asynchronous where practical.
 
-Non-critical network operations should be asynchronous.
+STARTUP AND SHUTDOWN
 
-============================================================
-16. STARTUP PERFORMANCE
-=======================
-
-Startup may include:
-
-* Configuration loading.
-* Logging initialization.
-* Hardware detection.
-* Renderer initialization.
-* Shader initialization.
-* Cache initialization.
-* Monitoring initialization.
+Startup may include configuration, logging, hardware detection, rendering, shader, cache, and monitoring initialization.
 
 [RECOMMENDED]
-
-Startup operations should be measured individually to identify
-major bottlenecks.
+Startup stages should be measured individually so actual bottlenecks can be identified.
 
 [MANDATORY]
+Startup optimization must not skip required security, validation, or initialization checks.
 
-A startup optimization must not skip required security,
-validation, or initialization checks.
+Shutdown must release owned resources correctly, including threads, files, GPU resources, logs, caches, and external connections where applicable.
 
-============================================================
-17. SHUTDOWN PERFORMANCE
-========================
+BACKGROUND WORK
 
-Shutdown may require cleanup of:
-
-* Threads.
-* Files.
-* GPU resources.
-* Logs.
-* Cache operations.
-* External connections.
+Monix may perform monitoring, logging, shader compilation, cache operations, process analysis, and update checks in the background.
 
 [MANDATORY]
-
-Shutdown must release owned resources correctly.
+Background work must not intentionally starve critical application operations.
 
 [RECOMMENDED]
+Background work should use controlled scheduling and appropriate priority.
 
-Shutdown delays caused by individual subsystems should be
-measured and investigated when significant.
+THERMALS AND POWER
 
-============================================================
-18. BACKGROUND PROCESSING
-=========================
-
-Monix may perform background tasks such as:
-
-* Monitoring.
-* Logging.
-* Shader compilation.
-* Cache operations.
-* Process analysis.
-* Update checks.
+Continuous monitoring and rendering add hardware load.
 
 [MANDATORY]
-
-Background tasks must not intentionally starve critical
-application operations.
+Monix must not intentionally create excessive load when that load is unrelated to an active feature.
 
 [RECOMMENDED]
+Expensive visual effects and background activity should be configurable where practical.
 
-Background work should use controlled scheduling and appropriate
-priority.
+REGRESSIONS
 
-============================================================
-19. PERFORMANCE AND THERMALS
-============================
-
-Continuous monitoring and rendering may generate additional
-hardware load.
+A performance regression is a meaningful decrease caused by a change without a corresponding intended benefit.
 
 [MANDATORY]
-
-Monix must not intentionally create excessive hardware load when
-such load is unrelated to an active feature.
+Significant regressions must be evaluated before stable release.
 
 [RECOMMENDED]
+Performance-sensitive components should have baseline measurements for comparison.
 
-High-cost visual effects should be configurable when practical.
+BENCHMARKING
 
-============================================================
-20. POWER CONSUMPTION
-=====================
-
-Monix may consume additional energy due to continuous monitoring
-and rendering.
-
-[RECOMMENDED]
-
-Power-sensitive configurations should provide ways to reduce
-unnecessary background activity where practical.
-
-============================================================
-21. PERFORMANCE REGRESSIONS
-===========================
-
-A performance regression occurs when a change causes a meaningful
-decrease in performance without an intended corresponding
-benefit.
+Benchmarks may measure startup, rendering, shader compilation, cache lookup, monitoring overhead, logging throughput, memory use, and CPU utilization.
 
 [MANDATORY]
-
-Significant performance regressions must be evaluated before
-stable release.
+A benchmark must identify the conditions under which it was obtained.
 
 [RECOMMENDED]
+Comparisons should use consistent environments whenever possible.
 
-Important performance-sensitive components should have baseline
-measurements for comparison.
-
-============================================================
-22. BENCHMARKING
-================
-
-Benchmarks may evaluate:
-
-* Startup time.
-* Rendering time.
-* Shader compilation time.
-* Cache lookup time.
-* Monitoring overhead.
-* Logging throughput.
-* Memory usage.
-* CPU utilization.
-
-[MANDATORY]
-
-Benchmark results must identify the conditions under which they
-were obtained.
-
-[RECOMMENDED]
-
-Benchmarks should use consistent environments when comparing
-different versions.
-
-============================================================
-23. PERFORMANCE BASELINES
-=========================
+BASELINES AND TARGETS
 
 [PENDING]
-
-Official baseline hardware:
-
----
+Official baseline hardware.
 
 [PENDING]
-
-Baseline operating system:
-
----
+Baseline operating system.
 
 [PENDING]
-
-Baseline GPU:
-
----
+Baseline GPU and resolution.
 
 [PENDING]
-
-Baseline resolution:
-
----
+Baseline configuration.
 
 [PENDING]
-
-Baseline configuration:
-
----
-
-============================================================
-24. TARGETS
-===========
+Startup target.
 
 [PENDING]
-
-Startup target:
-
----
+Idle CPU and memory targets.
 
 [PENDING]
+Rendering target and acceptable frame-time variance.
 
-Idle CPU target:
+PROFILING AND OPTIMIZATION
 
----
-
-[PENDING]
-
-Idle memory target:
-
----
-
-[PENDING]
-
-Rendering target:
-
----
-
-[PENDING]
-
-Maximum acceptable frame-time variance:
-
----
-
-============================================================
-25. PERFORMANCE PROFILING
-=========================
-
-[RECOMMENDED]
-
-Profiling should be used to identify significant bottlenecks before
-performing major optimization work.
-
-Potential profiling areas include:
-
-* CPU functions.
-* Memory allocations.
-* GPU workloads.
-* Synchronization.
-* File I/O.
-* Network activity.
-
-============================================================
-26. OPTIMIZATION PROCESS
-========================
-
-Recommended optimization sequence:
+A sensible optimization process is:
 
 1. Measure.
-2. Identify bottleneck.
+2. Identify the bottleneck.
 3. Form a hypothesis.
-4. Implement a change.
+4. Change the implementation.
 5. Measure again.
 6. Verify correctness.
 7. Check for regressions.
 
 [MANDATORY]
+An optimization is not successful merely because the implementation appears faster.
 
-An optimization must not be considered successful solely because
-the implementation appears faster.
+LOW-END AND HIGH-END HARDWARE
 
-============================================================
-27. PERFORMANCE TESTING
-=======================
-
-Performance testing may be integrated into the Monix testing
-process.
+Monix may need different behavior depending on available hardware.
 
 [RECOMMENDED]
-
-Major performance-sensitive changes should include measurements
-before and after the change.
+Hardware that cannot support the full visual feature set should receive reasonable fallback behavior.
 
 [MANDATORY]
+Hardware-specific scaling must not bypass correctness or security requirements.
 
-A performance test result must not be presented as a general
-guarantee when it was obtained under a limited test environment.
+FAILURE BEHAVIOR
 
-============================================================
-28. LOW-END HARDWARE
-====================
+Performance degradation can come from insufficient hardware, drivers, shader complexity, resource exhaustion, background load, or application defects.
+
+[MANDATORY]
+Performance problems must not be hidden by reporting false telemetry or false health states.
+
+TESTING
+
+Performance testing should cover relevant startup, runtime, rendering, shader, monitoring, logging, memory, I/O, and shutdown workloads.
+
+[MANDATORY]
+Major performance-sensitive changes should be measured before and after the change where practical.
+
+[MANDATORY]
+A limited benchmark must not be presented as a universal performance guarantee.
+
+DOCUMENTATION
+
+Important performance records should include benchmarks, baselines, regressions, optimizations, known bottlenecks, and hardware limitations.
+
+CURRENT STATUS
 
 [PENDING]
+Official performance baselines.
 
-Supported low-end configurations:
+[PENDING]
+Official performance targets.
 
----
-
-[RECOMMENDED]
-
-Monix should provide reasonable fallback behavior for hardware
-that cannot support the full visual feature set.
-
-============================================================
-29. HIGH-END HARDWARE
-=====================
-
-High-end hardware may allow:
-
-* Higher rendering resolution.
-* Additional shader passes.
-* Higher-quality visual effects.
-* More frequent monitoring.
-
-[MANDATORY]
-
-Performance scaling must not bypass correctness or security
-requirements.
-
-============================================================
-30. FAILURE BEHAVIOR
-====================
-
-Performance degradation may result from:
-
-* Insufficient hardware.
-* Driver limitations.
-* Shader complexity.
-* Resource exhaustion.
-* Background load.
-* Application bugs.
-
-[MANDATORY]
-
-Performance problems must not be hidden by reporting false
-telemetry or false health states.
-
-============================================================
-31. DOCUMENTATION
-=================
-
-Performance documentation should record important:
-
-* Benchmarks.
-* Baselines.
-* Regressions.
-* Optimizations.
-* Known bottlenecks.
-* Hardware limitations.
-
-============================================================
-32. RELATED DOCUMENTATION
-=========================
-
-Related documents include:
+RELATED DOCUMENTATION
 
 * Monix Product Overview.
 * Monix Product Specification.
@@ -642,16 +276,15 @@ Related documents include:
 * Monix Testing Documentation.
 * Monix Shader System.
 * Monix Security Documentation.
+* Monix Configuration Documentation.
 
-============================================================
-33. DOCUMENT CONTROL
-====================
+DOCUMENT CONTROL
 
 Document:
 MONIX — PERFORMANCE DOCUMENTATION
 
 Version:
-1.0
+1.1
 
 Status:
 INTERNAL / DEVELOPMENT
@@ -663,8 +296,6 @@ Product:
 Monix
 
 Last Updated:
-September 7, 2026
+September 12, 2026
 
-============================================================
 END OF DOCUMENT
-===============
