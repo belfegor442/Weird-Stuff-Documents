@@ -1,0 +1,28 @@
+WEIRD STUFF
+INTERNAL COMMUNICATION STANDARDS
+
+Version: 1.0
+Status: IN FORCE
+Classification: INTERNAL
+
+[MANDATORY]
+Internal communication must remain within authorized channels for the information's classification.
+
+[MANDATORY]
+Restricted and confidential information must only be shared with authorized recipients.
+
+[MANDATORY]
+Operational decisions affecting products, security, access, or releases must be communicated to the responsible people.
+
+[RECOMMENDED]
+Important decisions should be recorded so they remain traceable.
+
+[MANDATORY]
+Internal communication must not be used to impersonate another member or authority.
+
+[PENDING]
+Formal communication-channel matrix.
+[PENDING]
+Formal escalation matrix.
+
+END OF DOCUMENT
