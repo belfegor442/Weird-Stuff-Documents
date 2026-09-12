@@ -1,0 +1,63 @@
+WEIRD STUFF
+INFRASTRUCTURE STANDARDS
+
+Version: 1.0
+Status: IN FORCE
+Effective Date: September 12, 2026
+Owner: Weird Stuff
+Classification: INTERNAL
+
+1. SCOPE
+
+These standards apply to repositories, domains, DNS, email, communication services, build systems, hosting, storage, servers, and other organizational infrastructure.
+
+2. ACCESS
+
+[MANDATORY]
+Infrastructure access must be granted according to operational need.
+
+[MANDATORY]
+Administrative credentials must not be shared.
+
+[MANDATORY]
+Access must be revoked when the associated need ends.
+
+[RECOMMENDED]
+Critical infrastructure should use multi-factor authentication where available.
+
+3. CHANGES
+
+[MANDATORY]
+Material infrastructure changes must be traceable.
+
+[MANDATORY]
+Production changes must be performed by authorized personnel.
+
+[RECOMMENDED]
+High-risk changes should have a rollback or recovery plan.
+
+4. SECRETS
+
+[MANDATORY]
+API keys, passwords, tokens, private keys, and similar secrets must be stored using appropriate secret-management controls.
+
+[MANDATORY]
+Compromised credentials must be revoked or rotated as soon as reasonably possible.
+
+5. RECOVERY
+
+[MANDATORY]
+Critical information must have a reasonable recovery mechanism where technically possible.
+
+[PENDING]
+Production architecture.
+[PENDING]
+Hosting providers.
+[PENDING]
+Infrastructure inventory.
+[PENDING]
+Backup schedule and retention.
+[PENDING]
+RPO/RTO requirements.
+
+END OF DOCUMENT
