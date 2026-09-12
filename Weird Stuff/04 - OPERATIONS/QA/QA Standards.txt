@@ -1,51 +1,51 @@
 WEIRD STUFF
 QA STANDARDS
 
-Version: 1.0
+Version: 1.1
 Status: IN FORCE
 Effective Date: September 12, 2026
 Owner: Weird Stuff
 Classification: INTERNAL
 
-1. PURPOSE
+PURPOSE
 
-QA verifies that releases meet their intended functional, security, stability, and compatibility requirements.
+QA exists to check that releases meet their intended functional, security, stability, and compatibility requirements. Testing should provide useful evidence about whether a release is ready, not simply produce a checkbox.
 
-2. TESTING
+1. TESTING
 
 [MANDATORY]
 Stable releases must undergo testing appropriate to their functionality and risk.
 
 [MANDATORY]
-Known critical defects must be evaluated before stable release.
+Known critical defects must be evaluated before a stable release.
 
 [RECOMMENDED]
-Major changes should receive regression testing.
+Major changes should receive regression testing so that existing functionality is not broken unintentionally.
 
 [RECOMMENDED]
-Important fixes should retain evidence that the fix was tested.
+Important fixes should retain enough evidence to show that the fix was actually tested.
 
-3. BUG REPORTING
+2. BUG REPORTING
 
 [MANDATORY]
-Important bugs must contain enough information to determine impact and, where possible, reproduce the issue.
+Important bugs must contain enough information to determine their impact and, where possible, reproduce the issue.
 
 A useful bug report should identify:
 
-* Affected product/version.
+* Affected product and version.
 * Expected behavior.
 * Actual behavior.
 * Reproduction steps.
-* Relevant logs or evidence.
-* Severity or impact.
+* Relevant logs or other evidence.
+* Severity or practical impact.
 
-4. RELEASE GATES
-
-[MANDATORY]
-A release must not be marked stable solely because development is complete.
+3. RELEASE GATES
 
 [MANDATORY]
-Known unresolved critical issues must be explicitly accepted by the responsible authority or block release according to project risk.
+A release must not be marked stable simply because development is complete. Its required validation must also be considered complete or explicitly excepted.
+
+[MANDATORY]
+Known unresolved critical issues must either block the release or be explicitly accepted by the responsible authority based on the project's risk.
 
 [PENDING]
 Formal severity matrix.
